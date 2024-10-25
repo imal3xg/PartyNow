@@ -1,16 +1,15 @@
-// src/app/core/person.model.ts
 import { Model } from "./base.model";
 
 export interface Person extends Model{
     name:string,
     surname:string,
-    age?:number,
+    age:number,
     username:string,
-    email?:string, //TODO: Quitar interrogación más adelante
+    email:string,
     gender:string,
     picture?:{
         large:string,
         thumbnail:string
     },
-    groupID?:string
+    partyID?:string
 }
