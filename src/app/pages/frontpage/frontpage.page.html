@@ -1,0 +1,54 @@
+<ion-header translucent="false">
+  <ion-toolbar class="custom-toolbar">
+    <ion-buttons slot="end" class="topbuttons">
+      <ion-button fill="clear" (click)="navigateToLogin()">Iniciar sesión</ion-button>
+      <ion-button fill="clear" (click)="navigateToRegister()">Registrarse</ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="content">
+  <!-- Sección principal con imagen y texto debajo del toolbar -->
+  <div class="hero-section">
+    <img src="../../../assets/img/1.png" alt="Imagen de portada" class="hero-image" />
+    <p class="hero-description">La noche te espera. ¿Estás preparado?</p>
+  </div>
+  
+  <!-- Botón "Sobre mí" -->
+  <div class="about">
+    <ion-button fill="clear" (click)="goDown()">Sobre mí
+      <ion-icon size="small" name="chevron-down-outline"></ion-icon>
+    </ion-button>
+  </div>
+
+  <!-- Sección "Sobre mí" -->
+  <div class="about-me-section" id="about-me">
+    <h2>Sobre mí</h2>
+    <div class="about-me-content">
+      <div class="text-and-src">
+        <p class="about-description">
+          Soy un desarrollador de aplicaciones multiplataforma con un enfoque en crear soluciones innovadoras y eficientes.
+          A lo largo de mi carrera, he trabajado con tecnologías como Ionic, Angular y React Native, y siempre busco aprender nuevas habilidades y mantenerme actualizado con las últimas tendencias en el desarrollo de software.
+        </p>
+
+        <!-- Botones de contacto -->
+        <div class="contact-buttons">
+          <ion-button class="github-button" fill="outline" href="https://github.com/imal3xg" target="_blank">
+            <ion-icon slot="start" name="logo-github"></ion-icon>
+            GitHub
+          </ion-button>
+          <ion-button class="linkedin-button" fill="outline" href="https://www.linkedin.com/in/alejandro-gir%C3%A1ldez-guerrero/" target="_blank">
+            <ion-icon slot="start" name="logo-linkedin"></ion-icon>
+            LinkedIn
+          </ion-button>
+          <ion-button class="gmail-button" fill="outline" href="mailto:alexgg888999@gmail.com">
+            <ion-icon slot="start" name="mail-outline"></ion-icon>
+            Correo
+          </ion-button>
+        </div>
+      </div>
+      
+      <img src="../../../assets/img/Foto Curriculum.jpg" alt="Mi Foto" class="about-image" />
+    </div>
+  </div>
+</ion-content>

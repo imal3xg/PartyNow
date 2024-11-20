@@ -8,7 +8,7 @@ const routes: Routes = [
   },
   {
     path: '',
-    redirectTo: 'home',
+    redirectTo: 'frontpage',
     pathMatch: 'full'
   },
   {
@@ -20,9 +20,23 @@ const routes: Routes = [
     loadChildren: () => import('./pages/about/about.module').then( m => m.AboutPageModule)
   },
   {
-    path: 'cover-page',
-    loadChildren: () => import('./pages/cover-page/cover-page.module').then( m => m.CoverPagePageModule)
+    path: 'frontpage',
+    loadChildren: () => import('./pages/frontpage/frontpage.module').then( m => m.FrontpagePageModule)
   },
+  {
+    path: 'login',
+    loadChildren: () => import('./pages/login/login.module').then( m => m.LoginPageModule)
+  },
+  {
+    path: 'register',
+    loadChildren: () => import('./pages/register/register.module').then( m => m.RegisterPageModule)
+  },
+  {
+    path: 'splash',
+    loadChildren: () => import('./pages/splash/splash.module').then( m => m.SplashPageModule)
+  },
+
+
 ];
 
 @NgModule({

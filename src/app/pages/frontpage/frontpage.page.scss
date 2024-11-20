@@ -1,0 +1,187 @@
+/* Estilo del ion-header */
+.custom-toolbar {
+    --min-height: 60px; /* Altura del toolbar */
+    --height: 60px; /* Altura específica del toolbar */
+    --background: #000 !important; /* Fondo negro */
+    border-bottom: 2px solid #ffca28; /* Línea dorada fina como separación */
+}
+
+ion-header {
+    --background: #000 !important; /* Fondo negro */
+}
+  
+/* Fondo de la imagen para todo el contenido */
+.content {
+    --background: url('../../../assets/img/abstract-neon-background-with-glitch-effect-free-vector.jpg') no-repeat center center / cover;
+    justify-content: center;
+    align-items: center;
+    display: flex;
+    height: 100%;
+    flex-direction: column;
+}
+
+/* Estilo de los botones */
+ion-buttons {
+    display: flex;
+    align-items: center; /* Centra los botones verticalmente */
+    justify-content: flex-end; /* Los mantiene en el extremo derecho */
+    height: 100%;
+}
+
+/* Estilo del botón - Eliminamos los estilos predeterminados de Ionic */
+.topbuttons ion-button {
+    font-size: 1rem; /* Aumentamos el tamaño de los botones */
+    padding: 6px 15px; /* Aumentamos el padding para hacerlos más grandes */
+    color: white !important; /* Texto blanco */
+    border-radius: 15px; /* Bordes redondeados */
+    border: none !important; /* Sin bordes */
+    transition: background-color 0.3s, color 0.3s; /* Transiciones suaves para los cambios de color y sombra */
+}
+
+/* Estilo cuando el usuario pasa el mouse por encima */
+.topbuttons ion-button:hover {
+    background-color: white !important; /* Fondo blanco al pasar el mouse */
+    color: #ffca28 !important; /* Texto dorado */
+}
+
+/* Sección principal (imagen y texto) */
+.hero-section {
+    display: flex;
+    flex-direction: column; /* Alinea la imagen y el texto uno debajo del otro */
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    gap: 20px; /* Espacio entre la imagen y el texto */
+    margin-top: 30px; /* Un poco de margen arriba para separar el texto de la barra */
+}
+
+.hero-image {
+    opacity: 0; /* Inicialmente la imagen es transparente */
+    animation: fadeIn 3s forwards; /* Animación para hacer que la imagen aparezca gradualmente */
+    width: 25%; /* Tamaño ajustado de la imagen */
+    height: auto;
+}
+
+.hero-description {
+    font-size: 1.5rem;
+    color: #e0e0e0;
+    margin: 0;
+    white-space: nowrap;
+    opacity: 0; /* Inicialmente el texto es transparente */
+    animation: fadeInText 3s forwards; /* Animación para hacer que el texto aparezca gradualmente */
+}
+
+/* Animaciones */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+@keyframes fadeInText {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+.about ion-button {
+    font-size: 1rem;
+    padding: 6px 15px;
+    color: white;
+    border-radius: 15px;
+    scroll-behavior: smooth;
+}
+
+/* Sección "Sobre mí" */
+.about-me-section {
+    background-color: rgba(0, 0, 0, 0.7); /* Fondo semi-transparente */
+    padding: 20px;
+    margin-top: 70px;
+    border-radius: 10px;
+    color: white;
+}
+
+.about-me-section h2 {
+    text-align: left;
+    margin-left: 2%;
+    font-size: 2rem;
+    margin-bottom: 20px;
+}
+
+.about-me-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 20px;
+}
+
+.text-and-src {
+    margin-left: 2%;
+}
+
+.about-description {
+    font-size: 1.5rem;
+    line-height: 1.5;
+    max-width: 100%;
+}
+
+.about-image {
+    width: 30%;
+    height: auto;
+    border-radius: 20px;
+    margin-right: 10%;
+}
+
+/* Animación para desplazar el contenido al hacer click */
+#about-me {
+    scroll-margin-top: 60px; /* Asegura que no se tapen los elementos por el header */
+}
+
+.contact-buttons {
+    display: flex;
+    justify-content: center; /* Centra los botones */
+    gap: 15px; /* Espacio entre los botones */
+    margin-top: 30px; /* Espacio respecto al contenido anterior */
+}
+
+/* Estilo del botón de GitHub */
+.github-button {
+    --border-color: white; /* Borde blanco */
+    color: white; /* Texto blanco */
+    transition: all 0.3s ease-in-out; /* Transición suave */
+}
+  
+.github-button:hover {
+    --background: white; /* Fondo blanco */
+    color: black; /* Texto negro */
+}
+  
+/* Estilo del botón de LinkedIn */
+.linkedin-button {
+    --border-color: #0077b5; /* Borde azul de LinkedIn */
+    color: #0077b5; /* Texto azul */
+    transition: all 0.3s ease-in-out; /* Transición suave */
+}
+  
+.linkedin-button:hover {
+    --background: #0077b5; /* Fondo azul */
+    color: white; /* Texto blanco */
+}
+  
+/* Estilo del botón de Gmail */
+.gmail-button {
+    --border-color: #d93025; /* Borde rojo de Gmail */
+    color: #d93025; /* Texto rojo */
+    transition: all 0.3s ease-in-out; /* Transición suave */
+}
+  
+.gmail-button:hover {
+    --background: #d93025; /* Fondo rojo */
+    color: white; /* Texto blanco */
+}
