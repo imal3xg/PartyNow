@@ -2,7 +2,7 @@ import { Model } from "./base.model";
 
 export interface Party extends Model{
     name:string
-    location:string
-    minAge?:number
+    country:string
     date:string
+    minAge?:number
 }

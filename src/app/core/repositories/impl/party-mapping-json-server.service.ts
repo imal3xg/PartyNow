@@ -7,7 +7,7 @@ import { Party } from "../../models/party.model";
 export interface PartyRaw {
     id: string
     nombre: string
-    location: string,
+    country: string,
     minAge: number,
     date: string,
 }
@@ -30,7 +30,7 @@ export interface PartyRaw {
         return {
             id:data.id, 
             name:data.nombre, 
-            location:data.location,
+            country:data.country,
             minAge:data.minAge,
             date:data.date
         };
