@@ -1,5 +1,5 @@
 import { Injectable } from "@angular/core";
-import { IBaseMapping } from "../interfaces/base-mapping";
+import { IBaseMapping } from "../interfaces/base-mapping.interface";
 import { Paginated } from "../../models/paginated.model";
 import { Person } from "../../models/person.model";
 
@@ -10,12 +10,14 @@ interface PersonRaw{
         first:string;
         last:string;
     },
-    username:string,
+    birthdate:string,
     email:string,
-    age:number,
     genero:string,
     picture:{
-        large:string
+        url:string,
+        large:string,
+        medium:string,
+        small:string,
         thumbnail:string
     }
 }
@@ -40,12 +42,14 @@ interface PersonRaw{
             id:data.id, 
             name:data.name.first, 
             surname:data.name.last,
-            username:data.username,
-            email:data.email, 
-            age:data.age,
+            birthdate:data.birthdate,
+            email:data.email,
             gender:data.genero,
             picture:{
+                url:data.picture.url,
                 large:data.picture.large, 
+                medium:data.picture.medium,
+                small:data.picture.small,
                 thumbnail:data.picture.thumbnail
             }};
     }

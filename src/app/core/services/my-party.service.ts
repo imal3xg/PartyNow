@@ -19,7 +19,7 @@ export interface PaginatedRaw<T> {
   export interface PartyRaw {
     id: string
     nombre: string
-    location:string
+    country:string
     minAge?:number
     date:string
 }
@@ -41,7 +41,7 @@ export class MyPartyService{
                 return {
                     id:d.id, 
                     name:d.nombre,
-                    location:d.location,
+                    country:d.country,
                     minAge:d.minAge,
                     date:d.date
                 };

@@ -1,10 +1,10 @@
 // src/app/services/impl/people.service.ts
 import { Injectable, Inject } from '@angular/core';
 import { BaseService } from './base-service.service';
-import { IPeopleService } from '../interfaces/people-service.service';
+import { IPeopleService } from '../interfaces/people-service.interface';
 import { Person } from '../../models/person.model';
 import { PEOPLE_REPOSITORY_TOKEN } from '../../repositories/repository.tokens';
-import { IPeopleRepository } from '../../repositories/interfaces/people-repository';
+import { IPeopleRepository } from '../../repositories/interfaces/people-repository.interface';
 
 @Injectable({
   providedIn: 'root'

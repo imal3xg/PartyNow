@@ -1,5 +1,5 @@
 import { Injectable } from "@angular/core";
-import { IBaseMapping } from "../interfaces/base-mapping";
+import { IBaseMapping } from "../interfaces/base-mapping.interface";
 import { Paginated } from "../../models/paginated.model";
 import { Person } from "../../models/person.model";
 
@@ -8,11 +8,9 @@ export interface PersonRaw {
     id?: string
     nombre: string
     apellidos: string
-    username: string
     email: string
     genero: string
-    edad:string,
-    partyId: string
+    birthdate:string
 }
 @Injectable({
     providedIn: 'root'
@@ -34,11 +32,9 @@ export interface PersonRaw {
         return {
             nombre:data.name,
             apellidos:data.surname,
-            username: data.username,
-            email:data.email??'',
-            edad:data.age?.toString()??'',
+            email:data.email,
+            birthdate:data.birthdate,
             genero: this.toGenderMapping[data.gender],
-            partyId:''
         };
     }
     setUpdate(data: Person):PersonRaw {
@@ -49,13 +45,11 @@ export interface PersonRaw {
                 break;
                 case 'surname': toReturn['apellidos']=data[key];
                 break;
-                case 'age': toReturn['edad']=data[key];
+                case 'birthdate': toReturn['birthdate']=data[key];
                 break;
                 case 'email': toReturn['email']=data[key];
                 break;
                 case 'gender': toReturn['genero']=data[key]=='Masculino'?'male':data[key]=='Femenino'?'female':'other';
-                break;
-                case 'partyID': toReturn['partyID']=data[key];
                 break;
                 default:
             }
@@ -71,17 +65,20 @@ export interface PersonRaw {
         return {
             id:data.id!, 
             name:data.nombre, 
-            surname:data.apellidos,
-            username:data.username,
-            age:(data as any)["edad"]??0,
+            surname:data.apellidos, 
+            birthdate:(data as any)["fecha de nacimiento"]??'',
             email:(data as any)["email"]??'',
-            partyID:(data as any)["partyID"]??'',
             gender:this.fromGenderMapping[data.genero],
             picture:(data as any)["picture"]?{
+                url:(data as any)["picture"].url,
                 large:(data as any)["picture"].large, 
+                medium:(data as any)["picture"].medium,
+                small:(data as any)["picture"].small,
                 thumbnail:(data as any)["picture"].thumbnail
-            }:undefined};
+            }: undefined
+        };
     }
+    
     getAdded(data: PersonRaw):Person {
         return this.getOne(data);
     }

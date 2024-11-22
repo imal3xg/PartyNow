@@ -2,11 +2,12 @@
 import { Inject, Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { map, Observable } from 'rxjs';
-import { IBaseRepository } from '../interfaces/base-repository';
-import { API_URL_TOKEN, REPOSITORY_MAPPING_TOKEN, RESOURCE_NAME_TOKEN } from '../repository.tokens';
+import { IBaseRepository, SearchParams } from '../interfaces/base-repository.interface';
+import { API_URL_TOKEN, AUTH_TOKEN, REPOSITORY_MAPPING_TOKEN, RESOURCE_NAME_TOKEN } from '../repository.tokens';
 import { Model } from '../../models/base.model';
-import { IBaseMapping } from '../interfaces/base-mapping';
+import { IBaseMapping } from '../interfaces/base-mapping.interface';
 import { Paginated } from '../../models/paginated.model';
+import { IAuthentication } from '../../services/interfaces/authentication.service';
 
 
 @Injectable({
@@ -16,6 +17,7 @@ export class BaseRepositoryHttpService<T extends Model> implements IBaseReposito
 
   constructor(
     protected http: HttpClient,
+    @Inject(AUTH_TOKEN) protected auth: IAuthentication,
     @Inject(API_URL_TOKEN) protected apiUrl: string, // URL base de la API para el modelo
     @Inject(RESOURCE_NAME_TOKEN) protected resource:string, //nombre del recurso del repositorio
     @Inject(REPOSITORY_MAPPING_TOKEN) protected mapping:IBaseMapping<T>
@@ -23,7 +25,8 @@ export class BaseRepositoryHttpService<T extends Model> implements IBaseReposito
     this.apiUrl = apiUrl;
   }
 
-  getAll(page:number, pageSize:number): Observable<Paginated<T>> {
+
+  getAll(page:number, pageSize:number, filters:SearchParams): Observable<T[] | Paginated<T>> {
     return this.http.get<T[]>(`${this.apiUrl}/${this.resource}`).pipe(map(res=>this.mapping.getPaginated(page, pageSize, 0, res)));
   }
 

@@ -18,17 +18,16 @@ export interface PaginatedRaw<T> {
     id: string
     nombre: string
     apellidos: string
-    username: string
     email: string
+    birthdate: string,
     genero: string
-    grupoId: string
 }
 @Injectable({
     providedIn:'root'
 })
 export class MyPeopleService{
 
-    private apiUrl:string = "http://localhost:3000/personas"
+    private apiUrl:string = "http://localhost:3000/people"
     constructor(
         private http:HttpClient
     ){
@@ -42,14 +41,10 @@ export class MyPeopleService{
                     id:d.id, 
                     name:d.nombre, 
                     surname:d.apellidos, 
-                    username:d.username,
                     email:d.email,
+                    birthdate:d.birthdate,
                     gender:d.genero,
-                    age:(d as any)["age"]??0,
-                    picture:(d as any)["picture"]?{
-                        large:(d as any)["picture"].large, 
-                        thumbnail:(d as any)["picture"].thumbnail
-                    }:undefined};
+                }
             })};
         }))
     }

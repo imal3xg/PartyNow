@@ -1,5 +1,5 @@
 import { Injectable } from "@angular/core";
-import { IBaseMapping } from "../interfaces/base-mapping";
+import { IBaseMapping } from "../interfaces/base-mapping.interface";
 import { Paginated } from "../../models/paginated.model";
 import { Person } from "../../models/person.model";
 import { Party } from "../../models/party.model";
