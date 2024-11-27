@@ -28,7 +28,7 @@ export interface PaginatedRaw<T> {
 })
 export class MyPartyService{
 
-    private apiUrl:string = "http://localhost:3000/party"
+    private apiUrl:string = "http://localhost:3000/parties"
     constructor(
         private http:HttpClient
     ){

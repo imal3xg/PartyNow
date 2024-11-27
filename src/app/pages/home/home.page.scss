@@ -1,27 +1,29 @@
-#container {
-  text-align: center;
-
-  position: absolute;
-  left: 0;
-  right: 0;
-  top: 50%;
-  transform: translateY(-50%);
+/* Asegurarse de que el botón de la papelera esté inicialmente oculto */
+ion-item .delete-button {
+  display: none;
 }
 
-#container strong {
-  font-size: 20px;
-  line-height: 26px;
+/* Mostrar el botón cuando el ratón pase sobre el ion-item */
+ion-item:hover .delete-button {
+  display: flex; /* O inline-flex para que se vea correctamente el botón */
 }
 
-#container p {
-  font-size: 16px;
-  line-height: 22px;
-
-  color: #8c8c8c;
-
-  margin: 0;
+ion-item .update-button {
+  display: none;
 }
 
-#container a {
-  text-decoration: none;
+/* Mostrar el botón cuando el ratón pase sobre el ion-item */
+ion-item:hover .update-button {
+  display: flex; /* O inline-flex para que se vea correctamente el botón */
+}
+
+/* Opcional: Estilizar el botón de la papelera para que sea menos invasivo hasta que se necesite */
+ion-item .delete-button {
+  color: var(--ion-color-danger); /* Color de papelera */
+  transition: opacity 0.3s ease; /* Transición suave al aparecer/desaparecer */
+}
+
+ion-item .update-button {
+  color: var(--ion-color-primary);
+  transition: opacity 0.3s ease;
 }

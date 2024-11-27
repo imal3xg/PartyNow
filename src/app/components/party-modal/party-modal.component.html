@@ -1,0 +1,119 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-title class="ion-text-center">
+      <ion-icon name="person-outline" slot="start"></ion-icon>
+      {{ mode === 'edit' ? 'Editar Fiesta' : 'Crear Fiesta' }}
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding">
+  <form [formGroup]="formGroup" (ngSubmit)="onSubmit()">
+    <!-- Información General -->
+    <ion-card>
+      <ion-card-header>
+        <ion-card-title>Información General</ion-card-title>
+      </ion-card-header>
+      <ion-card-content>
+        <!-- Nombre -->
+        <ion-item>
+          <ion-input
+            label="Nombre"
+            label-placement="stacked"
+            type="text"
+            placeholder="Ej: Big Festival"
+            formControlName="name"
+            clearInput>
+          </ion-input>
+        </ion-item>
+        <ion-text color="danger" *ngIf="name?.invalid && (name?.dirty || name?.touched)">
+          <p *ngIf="name?.errors?.['required']">El nombre es obligatorio.</p>
+          <p *ngIf="name?.errors?.['minlength']">Debe tener al menos 2 caracteres.</p>
+        </ion-text>
+
+        <!-- minAge -->
+        <ion-item>
+          <ion-input
+            label="Edad Mínima"
+            label-placement="stacked"
+            type="text"
+            placeholder="Ej: 16"
+            formControlName="minAge"
+            clearInput>
+          </ion-input>
+        </ion-item>
+        <ion-text color="danger" *ngIf="minAge?.invalid && (minAge?.dirty || minAge?.touched)">
+        </ion-text>
+
+        <!-- Country -->
+        <ion-item>
+          <ion-select
+            label="País"
+            label-placement="stacked"
+            formControlName="country"
+            placeholder="Selecciona un país">
+            <ion-select-option *ngFor="let cnt of countries" [value]="cnt">{{ cnt }}</ion-select-option>
+          </ion-select>
+        </ion-item>
+        <ion-text color="danger" *ngIf="country?.invalid && (country?.dirty || country?.touched)">
+          <p *ngIf="country?.errors?.['required']">El país es obligatorio.</p>
+        </ion-text>
+      </ion-card-content>
+    </ion-card>
+
+    <!-- Datos Adicionales -->
+    <ion-card>
+      <ion-card-header>
+        <ion-card-title>Datos Adicionales</ion-card-title>
+      </ion-card-header>
+      <ion-card-content>
+        <!-- Date -->
+        <ion-item class="fechanac">
+          <ion-label position="stacked">Fecha</ion-label>
+          <ion-input
+            type="date" 
+            formControlName="date">
+          </ion-input>
+        </ion-item>
+        <ion-text color="danger" *ngIf="date?.invalid && date?.touched">
+          <p *ngIf="date?.errors?.['required']">La fecha de nacimiento es obligatoria.</p>
+          <p *ngIf="date?.errors?.['pattern']">Introduce una fecha válida.</p>
+        </ion-text>
+        
+        
+        <!--
+    <ion-item>
+      <ion-label position="stacked">Fecha de nacimiento</ion-label>
+      <ion-input 
+        type="date" 
+        formControlName="birthdate" 
+        (ionChange)="calculateAge()">
+      </ion-input>
+    </ion-item>
+    
+    <ion-text color="danger" *ngIf="birthdate?.invalid && birthdate?.touched">
+      <p *ngIf="birthdate?.errors?.['required']">La fecha de nacimiento es obligatoria.</p>
+      <p *ngIf="birthdate?.errors?.['pattern']">La fecha debe ser válida.</p>
+    </ion-text>
+    
+    <ion-text *ngIf="calculatedAge !== null">
+      <p>Edad: {{ calculatedAge }} años</p>
+    </ion-text>
+        -->
+      </ion-card-content>
+    </ion-card>
+
+    <!-- Botón de envío -->
+    <ion-footer>
+      <ion-toolbar>
+        <ion-button
+          expand="block"
+          color="primary"
+          [disabled]="!formGroup.valid || !formGroup.dirty"
+          type="submit">
+          {{ mode === 'edit' ? 'Actualizar Fiesta' : 'Crear Fiesta' }}
+        </ion-button>
+      </ion-toolbar>
+    </ion-footer>
+  </form>
+</ion-content>

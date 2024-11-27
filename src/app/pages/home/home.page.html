@@ -4,7 +4,18 @@
       <!-- Botón para abrir el menú lateral -->
       <ion-menu-button></ion-menu-button>
     </ion-buttons>
-    <ion-title>Home</ion-title>
+    <ion-title>Fiestas</ion-title>
+    <ion-buttons slot="end">
+      <ion-text>
+        Total: {{ totalParty }}
+      </ion-text>
+      <ion-input
+        placeholder="Buscar"
+        (ionInput)="onSearch($event)"
+        clear-input
+        style="max-width: 150px; border-radius: 4px; padding: 0 8px;"
+      ></ion-input>
+    </ion-buttons>
   </ion-toolbar>
 </ion-header>
 
@@ -15,8 +26,48 @@
         <!-- Botón para abrir el menú lateral -->
         <ion-menu-button></ion-menu-button>
       </ion-buttons>
-      <ion-title>Home</ion-title>
+      <ion-title>Fiestas</ion-title>
+      <ion-buttons slot="end">
+        <ion-text>
+          Total: {{ totalParty }}
+        </ion-text>
+        <ion-input
+          placeholder="Buscar"
+          (ionInput)="onSearch($event)"
+          clear-input
+          style="max-width: 150px; border-radius: 4px; padding: 0 8px;"
+        ></ion-input>
+      </ion-buttons>
     </ion-toolbar>
   </ion-header>
+
+  <ion-list>
+    <ion-item *ngFor="let party of filteredParty$ | async; let i = index" class="party-item">
+      <ion-label class="ion-text-nowrap">
+        {{party.name}}
+      </ion-label>
+      <ion-buttons>
+        <ion-button fill="clear" slot="end" class="update-button" (click)="openPartyDetail(party, i)">
+          <ion-icon name="create-outline"></ion-icon>
+        </ion-button>
+        <ion-button fill="clear" slot="end" class="delete-button" (click)="onDeleteParty(party)">
+          <ion-icon name="trash-outline"></ion-icon>
+        </ion-button>
+      </ion-buttons>
+    </ion-item>
+  </ion-list>
+
+  <div #animatedAvatarContainer class="animated-avatar-container" [ngStyle]="{'display':isAnimating?'block':'none'}">
+    <img #animatedAvatar [src]="selectedPerson?.picture?.large" alt="Foto de {{ selectedPerson?.name.first }}">
+  </div>
+
+  <ion-infinite-scroll (ionInfinite)="onIonInfinite($event)">
+    <ion-infinite-scroll-content></ion-infinite-scroll-content>
+  </ion-infinite-scroll>
   
+  <ion-fab slot="fixed" vertical="bottom" horizontal="end">
+    <ion-fab-button (click)="onAddParty()">
+      <ion-icon name="add-outline"></ion-icon>
+    </ion-fab-button>
+  </ion-fab>
 </ion-content>

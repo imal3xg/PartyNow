@@ -17,10 +17,13 @@ import { PartyMappingJsonServer } from './core/repositories/impl/party-mapping-j
 import { PartyService } from './core/services/impl/party-service.service';
 import { PersonModalComponent } from './components/person-modal/person-modal.component';
 import { ReactiveFormsModule } from '@angular/forms';
+import { LoginPage } from './pages/login/login.page';
+import { PartyModalComponent } from './components/party-modal/party-modal.component';
 @NgModule({
   declarations: [
     AppComponent,
-    PersonModalComponent
+    PersonModalComponent,
+    PartyModalComponent
   ],
   imports: [
     BrowserModule, 
@@ -35,7 +38,7 @@ import { ReactiveFormsModule } from '@angular/forms';
     provideHttpClient(),
     { provide: BACKEND_TOKEN, useValue: 'strapi' },
     { provide: PEOPLE_RESOURCE_NAME_TOKEN, useValue: 'people' },
-    { provide: PARTY_RESOURCE_NAME_TOKEN, useValue: 'party' },
+    { provide: PARTY_RESOURCE_NAME_TOKEN, useValue: 'parties' },
     { provide: PEOPLE_API_URL_TOKEN, useValue: 'http://localhost:1337/api' },
     { provide: PARTY_API_URL_TOKEN, useValue: 'http://localhost:1337/api' },
     { provide: AUTH_SIGN_IN_API_URL_TOKEN, useValue: 'http://localhost:1337/api/auth/local' },

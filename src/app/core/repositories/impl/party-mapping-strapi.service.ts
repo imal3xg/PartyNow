@@ -20,7 +20,7 @@ export interface PartyAttributes {
     name: string
     country: string
     minAge?: number
-    date: string
+    dayDate: string
     createdAt?: string
     updatedAt?: string
     publishedAt?: string
@@ -38,12 +38,12 @@ export interface Meta {}
                 name:data.name,
                 country:data.country,
                 minAge:data.minAge,
-                date:data.date
+                dayDate:data.date
             }
         };
     }
     setUpdate(data: Party):PartyData {
-        let toReturn:any = {
+        let toReturn: any = {
             data: {}
         };
         Object.keys(data).forEach(key=>{
@@ -77,7 +77,7 @@ export interface Meta {}
             name: attributes.name,
             country: attributes.country,
             minAge: attributes.minAge,
-            date: attributes.date
+            date: attributes.dayDate
         };
     }
     getAdded(data: PartyRaw):Party {
