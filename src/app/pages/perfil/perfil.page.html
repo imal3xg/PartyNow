@@ -1,4 +1,4 @@
-<ion-header [translucent]="true">
+<ion-header>
   <ion-toolbar>
     <ion-buttons slot="start">
       <!-- Botón para abrir el menú lateral -->
@@ -8,14 +8,30 @@
   </ion-toolbar>
 </ion-header>
 
-<ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-buttons slot="start">
-        <!-- Botón para abrir el menú lateral -->
-        <ion-menu-button></ion-menu-button>
-      </ion-buttons>
-      <ion-title size="large">Perfil</ion-title>
-    </ion-toolbar>
-  </ion-header>
+<ion-content *ngIf="person">
+  <ion-card>
+    <ion-card-header>
+      <ion-card-title>{{ person.name }} {{ person.surname }}</ion-card-title>
+    </ion-card-header>
+    <ion-card-content>
+      <ion-list>
+        <ion-item>
+          <ion-label>Género:</ion-label>
+          <ion-text>{{ person.gender }}</ion-text>
+        </ion-item>
+        <ion-item>
+          <ion-label>Fecha de Nacimiento:</ion-label>
+          <ion-text>{{ person.birthdate | date }}</ion-text>
+        </ion-item>
+      </ion-list>
+    </ion-card-content>
+  </ion-card>
+
+  <ion-button expand="block" (click)="openEditProfile()">
+    Editar Perfil
+  </ion-button>
 </ion-content>
+
+<ng-template #loading>
+  <ion-spinner></ion-spinner>
+</ng-template>

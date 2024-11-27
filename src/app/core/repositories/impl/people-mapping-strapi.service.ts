@@ -4,19 +4,35 @@ import { Paginated } from "../../models/paginated.model";
 import { Person } from "../../models/person.model";
 import { PartyRaw } from "./party-mapping-json-server.service";
 
-export interface GroupRaw{
-    data: Data<GroupAttributes>
+interface UserRaw{
+    data: UserData
+}
+
+interface UserData{
+    id: number
+    attributes: UserAttributes
+}
+
+interface UserAttributes {
+    username: string
+    email: string
+    provider: string
+    confirmed: boolean
+    blocked: boolean
+    createdAt: string
+    updatedAt: string
 }
 
 export interface PersonRaw {
-    data: Data<PersonAttributes>
+    data: Data
     meta: Meta
-  }
+}
   
-export interface Data<T> {
+export interface Data {
     id: number
     attributes: PersonAttributes
 }
+
 export interface PersonData {
     data: PersonAttributes;
 }
@@ -27,13 +43,10 @@ export interface PersonAttributes {
     gender: string
     birthdate: string
     email: string
+    user:UserRaw | number | null,
     createdAt?: string
     updatedAt?: string
     publishedAt?: string
-}
-
-export interface GroupAttributes {
-    name: string
 }
 
 export interface Meta {}
@@ -61,6 +74,7 @@ export interface Meta {}
                 surname:data.surname,
                 email:data.email,
                 birthdate:data.birthdate,
+                user:data.userId?Number(data.userId):null,
                 gender: this.toGenderMapping[data.gender],
 
             }
@@ -82,6 +96,8 @@ export interface Meta {}
                 break;
                 case 'gender': toReturn.data['gender']=data[key]=='Masculino'?'male':data[key]=='Femenino'?'female':'other';
                 break;
+                case 'userId': toReturn.data['userId']=data[key];
+                break;
                 default:
             }
         });
@@ -89,24 +105,29 @@ export interface Meta {}
         return toReturn;
     }
     
-    getPaginated(page: number, pageSize: number, pages: number, data: Data<PersonRaw>[]): Paginated<Person> {
+    getPaginated(page: number, pageSize: number, pages: number, data: Data[]): Paginated<Person> {
         return {
             page: page,
             pageSize: pageSize,
             pages: pages,
-            data: data.map((d: Data<PersonRaw>) => this.getOne(d))
+            data: data.map((d: Data | PersonRaw) => this.getOne(d))
         };
     }
     
-    getOne(data: Data<Person>): Person {
+    getOne(data: Data | PersonRaw): Person {
         console.log(data)
+        const isPersonRaw = (data: Data | PersonRaw): data is PersonRaw => 'meta' in data;
+
+        const attributes = isPersonRaw(data) ? data.data.attributes : data.attributes;
+        const id = isPersonRaw(data) ? data.data.id : data.id;
       return {
-        id: data.id.toString(),
-        name: data.attributes.name,
-        surname: data.attributes.surname,
-        email: data.attributes.email,
-        birthdate: data.attributes.birthdate,
-        gender: this.fromGenderMapping[data.attributes.gender]
+        id: id.toString(),
+        name: attributes.name,
+        surname: attributes.surname,
+        email: attributes.email,
+        birthdate: attributes.birthdate,
+        gender: this.fromGenderMapping[attributes.gender],
+        userId: typeof attributes.user === 'object' ? attributes.user?.data?.id.toString() : undefined,
       };
     }
   
