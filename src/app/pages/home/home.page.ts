@@ -19,10 +19,7 @@ export class HomePage implements OnInit {
 
   _party: BehaviorSubject<Party[]> = new BehaviorSubject<Party[]>([]); // Almacena las fiestas
   party$: Observable<Party[]> = this._party.asObservable(); // Observable de fiestas
-  filteredParty$: Observable<Party[]>;
-  _people: BehaviorSubject<Person[]> = new BehaviorSubject<Person[]>([]); // Almacena las personas
-  people$: Observable<Person[]> = this._people.asObservable(); // Observable de personas
-  filteredPeople$: Observable<Person[]>;  // Observable para las personas filtradas
+  filteredParty$: Observable<Party[]>; // Observable para las fiestas filtradas
   totalParty: number = 0;
   hasMoreParty: boolean = true;
   hasMorePeople: boolean = true;
@@ -34,13 +31,14 @@ export class HomePage implements OnInit {
     private modalCtrl: ModalController,
     private alertCtrl: AlertController
   ) {
-    // Inicializar el observable filtrado a todas las personas
-    this.filteredPeople$ = this.people$;
+    // Inicializar el observable filtrado a todas las fiestas
     this.filteredParty$ = this.party$;
+    this.party$.subscribe((parties) => {
+      this.totalParty = parties.length; // Actualizar total dinámicamente
+    });
   }
 
   ngOnInit(): void {
-    //this.getMorePeople();
     this.getMoreParty();
   }
 
@@ -48,7 +46,6 @@ export class HomePage implements OnInit {
   @ViewChild('animatedAvatar') animatedAvatar!: ElementRef;
   @ViewChild('animatedAvatarContainer') animatedAvatarContainer!: ElementRef;
 
-  selectedPerson: any = null;
   selectedParty: any = null;
   isAnimating = false;
   page: number = 1;
@@ -57,16 +54,13 @@ export class HomePage implements OnInit {
   // Función para refrescar el listado de personas
   refresh() {
     this.page = 1;
-    this.hasMorePeople = true;
     this.hasMoreParty = true;
-
     this.partySvc.getAll(this.page, this.pageSize).subscribe({
       next: (response: Paginated<Party>) => {
         const party = response.data.map(party => ({
-          ...party,
+          ...party
         }));
         this._party.next([...party]);
-        this.totalParty = party.length;
         this.page++;
         if (response.data.length < this.pageSize) {
           this.hasMoreParty = false;
@@ -162,7 +156,8 @@ export class HomePage implements OnInit {
   private async presentModalParty(mode: 'new' | 'edit', party: Party | undefined = undefined) {
   
     const modal = await this.modalCtrl.create({
-      component: PartyModalComponent
+      component: PartyModalComponent,
+      componentProps: mode === 'edit' ? { party: party } : {}
     });
   
     // Cuando el modal se cierre, manejar el resultado
@@ -173,7 +168,6 @@ export class HomePage implements OnInit {
           this.partySvc.add(response.data).subscribe({
             next: () => {
               this.refresh(); // Refrescar la lista de fiestas
-              this.totalParty++; // Aumentar el total de fiestas
             },
             error: (err) => {
               console.error('Error al agregar fiesta', err);

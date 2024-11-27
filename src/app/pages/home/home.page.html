@@ -58,7 +58,7 @@
   </ion-list>
 
   <div #animatedAvatarContainer class="animated-avatar-container" [ngStyle]="{'display':isAnimating?'block':'none'}">
-    <img #animatedAvatar [src]="selectedPerson?.picture?.large" alt="Foto de {{ selectedPerson?.name.first }}">
+    <img #animatedAvatar [src]="selectedParty?.picture?.large" alt="Foto de {{ selectedParty?.name }}">
   </div>
 
   <ion-infinite-scroll (ionInfinite)="onIonInfinite($event)">
