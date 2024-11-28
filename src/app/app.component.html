@@ -10,13 +10,13 @@
     <ion-content class="ion-padding menu-content">
       <ion-list class="listt">
         <!-- Enlace "Fiestas" -->
-        <ion-item class="menu-item" routerLink="/home" routerDirection="root" (click)="closeMenu()">
+        <ion-item class="menu-item" (click)="closeMenu()" *ngIf="(authSvc.authenticated$ | async)" routerLink="/home">
           <ion-icon slot="start" name="balloon-outline" class="menu-icon"></ion-icon>
           <ion-label>Fiestas</ion-label>
         </ion-item>
   
         <!-- Enlace "Perfil" -->
-        <ion-item class="menu-item" routerLink="/perfil" routerDirection="root" (click)="closeMenu()">
+        <ion-item class="menu-item" (click)="closeMenu()" *ngIf="(authSvc.authenticated$ | async)" routerLink="/perfil">
           <ion-icon slot="start" name="person-circle-outline" class="menu-icon"></ion-icon>
           <ion-label>Perfil</ion-label>
         </ion-item>

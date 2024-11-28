@@ -8,7 +8,7 @@
   </ion-toolbar>
 </ion-header>
 
-<ion-content *ngIf="person">
+<ion-content *ngIf="person; else loading">
   <ion-card>
     <ion-card-header>
       <ion-card-title>{{ person.name }} {{ person.surname }}</ion-card-title>
@@ -27,11 +27,17 @@
     </ion-card-content>
   </ion-card>
 
-  <ion-button expand="block" (click)="openEditProfile()">
+  <ion-button expand="block" (click)="openPersonDetail(person)">
     Editar Perfil
   </ion-button>
 </ion-content>
 
+<!-- Plantilla de carga -->
 <ng-template #loading>
-  <ion-spinner></ion-spinner>
+  <ion-content>
+    <div class="spinner-container">
+      <ion-spinner></ion-spinner>
+      <p>Cargando perfil...</p>
+    </div>
+  </ion-content>
 </ng-template>
