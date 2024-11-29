@@ -1,7 +1,7 @@
 import { Component, ElementRef, OnInit, QueryList, ViewChild, ViewChildren } from '@angular/core';
 import { AlertController, AnimationController, InfiniteScrollCustomEvent, ModalController } from '@ionic/angular';
-import { BehaviorSubject, Observable, lastValueFrom } from 'rxjs';
-import { map } from 'rxjs/operators';  // Importar map para el filtro
+import { BehaviorSubject, Observable, combineLatest, lastValueFrom } from 'rxjs';
+import { map, startWith } from 'rxjs/operators';  // Importar map para el filtro
 import { PersonModalComponent } from 'src/app/components/person-modal/person-modal.component';
 import { Party } from 'src/app/core/models/party.model';
 import { Paginated } from 'src/app/core/models/paginated.model';
@@ -9,6 +9,7 @@ import { Person } from 'src/app/core/models/person.model';
 import { PartyService } from 'src/app/core/services/impl/party-service.service';
 import { PeopleService } from 'src/app/core/services/impl/people-service.service';
 import { PartyModalComponent } from 'src/app/components/party-modal/party-modal.component';
+import { Countries } from 'src/app/core/models/countries.enum';
 
 @Component({
   selector: 'app-home',
@@ -23,6 +24,13 @@ export class HomePage implements OnInit {
   totalParty: number = 0;
   hasMoreParty: boolean = true;
   hasMorePeople: boolean = true;
+  // Para gestionar los detalles visibles de cada fiesta
+  partyDetailsVisibility: { [key: string]: boolean } = {}; // Diccionario para almacenar el estado de visibilidad de cada fiesta
+  
+  // Para filtros
+  searchTerm: BehaviorSubject<string> = new BehaviorSubject<string>(''); // Filtro de búsqueda
+  selectedCountry: BehaviorSubject<string | null> = new BehaviorSubject<string | null>(null); // Filtro de país
+  countries: string[] = Object.values(Countries);
 
   constructor(
     private animationCtrl: AnimationController,
@@ -31,12 +39,26 @@ export class HomePage implements OnInit {
     private modalCtrl: ModalController,
     private alertCtrl: AlertController
   ) {
-    // Inicializar el observable filtrado a todas las fiestas
-    this.filteredParty$ = this.party$;
-    this.party$.subscribe((parties) => {
-      this.totalParty = parties.length; // Actualizar total dinámicamente
+    // Combinar filtros con la lista de fiestas
+    this.filteredParty$ = combineLatest([
+      this.party$, // Fuente de datos
+      this.searchTerm.pipe(startWith('')), // Filtro de búsqueda
+      this.selectedCountry.pipe(startWith(null)), // Filtro de país
+    ]).pipe(
+      map(([parties, search, country]) => 
+        parties.filter((party) =>
+          party.name.toLowerCase().includes(search.toLowerCase()) && // Filtrar por nombre (búsqueda)
+          (!country || party.country === country) // Filtrar por país si está seleccionado
+        )
+      )
+    );
+  
+    // Actualizar el total dinámicamente después de cada cambio en los filtros
+    this.filteredParty$.subscribe((parties) => {
+      this.totalParty = parties.length;  // Actualiza el recuento con el resultado filtrado
     });
   }
+  
 
   ngOnInit(): void {
     this.getMoreParty();
@@ -67,6 +89,16 @@ export class HomePage implements OnInit {
         }
       }
     });
+  }
+
+  // Función para manejar el cambio de país
+  onCountryChange(event: any) {
+    const country = event.target.value || null;
+    if (country === 'all') {
+      this.selectedCountry.next(null);
+    } else {
+      this.selectedCountry.next(country);
+    }
   }
 
   getMoreParty(notify: HTMLIonInfiniteScrollElement | null = null) {
@@ -110,8 +142,19 @@ export class HomePage implements OnInit {
     );
   }
 
+  // Función para alternar la visibilidad de los detalles de la fiesta
+  toggleDetails(party: Party): void {
+    const partyId = party.id; // Usamos el ID de la fiesta para asegurar que la visibilidad sea única por fiesta
+    this.partyDetailsVisibility[partyId] = !this.partyDetailsVisibility[partyId]; // Alternamos la visibilidad
+  }
+
+  // Función para verificar si los detalles de una fiesta están visibles
+  isDetailsVisible(party: Party): boolean {
+    return !!this.partyDetailsVisibility[party.id];
+  }
+
   // Función para abrir el modal de detalles de la fiesta
-  async openPartyDetail(party: any, index: number) {
+  async openUpdateParty(party: any, index: number) {
     await this.presentModalParty('edit', party);
     this.selectedParty = party;
   }

@@ -52,7 +52,7 @@ export class StrapiAuthenticationService extends BaseAuthenticationService imple
       this._ready.pipe(
         filter(ready => ready === true),
         take(1),
-        switchMap(() => this._user.pipe(take(1)))
+        switchMap(() => this._user)
       ).subscribe(user => {
         resolve(user);
       });

@@ -5,57 +5,66 @@
       <ion-menu-button></ion-menu-button>
     </ion-buttons>
     <ion-title>Fiestas</ion-title>
+
     <ion-buttons slot="end">
+      <!-- Recuento de fiestas mostradas -->
       <ion-text>
         Total: {{ totalParty }}
       </ion-text>
+      <!-- Filtro por nombre -->
       <ion-input
         placeholder="Buscar"
         (ionInput)="onSearch($event)"
         clear-input
         style="max-width: 150px; border-radius: 4px; padding: 0 8px;"
       ></ion-input>
+
+      <!-- Filtro por país -->
+      <ion-item>
+        <ion-select placeholder="Selecciona un país" (ionChange)="onCountryChange($event)">
+          <ion-select-option value="all">Alrededor del mundo</ion-select-option>
+          <ion-select-option *ngFor="let country of countries" [value]="country">{{ country }}</ion-select-option>
+        </ion-select>
+      </ion-item>
     </ion-buttons>
   </ion-toolbar>
 </ion-header>
 
 <ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-buttons slot="start">
-        <!-- Botón para abrir el menú lateral -->
-        <ion-menu-button></ion-menu-button>
-      </ion-buttons>
-      <ion-title>Fiestas</ion-title>
-      <ion-buttons slot="end">
-        <ion-text>
-          Total: {{ totalParty }}
-        </ion-text>
-        <ion-input
-          placeholder="Buscar"
-          (ionInput)="onSearch($event)"
-          clear-input
-          style="max-width: 150px; border-radius: 4px; padding: 0 8px;"
-        ></ion-input>
-      </ion-buttons>
-    </ion-toolbar>
-  </ion-header>
-
   <ion-list>
-    <ion-item *ngFor="let party of filteredParty$ | async; let i = index" class="party-item">
-      <ion-label class="ion-text-nowrap">
-        {{party.name}}
-      </ion-label>
-      <ion-buttons>
-        <ion-button fill="clear" slot="end" class="update-button" (click)="openPartyDetail(party, i)">
-          <ion-icon name="create-outline"></ion-icon>
-        </ion-button>
-        <ion-button fill="clear" slot="end" class="delete-button" (click)="onDeleteParty(party)">
-          <ion-icon name="trash-outline"></ion-icon>
-        </ion-button>
-      </ion-buttons>
-    </ion-item>
-  </ion-list>
+    <div class="party-list">
+      <ion-card *ngFor="let party of filteredParty$ | async; let i = index" class="party-item">
+        <!-- Imagen de la fiesta si la hay -->
+        <ion-card-header>
+          <ion-card-title>
+            {{ party.name }}
+          </ion-card-title>
+          <!-- Botones de acción -->
+          <ion-buttons>
+            <ion-button fill="clear" slot="end" class="details-button" (click)="toggleDetails(party)">
+              <ion-icon [name]="isDetailsVisible(party) ? 'eye-off-outline' : 'eye-outline'"></ion-icon>
+            </ion-button>
+            <ion-button fill="clear" slot="end" class="update-button" (click)="openUpdateParty(party, i)">
+              <ion-icon name="create-outline"></ion-icon>
+            </ion-button>
+            <ion-button fill="clear" slot="end" class="delete-button" (click)="onDeleteParty(party)">
+              <ion-icon name="trash-outline"></ion-icon>
+            </ion-button>
+          </ion-buttons>
+        </ion-card-header>
+      
+        <ion-card-content>
+          <!-- Sección de detalles que se mostrará u ocultará -->
+          <div *ngIf="isDetailsVisible(party)" class="party-details">
+            <p><strong>Fecha:</strong> {{ party.date }}</p>
+            <p><strong>Edad mínima:</strong> {{ party.minAge }}</p>
+            <p><strong>País:</strong> {{ party.country }}</p>
+            <!-- Agrega más detalles según sea necesario -->
+          </div>
+        </ion-card-content>
+      </ion-card>    
+    </div>
+  </ion-list>  
 
   <div #animatedAvatarContainer class="animated-avatar-container" [ngStyle]="{'display':isAnimating?'block':'none'}">
     <img #animatedAvatar [src]="selectedParty?.picture?.large" alt="Foto de {{ selectedParty?.name }}">

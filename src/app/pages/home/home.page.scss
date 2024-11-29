@@ -1,29 +1,108 @@
 /* Asegurarse de que el botón de la papelera esté inicialmente oculto */
-ion-item .delete-button {
+ion-card .delete-button {
   display: none;
 }
 
-/* Mostrar el botón cuando el ratón pase sobre el ion-item */
-ion-item:hover .delete-button {
+/* Mostrar el botón cuando el ratón pase sobre el ion-card */
+ion-card:hover .delete-button {
   display: flex; /* O inline-flex para que se vea correctamente el botón */
 }
 
-ion-item .update-button {
+/* Asegurarse de que el botón de la actualización esté inicialmente oculto */
+ion-card .update-button {
   display: none;
 }
 
-/* Mostrar el botón cuando el ratón pase sobre el ion-item */
-ion-item:hover .update-button {
+/* Mostrar el botón cuando el ratón pase sobre el ion-card */
+ion-card:hover .update-button {
   display: flex; /* O inline-flex para que se vea correctamente el botón */
 }
 
-/* Opcional: Estilizar el botón de la papelera para que sea menos invasivo hasta que se necesite */
-ion-item .delete-button {
+/* Asegurarse de que el botón del ojo esté inicialmente oculto */
+ion-card .details-button {
+  display: none;
+}
+
+/* Mostrar el botón cuando el ratón pase sobre el ion-card */
+ion-card:hover .details-button {
+  display: flex; /* O inline-flex para que se vea correctamente el botón */
+}
+
+/* Estilizar los botones dentro de la tarjeta */
+ion-card .delete-button {
   color: var(--ion-color-danger); /* Color de papelera */
   transition: opacity 0.3s ease; /* Transición suave al aparecer/desaparecer */
 }
 
-ion-item .update-button {
+ion-card .update-button {
+  color: var(--ion-color-primary); /* Color del botón de actualización */
+  transition: opacity 0.3s ease;
+}
+
+ion-card .details-button {
   color: var(--ion-color-primary);
   transition: opacity 0.3s ease;
+}
+
+/* Estilizar la tarjeta en general */
+ion-card {
+  margin-bottom: 16px; /* Espacio entre tarjetas */
+  width: 300px;
+  border-radius: 12px; /* Bordes redondeados */
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1); /* Sombra suave */
+}
+
+/* Efecto al hacer hover sobre la tarjeta */
+ion-card:hover {
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2); /* Sombra más prominente */
+}
+
+/* Estilo para el título de la tarjeta */
+ion-card-header {
+  background-color: var(--ion-color-light); /* Fondo claro para el encabezado */
+  padding: 10px 15px;
+  border-top-left-radius: 12px; /* Bordes redondeados en la parte superior */
+  border-top-right-radius: 12px;
+}
+
+ion-card-title {
+  font-size: 18px;
+  font-weight: bold;
+  color: var(--ion-color-dark); /* Color del título */
+}
+
+/* Estilo para el contenido de la tarjeta */
+ion-card-content {
+  padding-top: 10px;
+  color: var(--ion-color-medium); /* Color de texto más suave */
+  font-size: 14px; /* Tamaño de fuente más pequeño */
+}
+
+/* Estilo para las imágenes de la tarjeta */
+ion-card img {
+  width: 100%;
+  border-top-left-radius: 12px;
+  border-top-right-radius: 12px;
+  object-fit: cover; /* Asegura que la imagen cubra bien el área */
+}
+
+/* Opcional: Estilo para el área de los botones */
+ion-buttons {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  display: flex;
+  gap: 10px;
+}
+
+@media (max-width: 768px) {
+  .party-item {
+    flex: 1 1 calc(50% - 16px); /* En pantallas medianas, cada tarjeta ocupará el 50% del ancho */
+  }
+}
+
+@media (max-width: 480px) {
+  .party-item {
+    flex: 1 1 100%; /* En pantallas pequeñas, cada tarjeta ocupará el 100% del ancho */
+  }
 }
