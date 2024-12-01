@@ -10,6 +10,9 @@ export interface PartyRaw {
     country: string,
     minAge: number,
     date: string,
+    city:string,
+    price:number,
+    description:string
 }
 @Injectable({
     providedIn: 'root'
@@ -32,7 +35,10 @@ export interface PartyRaw {
             name:data.nombre, 
             country:data.country,
             minAge:data.minAge,
-            date:data.date
+            date:data.date,
+            city:data.city,
+            price:data.price,
+            description:data.description
         };
     }
     getAdded(data: any):Party {

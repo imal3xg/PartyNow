@@ -5,4 +5,7 @@ export interface Party extends Model{
     country:string
     date:string
     minAge?:number
+    city:string
+    price:number
+    description?:string
 }

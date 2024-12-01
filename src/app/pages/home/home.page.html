@@ -40,7 +40,7 @@
             {{ party.name }}
           </ion-card-title>
           <!-- Botones de acción -->
-          <ion-buttons>
+          <ion-buttons class="card-buttons">
             <ion-button fill="clear" slot="end" class="details-button" (click)="toggleDetails(party)">
               <ion-icon [name]="isDetailsVisible(party) ? 'eye-off-outline' : 'eye-outline'"></ion-icon>
             </ion-button>
@@ -57,8 +57,9 @@
           <!-- Sección de detalles que se mostrará u ocultará -->
           <div *ngIf="isDetailsVisible(party)" class="party-details">
             <p><strong>Fecha:</strong> {{ party.date }}</p>
+            <p><strong>Lugar del acontecimiento:</strong> {{ party.city }}, {{ party.country }}</p>
+            <p><strong>Precio:</strong> {{ party.price }}</p>
             <p><strong>Edad mínima:</strong> {{ party.minAge }}</p>
-            <p><strong>País:</strong> {{ party.country }}</p>
             <!-- Agrega más detalles según sea necesario -->
           </div>
         </ion-card-content>

@@ -22,6 +22,9 @@ export interface PaginatedRaw<T> {
     country:string
     minAge?:number
     date:string
+    city: string
+    price: number
+    description: string
 }
 @Injectable({
     providedIn:'root'
@@ -43,7 +46,10 @@ export class MyPartyService{
                     name:d.nombre,
                     country:d.country,
                     minAge:d.minAge,
-                    date:d.date
+                    date:d.date,
+                    city:d.city,
+                    price:d.price,
+                    description:d.description
                 };
             })};
         }))

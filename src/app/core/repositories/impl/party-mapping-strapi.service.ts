@@ -21,6 +21,9 @@ export interface PartyAttributes {
     country: string
     minAge?: number
     dayDate: string
+    city: string
+    price: number
+    description?: string
     createdAt?: string
     updatedAt?: string
     publishedAt?: string
@@ -38,7 +41,10 @@ export interface Meta {}
                 name:data.name,
                 country:data.country,
                 minAge:data.minAge,
-                dayDate:data.date
+                dayDate:data.date,
+                city:data.city,
+                price:data.price,
+                description:data.description
             }
         };
     }
@@ -55,6 +61,12 @@ export interface Meta {}
                 case 'minAge': toReturn.data['minAge']=data[key];
                 break;
                 case 'date': toReturn.data['date']=data[key];
+                break;
+                case 'city': toReturn.data['city']=data[key];
+                break;
+                case 'price': toReturn.data['price']=data[key];
+                break;
+                case 'description': toReturn.data['description']=data[key];
                 break;
                 default:
             }
@@ -77,7 +89,10 @@ export interface Meta {}
             name: attributes.name,
             country: attributes.country,
             minAge: attributes.minAge,
-            date: attributes.dayDate
+            date: attributes.dayDate,
+            city:attributes.city,
+            price:attributes.price,
+            description:attributes.description
         };
     }
     getAdded(data: PartyRaw):Party {

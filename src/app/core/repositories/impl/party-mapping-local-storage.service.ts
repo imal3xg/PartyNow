@@ -9,6 +9,9 @@ interface PartyRaw {
   country: string;
   minAge: number;
   date: string;
+  city: string;
+  price: number;
+  description: string;
 }
 
 @Injectable({
@@ -41,7 +44,10 @@ export class GroupsMappingLocalStorageService implements IBaseMapping<Party> {
       name: data.name,
       country: data.country,
       minAge: data.minAge,
-      date: data.date
+      date: data.date,
+      city:data.city,
+      price:data.price,
+      description:data.description
     };
   }
 

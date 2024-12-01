@@ -1,5 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { AbstractControl, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ModalController } from '@ionic/angular';
 import { Countries } from 'src/app/core/models/countries.enum';
 import { Party } from 'src/app/core/models/party.model';
@@ -20,21 +20,28 @@ export class PartyModalComponent implements OnInit {
 
     this.formGroup.controls['name'].setValue(_party.name);
     this.formGroup.controls['minAge'].setValue(_party.minAge);
-    this.formGroup.controls['country'].setValue(_party.country); // Set birthdate
+    this.formGroup.controls['country'].setValue(_party.country);
+    this.formGroup.controls['city'].setValue(_party.city);
     this.formGroup.controls['date'].setValue(_party.date);
+    this.formGroup.controls['price'].setValue(_party.price);
+    this.formGroup.controls['description'].setValue(_party.description);
   }
 
   constructor(private fb: FormBuilder, private modalCtrl: ModalController) {
     this.formGroup = this.fb.group({
       name: ['', [Validators.required, Validators.minLength(2)]],
-      minAge: ['', [Validators.required]],
-      country: ['', [Validators.required]],
-      date: ['', [Validators.required]],
-    });
+      country: ['', Validators.required],
+      city: ['', Validators.required],
+      date: ['', Validators.required],
+      minAge: [0, [Validators.min(0), this.integerValidator]],
+      price: [0, [Validators.min(0)]],
+      description: [''],
+    });  
   }
 
   ngOnInit() {}
 
+  // Getters for form controls
   get name() {
     return this.formGroup.controls['name'];
   }
@@ -47,8 +54,20 @@ export class PartyModalComponent implements OnInit {
     return this.formGroup.controls['country'];
   }
 
+  get city() {
+    return this.formGroup.controls['city'];
+  }
+
   get date() {
     return this.formGroup.controls['date'];
+  }
+
+  get price() {
+    return this.formGroup.controls['price'];
+  }
+
+  get description() {
+    return this.formGroup.controls['description'];
   }
 
   getDirtyValues(formGroup: FormGroup): any {
@@ -61,15 +80,25 @@ export class PartyModalComponent implements OnInit {
     });
     return dirtyValues;
   }
+  
+  integerValidator(control: AbstractControl) {
+    const value = control.value;
+    if (value && !Number.isInteger(value)) {
+      return { notInteger: true };
+    }
+    return null;
+  }
 
   onSubmit() {
     if (this.formGroup.valid) {
+      const formValue = this.formGroup.value;
+  
       this.modalCtrl.dismiss(
-        this.mode == 'new' ? this.formGroup.value : this.getDirtyValues(this.formGroup),
+        this.mode === 'new' ? formValue : this.getDirtyValues(this.formGroup),
         this.mode
       );
     } else {
       console.log('Formulario inválido');
     }
-  }
+  }  
 }
