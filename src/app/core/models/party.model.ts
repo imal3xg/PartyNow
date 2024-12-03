@@ -8,4 +8,5 @@ export interface Party extends Model{
     city:string
     price:number
     description?:string
+    personId:string
 }

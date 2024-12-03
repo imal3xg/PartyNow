@@ -24,6 +24,7 @@ export interface PartyAttributes {
     city: string
     price: number
     description?: string
+    personId: string
     createdAt?: string
     updatedAt?: string
     publishedAt?: string
@@ -44,7 +45,8 @@ export interface Meta {}
                 dayDate:data.date,
                 city:data.city,
                 price:data.price,
-                description:data.description
+                description:data.description,
+                personId:data.personId
             }
         };
     }
@@ -68,6 +70,8 @@ export interface Meta {}
                 break;
                 case 'description': toReturn.data['description']=data[key];
                 break;
+                case 'personId': toReturn.data['personId']=data[key];
+                break;
                 default:
             }
         });
@@ -79,10 +83,10 @@ export interface Meta {}
         })};
     }
     getOne(data: Data | PartyRaw): Party {
-        const isGroupRaw = (data: Data | PartyRaw): data is PartyRaw => 'meta' in data;
+        const isPartyRaw = (data: Data | PartyRaw): data is PartyRaw => 'meta' in data;
         
-        const attributes = isGroupRaw(data) ? data.data.attributes : data.attributes;
-        const id = isGroupRaw(data) ? data.data.id : data.id;
+        const attributes = isPartyRaw(data) ? data.data.attributes : data.attributes;
+        const id = isPartyRaw(data) ? data.data.id : data.id;
 
         return {
             id: id.toString(),
@@ -92,7 +96,8 @@ export interface Meta {}
             date: attributes.dayDate,
             city:attributes.city,
             price:attributes.price,
-            description:attributes.description
+            description:attributes.description,
+            personId:attributes.personId
         };
     }
     getAdded(data: PartyRaw):Party {

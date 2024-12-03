@@ -1,3 +1,29 @@
+.header-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.name-title {
+  flex-grow: 1;
+  text-align: start;
+}
+
+.header-container ion-button {
+  text-align: end;
+  --border-radius: 8px; /* Bordes redondeados para un diseño rectangular */
+  --padding-start: 12px; /* Espacio a la izquierda del texto */
+  --padding-end: 12px; /* Espacio a la derecha del texto */
+  --padding-top: 10px; /* Espacio superior */
+  --padding-bottom: 10px; /* Espacio inferior */
+  --background: #f6ff00; /* Color de fondo */
+  --color: black; /* Color del texto */
+}
+
+.person-att {
+  display: block;
+}
+
 .spinner-container {
     display: flex;
     flex-direction: column;
@@ -5,5 +31,153 @@
     align-items: center;
     height: 100%;
     text-align: center;
+}
+
+.separator {
+  text-align: center;
+  margin: 20px 0;
+  border-top: 1px solid rgb(0, 0, 0);
+  padding-top: 10px;
+}
+
+.separator h2 {
+  font-size: 1.2rem;
+  color: rgb(0, 0, 0);
+}
+
+.party-grid {
+  //background-color: #000;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr); /* Tres columnas */
+  gap: 16px; /* Espaciado entre tarjetas */
+  padding: 16px;
+}
+
+.party-item {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  text-align: left;
+  border-radius: 15px; /* Bordes redondeados */
+  //border: 2px solid #f6ff00; /* Borde fino y visible */
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3); /* Incrementar sombra para mayor contraste */
+  overflow: hidden; /* Evita que el contenido sobresalga de los bordes redondeados */
+  margin: 16px; /* Separación entre las tarjetas */
+  transition: transform 0.2s ease, box-shadow 0.2s ease; /* Animación suave al pasar el mouse */
+  //background-color: #000; /* Fondo negro */
+}
+
+.party-item:hover {
+  //transform: translateY(-5px); /* Eleva la tarjeta al pasar el mouse */
+  box-shadow: 0 8px 12px rgba(0, 0, 0, 0.45); /* Incrementa la sombra */
+}
+
+.party-item ion-card-header {
+  padding: 16px;
+  border-bottom: 1px solid #e0e0e0; /* Línea sutil entre el encabezado y el contenido */
+}
+
+.party-item ion-card-title {
+  font-size: 1.2rem;
+  font-weight: bold;
+  margin-bottom: 8px;
+  //color: rgb(251, 255, 0); /* Color del texto según el tema */
+}
+
+.party-item .card-buttons {
+  display: flex;
+  justify-content: flex-end;
+  margin-top: -35px;
+}
+
+.update-button {
+  color: #3880ff;
+}
+
+.delete-button {
+  color: red;
+}
+
+.party-item ion-card-content {
+  padding: 16px;
+}
+
+.party-details p {
+  margin: 4px 0;
+  font-size: 0.9rem;
+  //color: rgb(251, 255, 0); /* Color del texto de los detalles */
+}
+
+.party-item ion-button {
+  --background: transparent;
+  --color: var(--ion-text-color, #000); /* Color de los íconos según el tema */
+}
+
+.profile-stats {
+  display: flex;
+  justify-content: space-around; /* Espaciado uniforme entre contadores */
+  align-items: center;
+  margin-bottom: 16px; /* Espacio debajo de los contadores */
+  text-align: center;
+}
+
+.stat {
+  display: flex;
+  flex-direction: column; /* Alinea el número y la etiqueta en columna */
+}
+
+.stat-number {
+  font-size: 1.2rem;
+  font-weight: bold;
+  color: var(--ion-text-color, #000); /* Ajuste según el tema */
+  margin-bottom: 4px; /* Separación entre número y etiqueta */
+}
+
+.stat-label {
+  font-size: 0.9rem;
+  color: #555; /* Color más tenue para la etiqueta */
+}
+
+.header-container {
+  display: flex;
+  justify-content: space-between; /* Nombre a la izquierda, botón a la derecha */
+  align-items: center;
+}
+
+.name-title {
+  flex-grow: 1;
+  text-align: start;
+}
+
+.fab-button-container {
+  position: fixed;
+  bottom: 20px; /* Distancia desde el borde inferior */
+  right: 20px; /* Distancia desde el borde derecho */
+  z-index: 1000; /* Asegúrate de que esté por encima de otros elementos */
+}
+
+.fab-button {
+  --border-radius: 8px; /* Bordes redondeados para un diseño rectangular */
+  --padding-start: 12px; /* Espacio a la izquierda del texto */
+  --padding-end: 12px; /* Espacio a la derecha del texto */
+  --padding-top: 10px; /* Espacio superior */
+  --padding-bottom: 10px; /* Espacio inferior */
+  --background: #f6ff00; /* Color de fondo */
+  --color: black; /* Color del texto */
+}
+
+.fab-button ion-icon {
+  font-size: 20px; /* Tamaño del icono */
+}
+
+@media (max-width: 768px) {
+  .party-grid {
+    grid-template-columns: repeat(2, 1fr); /* Dos columnas en pantallas medianas */
   }
-  
+}
+
+@media (max-width: 480px) {
+  .party-grid {
+    grid-template-columns: 1fr; /* Una columna en pantallas pequeñas */
+  }
+}

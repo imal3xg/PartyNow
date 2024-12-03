@@ -16,9 +16,10 @@ export class BaseService<T extends Model> implements IBaseService<T> {
   ) {}
 
   getAll(): Observable<T[]>;
-  getAll(page:number, pageSize:number):Observable<Paginated<T>>;
-  getAll(page:number=-1, pageSize:number=25, filters:SearchParams={}): Observable<T[]| Paginated<T>> {    
-      return this.repository.getAll(page, pageSize, filters);
+  getAll(page: number, pageSize: number): Observable<Paginated<T>>;
+  getAll(page: number, pageSize: number, filters: SearchParams): Observable<Paginated<T>>;
+  getAll(page: number = -1, pageSize: number = 25, filters: SearchParams = {}): Observable<T[] | Paginated<T>> {
+    return this.repository.getAll(page, pageSize, filters);
   }
 
   getById(id: string): Observable<T | null> {

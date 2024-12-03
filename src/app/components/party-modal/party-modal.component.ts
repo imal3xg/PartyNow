@@ -15,6 +15,8 @@ export class PartyModalComponent implements OnInit {
   mode: 'new' | 'edit' = 'new';
   countries: string[] = Object.values(Countries);
 
+  @Input() personId: string = '';  // Recibimos el personId de la persona autenticada
+
   @Input() set party(_party: Party) {
     if (_party && _party.id) this.mode = 'edit';
 
@@ -91,14 +93,23 @@ export class PartyModalComponent implements OnInit {
 
   onSubmit() {
     if (this.formGroup.valid) {
+      if (!this.personId) {
+        console.error("El personId no está definido.");
+        return;
+      }
+      
       const formValue = this.formGroup.value;
-  
+      const partyToSave: Party = {
+        ...formValue,
+        personId: this.personId,  // Asociamos el personId con la fiesta
+      };
+      
       this.modalCtrl.dismiss(
-        this.mode === 'new' ? formValue : this.getDirtyValues(this.formGroup),
+        this.mode === 'new' ? partyToSave : this.getDirtyValues(this.formGroup),
         this.mode
-      );
+      );      
     } else {
       console.log('Formulario inválido');
     }
-  }  
+  }
 }

@@ -1,127 +1,64 @@
-/* Asegurarse de que el botón de la papelera esté inicialmente oculto */
-ion-card .delete-button {
-  display: none;
+.party-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr); /* Tres columnas */
+  gap: 16px; /* Espaciado entre tarjetas */
+  padding: 16px;
 }
 
-/* Mostrar el botón cuando el ratón pase sobre el ion-card */
-ion-card:hover .delete-button {
-  display: flex; /* O inline-flex para que se vea correctamente el botón */
-}
-
-/* Asegurarse de que el botón de la actualización esté inicialmente oculto */
-ion-card .update-button {
-  display: none;
-}
-
-/* Mostrar el botón cuando el ratón pase sobre el ion-card */
-ion-card:hover .update-button {
-  display: flex; /* O inline-flex para que se vea correctamente el botón */
-}
-
-/* Asegurarse de que el botón del ojo esté inicialmente oculto */
-ion-card .details-button {
-  display: none;
-}
-
-/* Mostrar el botón cuando el ratón pase sobre el ion-card */
-ion-card:hover .details-button {
-  display: flex; /* O inline-flex para que se vea correctamente el botón */
-}
-
-/* Estilizar los botones dentro de la tarjeta */
-ion-card .delete-button {
-  color: var(--ion-color-danger); /* Color de papelera */
-  transition: opacity 0.3s ease; /* Transición suave al aparecer/desaparecer */
-}
-
-ion-card .update-button {
-  color: var(--ion-color-primary); /* Color del botón de actualización */
-  transition: opacity 0.3s ease;
-}
-
-ion-card .details-button {
-  color: var(--ion-color-primary);
-  transition: opacity 0.3s ease;
-}
-
-/* Estilizar la tarjeta en general */
-ion-card {
-  margin-bottom: 16px; /* Espacio entre tarjetas */
-  width: 300px;
-  border-radius: 12px; /* Bordes redondeados */
-  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1); /* Sombra suave */
-}
-
-/* Efecto al hacer hover sobre la tarjeta */
-ion-card:hover {
-  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2); /* Sombra más prominente */
-}
-
-/* Estilo para el título de la tarjeta */
-ion-card-header {
-  background-color: var(--ion-color-light); /* Fondo claro para el encabezado */
-  padding: 10px 15px;
-  border-top-left-radius: 12px; /* Bordes redondeados en la parte superior */
-  border-top-right-radius: 12px;
-}
-
-ion-card-title {
-  font-size: 18px;
-  font-weight: bold;
-  color: var(--ion-color-dark); /* Color del título */
-}
-
-/* Estilo para el contenido de la tarjeta */
-ion-card-content {
-  padding-top: 10px;
-  color: var(--ion-color-medium); /* Color de texto más suave */
-  font-size: 14px; /* Tamaño de fuente más pequeño */
-}
-
-/* Estilo para las imágenes de la tarjeta */
-ion-card img {
-  width: 100%;
-  border-top-left-radius: 12px;
-  border-top-right-radius: 12px;
-  object-fit: cover; /* Asegura que la imagen cubra bien el área */
-}
-
-/* Opcional: Estilo para el área de los botones */
-.card-buttons {
-  position: absolute;
-  top: 10px;
-  right: 10px;
+.party-item {
   display: flex;
-  gap: 10px;
+  flex-direction: column;
+  justify-content: space-between;
+  text-align: left;
+  border-radius: 15px; /* Bordes redondeados */
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Sombra suave */
+  overflow: hidden; /* Evita que el contenido sobresalga de los bordes redondeados */
+  margin: 16px; /* Separación entre las tarjetas */
+  transition: transform 0.2s ease, box-shadow 0.2s ease; /* Animación suave al pasar el mouse */
+  background-color: var(--ion-background-color, #fff); /* Fondo según el tema */
 }
 
-/* Contenedor de las tarjetas */
-.card-container {
-  display: flex; /* Hacer que los elementos hijos estén en fila horizontal */
-  flex-wrap: wrap; /* Permitir que los elementos pasen a la siguiente fila si no caben */
-  gap: 16px; /* Espacio entre las tarjetas */
-  justify-content: center; /* Centrar las tarjetas horizontalmente */
-  padding: 16px; /* Espaciado alrededor del contenedor */
+.party-item:hover {
+  transform: translateY(-5px); /* Eleva la tarjeta al pasar el mouse */
+  box-shadow: 0 8px 12px rgba(0, 0, 0, 0.15); /* Incrementa la sombra */
 }
 
-/* Tarjetas individuales */
-ion-card {
-  flex: 1 1 calc(25% - 16px); /* Cada tarjeta ocupa un 25% del ancho menos el espacio del gap */
-  width: 400px; /* Tamaño máximo para que no se estiren demasiado */
-  margin: 8px; /* Espacio adicional entre tarjetas */
-  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1); /* Sombra suave */
-  border-radius: 12px; /* Bordes redondeados */
+.party-item ion-card-header {
+  padding: 16px;
+  border-bottom: 1px solid #e0e0e0; /* Línea sutil entre el encabezado y el contenido */
 }
 
-/* Asegurar que las tarjetas se adapten en dispositivos más pequeños */
+.party-item ion-card-title {
+  font-size: 1.2rem;
+  font-weight: bold;
+  color: var(--ion-text-color, #000); /* Color del texto según el tema */
+}
+
+.party-item .action-buttons {
+  display: flex;
+  margin-top: -35px;
+  justify-content: flex-end;
+  color: rgb(251, 255, 0);
+}
+
+.party-item ion-card-content {
+  padding: 16px;
+}
+
+.party-details p {
+  margin: 4px 0;
+  font-size: 0.9rem;
+  color: #555; /* Color del texto de los detalles */
+}
+
 @media (max-width: 768px) {
-  ion-card {
-    flex: 1 1 calc(50% - 16px); /* Cada tarjeta ocupará el 50% del ancho en pantallas medianas */
+  .party-grid {
+    grid-template-columns: repeat(2, 1fr); /* Dos columnas en pantallas medianas */
   }
 }
 
 @media (max-width: 480px) {
-  ion-card {
-    flex: 1 1 100%; /* Cada tarjeta ocupará el 100% del ancho en pantallas pequeñas */
+  .party-grid {
+    grid-template-columns: 1fr; /* Una columna en pantallas pequeñas */
   }
 }

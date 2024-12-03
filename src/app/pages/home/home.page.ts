@@ -2,13 +2,11 @@ import { Component, ElementRef, OnInit, QueryList, ViewChild, ViewChildren } fro
 import { AlertController, AnimationController, InfiniteScrollCustomEvent, ModalController } from '@ionic/angular';
 import { BehaviorSubject, Observable, combineLatest, lastValueFrom } from 'rxjs';
 import { map, startWith } from 'rxjs/operators';  // Importar map para el filtro
-import { PersonModalComponent } from 'src/app/components/person-modal/person-modal.component';
 import { Party } from 'src/app/core/models/party.model';
 import { Paginated } from 'src/app/core/models/paginated.model';
 import { Person } from 'src/app/core/models/person.model';
 import { PartyService } from 'src/app/core/services/impl/party-service.service';
 import { PeopleService } from 'src/app/core/services/impl/people-service.service';
-import { PartyModalComponent } from 'src/app/components/party-modal/party-modal.component';
 import { Countries } from 'src/app/core/models/countries.enum';
 
 @Component({
@@ -24,31 +22,21 @@ export class HomePage implements OnInit {
   totalParty: number = 0;
   hasMoreParty: boolean = true;
   hasMorePeople: boolean = true;
-  // Para gestionar los detalles visibles de cada fiesta
-  partyDetailsVisibility: { [key: string]: boolean } = {}; // Diccionario para almacenar el estado de visibilidad de cada fiesta
-  
   // Para filtros
   searchTerm: BehaviorSubject<string> = new BehaviorSubject<string>(''); // Filtro de búsqueda
   selectedCountry: BehaviorSubject<string | null> = new BehaviorSubject<string | null>(null); // Filtro de país
   countries: string[] = Object.values(Countries);
 
   constructor(
-    private animationCtrl: AnimationController,
-    private peopleSvc: PeopleService,
     private partySvc: PartyService,
-    private modalCtrl: ModalController,
-    private alertCtrl: AlertController
   ) {
     // Combinar filtros con la lista de fiestas
     this.filteredParty$ = combineLatest([
       this.party$, // Fuente de datos
-      this.searchTerm.pipe(startWith('')), // Filtro de búsqueda
       this.selectedCountry.pipe(startWith(null)), // Filtro de país
     ]).pipe(
-      map(([parties, search, country]) => 
-        parties.filter((party) =>
-          party.name.toLowerCase().includes(search.toLowerCase()) && // Filtrar por nombre (búsqueda)
-          (!country || party.country === country) // Filtrar por país si está seleccionado
+      map(([parties, country]) => 
+        parties.filter((party) => (!country || party.country === country)
         )
       )
     );
@@ -60,8 +48,11 @@ export class HomePage implements OnInit {
   }
   
 
-  ngOnInit(): void {
-    this.getMoreParty();
+  ngOnInit(): void {}
+
+  ionViewWillEnter() {
+    // Forzamos la recarga de los datos al ingresar a la página
+    this.refresh(); // O this.getMoreParty();
   }
 
   @ViewChildren('avatar') avatars!: QueryList<ElementRef>;
@@ -128,7 +119,6 @@ export class HomePage implements OnInit {
     });
   }
   
-
   // Función para filtrar personas por nombre o apellido
   onSearch(event: any) {
     const searchTerm = event.target.value.toLowerCase();
@@ -142,105 +132,45 @@ export class HomePage implements OnInit {
     );
   }
 
-  // Función para alternar la visibilidad de los detalles de la fiesta
-  toggleDetails(party: Party): void {
-    const partyId = party.id; // Usamos el ID de la fiesta para asegurar que la visibilidad sea única por fiesta
-    this.partyDetailsVisibility[partyId] = !this.partyDetailsVisibility[partyId]; // Alternamos la visibilidad
+  onSaveParty(party: Party): void {
+    // Lógica para guardar la fiesta
+    console.log('Guardar fiesta:', party);
+    // Aquí puedes llamar a un servicio o agregar lógica para marcar la fiesta como guardada
   }
-
-  // Función para verificar si los detalles de una fiesta están visibles
-  isDetailsVisible(party: Party): boolean {
-    return !!this.partyDetailsVisibility[party.id];
-  }
-
-  // Función para abrir el modal de detalles de la fiesta
-  async openUpdateParty(party: any, index: number) {
-    await this.presentModalParty('edit', party);
-    this.selectedParty = party;
-  }
-
-  // Función para eliminar a una persona
-  async onDeleteParty(party: Party) {
-    const alert = await this.alertCtrl.create({
-      header: 'Confirmar eliminación',
-      message: `¿Estás seguro de que quieres eliminar la fiesta con nombre ${party.name}?`,
-      buttons: [
-        {
-          text: 'Cancelar',
-          role: 'cancel',
-        },
-        {
-          text: 'Eliminar',
-          role: 'destructive',
-          handler: () => {
-            this.partySvc.delete(party.id).subscribe({
-              next: () => {
-                const updatedParty = this._party.value.filter((p) => p.id !== party.id);
-                this._party.next(updatedParty);
-                this.totalParty = updatedParty.length;
-              },
-              error: (err) => {
-                console.error('Error eliminando fiesta:', err);
-              }
-            });
-          }
-        }
-      ]
-    });
-    await alert.present();
-  }
+  
+  onShareParty(party: Party): void {
+    // Verificar si la edad mínima es 0 y tratarla como nula
+    const minAgeText = party.minAge === 0 ? 'No requerida' : party.minAge;
+  
+    // Crear un texto completo con todos los detalles de la fiesta
+    const shareText = `
+      🎉 ¡No te pierdas esta fiesta! 🎉
+  
+      **Nombre**: ${party.name}
+      **Fecha**: ${party.date}
+      **Lugar**: ${party.city}, ${party.country}
+      **Edad Mínima**: ${minAgeText}
+      **Precio**: ${party.price} €
+      **Descripción**: ${party.description ?? 'Sin descripción'}
+  
+      Más detalles aquí: https://partynow.netlify.app
+    `;
+  
+    // Verificar si Web Share API está disponible
+    if (navigator.share) {
+      navigator.share({
+        title: `Fiesta: ${party.name}`,
+        text: shareText,
+      })
+      .then(() => console.log('Fiesta compartida exitosamente'))
+      .catch((error) => console.error('Error al compartir:', error));
+    } else {
+      alert('La función de compartir no está disponible en este dispositivo.');
+    }
+  }  
 
   // Función para manejar la carga infinita de fiestas
   onIonInfinite(ev: InfiniteScrollCustomEvent) {
     this.getMoreParty(ev.target);
-  }
-
-  // Función para presentar el modal de agregar o editar una persona
-  private async presentModalParty(mode: 'new' | 'edit', party: Party | undefined = undefined) {
-  
-    const modal = await this.modalCtrl.create({
-      component: PartyModalComponent,
-      componentProps: mode === 'edit' ? { party: party } : {}
-    });
-  
-    // Cuando el modal se cierre, manejar el resultado
-    modal.onDidDismiss().then((response: any) => {
-      switch (response.role) {
-        case 'new':
-          // Si el rol es 'new', agregar la nueva fiesta
-          this.partySvc.add(response.data).subscribe({
-            next: () => {
-              this.refresh(); // Refrescar la lista de fiestas
-            },
-            error: (err) => {
-              console.error('Error al agregar fiesta', err);
-            }
-          });
-          break;
-  
-        case 'edit':
-          // Si el rol es 'edit', actualizar la fiesta
-          this.partySvc.update(party!.id, response.data).subscribe({
-            next: () => {
-              this.refresh(); // Refrescar la lista de fiesta
-            },
-            error: (err) => {
-              console.error('Error al actualizar fiesta', err);
-            }
-          });
-          break;
-        default:
-          break;
-      }
-    });
-  
-    // Presentar el modal
-    await modal.present();
-  }
-  
-
-  // Función para agregar una nueva fiesta
-  async onAddParty() {
-    await this.presentModalParty('new');
   }
 }

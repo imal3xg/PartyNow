@@ -25,6 +25,7 @@ export interface PaginatedRaw<T> {
     city: string
     price: number
     description: string
+    personId: string
 }
 @Injectable({
     providedIn:'root'
@@ -49,7 +50,8 @@ export class MyPartyService{
                     date:d.date,
                     city:d.city,
                     price:d.price,
-                    description:d.description
+                    description:d.description,
+                    personId:d.personId
                 };
             })};
         }))

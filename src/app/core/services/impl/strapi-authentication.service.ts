@@ -1,5 +1,5 @@
 import { Inject, Injectable } from '@angular/core';
-import { filter, map, Observable, of, switchMap, take, tap } from 'rxjs';
+import { filter, firstValueFrom, map, Observable, of, switchMap, take, tap } from 'rxjs';
 import { BaseAuthenticationService } from './base-authentication.service';
 import { AUTH_MAPPING_TOKEN, AUTH_ME_API_URL_TOKEN, AUTH_SIGN_IN_API_URL_TOKEN, AUTH_SIGN_UP_API_URL_TOKEN } from '../../repositories/repository.tokens';
 import { HttpClient } from '@angular/common/http';
@@ -46,17 +46,9 @@ export class StrapiAuthenticationService extends BaseAuthenticationService imple
     return this.jwt_token;
   }
 
-  getCurrentUser(): Promise<any> {
-    return new Promise((resolve) => {
-      // Primero esperamos a que el servicio esté listo
-      this._ready.pipe(
-        filter(ready => ready === true),
-        take(1),
-        switchMap(() => this._user)
-      ).subscribe(user => {
-        resolve(user);
-      });
-    });
+  async getCurrentUser(): Promise<any> {
+    await firstValueFrom(this._ready.pipe(filter(ready => ready === true))); // Espera a que esté listo
+    return firstValueFrom(this._user.asObservable()); // Usamos el observable de _user para asegurar que se obtenga el último valor
   }
 
   signIn(authPayload: any): Observable<User> {

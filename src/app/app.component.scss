@@ -1,5 +1,5 @@
 /* Estilo del menú */
-ion-menu {
+  ion-menu {
     --width: 280px; /* Ancho del menú */
     --background: #1a1a1a; /* Fondo oscuro */
   }
@@ -12,9 +12,9 @@ ion-menu {
   
   /* Estilo del header del menú */
   .menu-header {
-    --background: #000; /* Fondo negro */
-    border-bottom: 1px solid #ffca28; /* Línea dorada */
-    color: #fff; /* Texto blanco */
+    --background: #ffca28 !important;
+    border-bottom: 1px solid #000000; /* Línea dorada */
+    color: #000000; /* Texto blanco */
     text-align: center; /* Centrado */
   }
   
@@ -26,30 +26,33 @@ ion-menu {
   /* Estilo de los ítems del menú */
   .menu-item {
     --background: transparent;
-    --color: #fff; /* Texto blanco */
     font-size: 1rem;
+    color: #ffca28;
     font-weight: 500;
-    transition: background-color 0.3s, color 0.3s;
     border-radius: 10px;
     margin: 5px 10px; /* Espaciado interno */
     cursor: pointer;
+
+    /* Transiciones para color y fondo */
+    transition: color 0.3s ease, background-color 0.3s ease;
   }
-  
+
   /* Íconos del menú */
   .menu-icon {
     font-size: 1.4rem;
     color: #ffca28; /* Íconos dorados */
-    transition: color 0.3s;
+
+    /* Transición de color para íconos */
+    transition: color 0.3s ease;
   }
-  
+
   /* Efectos hover para los ítems */
   .menu-item:hover {
-    --background: #ffca28; /* Fondo dorado al pasar el mouse */
-    --color: #000; /* Texto negro al pasar el mouse */
+    background-color: #ffca28; /* Fondo dorado al pasar el mouse */
+    color: #000; /* Texto negro al pasar el mouse */
   }
-  
+
   /* Efectos hover para los íconos */
   .menu-item:hover .menu-icon {
     color: #000; /* Íconos negros al pasar el mouse */
   }
-  

@@ -5,14 +5,15 @@ import { Person } from "../../models/person.model";
 import { Party } from "../../models/party.model";
 
 export interface PartyRaw {
-    id: string
-    nombre: string
+    id: string,
+    nombre: string,
     country: string,
     minAge: number,
     date: string,
     city:string,
     price:number,
-    description:string
+    description:string,
+    personId:string
 }
 @Injectable({
     providedIn: 'root'
@@ -38,7 +39,8 @@ export interface PartyRaw {
             date:data.date,
             city:data.city,
             price:data.price,
-            description:data.description
+            description:data.description,
+            personId:data.personId
         };
     }
     getAdded(data: any):Party {

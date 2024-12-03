@@ -8,28 +8,107 @@
   </ion-toolbar>
 </ion-header>
 
-<ion-content *ngIf="person; else loading">
+<ion-content class="content" *ngIf="person; else loading">
   <ion-card>
     <ion-card-header>
-      <ion-card-title>{{ person.name }} {{ person.surname }}</ion-card-title>
+      <div class="header-container">
+        <!-- Nombre del usuario alineado a la izquierda -->
+        <ion-card-title class="name-title">{{ person.name }} {{ person.surname }}</ion-card-title>
+        
+        <!-- Botón Editar Perfil alineado a la derecha -->
+        <ion-buttons slot="end" class="edit-button">
+          <ion-button (click)="openPersonDetail(person)">
+            <ion-icon name="create-outline" slot="start"></ion-icon>
+            Editar Perfil
+          </ion-button>
+        </ion-buttons>
+      </div>
+      <div class="profile-stats">
+        <!-- Contador de publicaciones -->
+        <div class="stat">
+          <!-- <p class="stat-number">{{ person.posts }}</p> -->
+          <p class="stat-label">Publicaciones</p>
+        </div>
+        <!-- Contador de seguidores -->
+        <div class="stat">
+          <!-- <p class="stat-number">{{ person.followers }}</p> -->
+          <p class="stat-label">Seguidores</p>
+        </div>
+        <!-- Contador de seguidos -->
+        <div class="stat">
+          <!-- <p class="stat-number">{{ person.following }}</p> -->
+          <p class="stat-label">Seguidos</p>
+        </div>
+      </div>
     </ion-card-header>
-    <ion-card-content>
+  
+    <ion-card-content class="person-att">
       <ion-list>
-        <ion-item>
-          <ion-label>Género:</ion-label>
-          <ion-text>{{ person.gender }}</ion-text>
+        <!-- Usar un contenedor para alinear los elementos -->
+        <ion-item class="person-att">
+          <ion-label class="attribute-label"><strong>Género:</strong> {{ person.gender }}</ion-label>
         </ion-item>
-        <ion-item>
-          <ion-label>Fecha de Nacimiento:</ion-label>
-          <ion-text>{{ person.birthdate | date }}</ion-text>
+        <ion-item class="person-att">
+          <ion-label class="attribute-label"><strong>Fecha de Nacimiento:</strong> {{ person.birthdate | date }}</ion-label>
         </ion-item>
       </ion-list>
     </ion-card-content>
-  </ion-card>
+  </ion-card>  
 
-  <ion-button expand="block" (click)="openPersonDetail(person)">
-    Editar Perfil
-  </ion-button>
+  <!-- Separador estilizado -->
+  <div class="separator">
+    <ion-text>
+      <h2>Publicaciones</h2>
+    </ion-text>
+  </div>
+
+  <ion-list class="cards-list">
+    <div class="party-grid">
+      <ion-card *ngFor="let party of filteredParty$ | async; let i = index" class="party-item">
+        <!-- Imagen de la fiesta si la hay -->
+        <ion-card-header>
+          <ion-card-title>
+            {{ party.name }}
+          </ion-card-title>
+          <!-- Botones de acción -->
+          <ion-buttons class="card-buttons">
+            <ion-button fill="clear" slot="end" class="update-button" (click)="openUpdateParty(party, i)">
+              <ion-icon name="create-outline"></ion-icon>
+            </ion-button>
+            <ion-button fill="clear" slot="end" class="delete-button" (click)="onDeleteParty(party)">
+              <ion-icon name="trash-outline"></ion-icon>
+            </ion-button>
+          </ion-buttons>
+        </ion-card-header>
+      
+        <ion-card-content>
+          <!-- Sección de detalles que se mostrará u ocultará -->
+          <div class="party-details">
+            <p><strong>Fecha:</strong> {{ party.date }}</p>
+            <p><strong>Lugar del acontecimiento:</strong> {{ party.city }}, {{ party.country }}</p>
+            <p><strong>Precio:</strong> {{ party.price }}</p>
+            <p><strong>Edad mínima:</strong> {{ party.minAge }}</p>
+            <!-- Agrega más detalles según sea necesario -->
+          </div>
+        </ion-card-content>
+      </ion-card>
+    </div>
+  </ion-list>
+
+  <div class="fab-button-container">
+    <ion-button class="fab-button" (click)="onAddParty()">
+      <ion-icon name="add-outline" slot="start"></ion-icon>
+      Crear publicación
+    </ion-button>
+  </div>
+
+  <div #animatedAvatarContainer class="animated-avatar-container" [ngStyle]="{'display':isAnimating?'block':'none'}">
+    <img #animatedAvatar [src]="selectedParty?.picture?.large" alt="Foto de {{ selectedParty?.name }}">
+  </div>
+
+  <ion-infinite-scroll (ionInfinite)="onIonInfinite($event)">
+    <ion-infinite-scroll-content></ion-infinite-scroll-content>
+  </ion-infinite-scroll>
 </ion-content>
 
 <!-- Plantilla de carga -->
