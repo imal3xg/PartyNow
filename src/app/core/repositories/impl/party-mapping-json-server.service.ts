@@ -13,7 +13,8 @@ export interface PartyRaw {
     city:string,
     price:number,
     description:string,
-    personId:string
+    personId:string,
+    likesCount: number
 }
 @Injectable({
     providedIn: 'root'
@@ -40,7 +41,8 @@ export interface PartyRaw {
             city:data.city,
             price:data.price,
             description:data.description,
-            personId:data.personId
+            personId:data.personId,
+            likesCount:data.likesCount
         };
     }
     getAdded(data: any):Party {

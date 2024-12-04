@@ -13,6 +13,7 @@ interface PartyRaw {
   price: number;
   description: string;
   personId: string;
+  likesCount: number;
 }
 
 @Injectable({
@@ -49,7 +50,8 @@ export class GroupsMappingLocalStorageService implements IBaseMapping<Party> {
       city:data.city,
       price:data.price,
       description:data.description,
-      personId:data.personId
+      personId:data.personId,
+      likesCount:data.likesCount
     };
   }
 
