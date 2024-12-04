@@ -9,5 +9,4 @@ export interface Party extends Model{
     price:number
     description?:string
     personId:string
-    likesCount: number;
 }

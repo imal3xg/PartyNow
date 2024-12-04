@@ -33,9 +33,6 @@
           </ion-card-title>
           <!-- Botones de acción -->
           <ion-buttons class="action-buttons">
-            <ion-button fill="clear" slot="end" (click)="toggleLike(party)">
-              <ion-icon [name]="isLiked(party.id) ? 'heart' : 'heart-outline'" slot="icon-only"></ion-icon>
-            </ion-button>
             <ion-button fill="clear" slot="end" (click)="onSaveParty(party)">
               <ion-icon name="bookmark-outline" slot="icon-only"></ion-icon>
             </ion-button>
@@ -48,7 +45,6 @@
         <ion-card-content>
           <!-- Sección de detalles que se mostrará u ocultará -->
           <div class="party-details">
-            <p><strong>Likes:</strong> {{ party.likesCount }}</p>
             <p><strong>Fecha:</strong> {{ party.date }}</p>
             <p><strong>Lugar del acontecimiento:</strong> {{ party.city }}, {{ party.country }}</p>
             <p><strong>Precio:</strong> {{ party.price }}</p>

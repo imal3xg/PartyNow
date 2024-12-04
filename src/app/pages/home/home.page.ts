@@ -1,4 +1,4 @@
-import { ChangeDetectorRef, Component, ElementRef, OnInit, QueryList, ViewChild, ViewChildren } from '@angular/core';
+import { Component, ElementRef, OnInit, QueryList, ViewChild, ViewChildren } from '@angular/core';
 import { AlertController, AnimationController, InfiniteScrollCustomEvent, ModalController } from '@ionic/angular';
 import { BehaviorSubject, Observable, combineLatest, lastValueFrom } from 'rxjs';
 import { map, startWith } from 'rxjs/operators';  // Importar map para el filtro
@@ -8,7 +8,6 @@ import { Person } from 'src/app/core/models/person.model';
 import { PartyService } from 'src/app/core/services/impl/party-service.service';
 import { PeopleService } from 'src/app/core/services/impl/people-service.service';
 import { Countries } from 'src/app/core/models/countries.enum';
-import { BaseAuthenticationService } from 'src/app/core/services/impl/base-authentication.service';
 
 @Component({
   selector: 'app-home',
@@ -16,11 +15,10 @@ import { BaseAuthenticationService } from 'src/app/core/services/impl/base-authe
   styleUrls: ['./home.page.scss'],
 })
 export class HomePage implements OnInit {
-  person?: Person | null;
+
   _party: BehaviorSubject<Party[]> = new BehaviorSubject<Party[]>([]); // Almacena las fiestas
   party$: Observable<Party[]> = this._party.asObservable(); // Observable de fiestas
   filteredParty$: Observable<Party[]>; // Observable para las fiestas filtradas
-  likedParties: Set<string> = new Set(); // Conjunto local para almacenar las fiestas que le gustan al usuario
   totalParty: number = 0;
   hasMoreParty: boolean = true;
   hasMorePeople: boolean = true;
@@ -31,9 +29,6 @@ export class HomePage implements OnInit {
 
   constructor(
     private partySvc: PartyService,
-    private authService: BaseAuthenticationService,
-    private peopleService: PeopleService,
-    private cdr:ChangeDetectorRef,
   ) {
     // Combinar filtros con la lista de fiestas
     this.filteredParty$ = combineLatest([
@@ -53,74 +48,11 @@ export class HomePage implements OnInit {
   }
   
 
-  async ngOnInit() {
-    this.refresh();
-    try {
-      const user = await this.authService.getCurrentUser();
-      console.log('Usuario autenticado:', user);
-  
-      if (user) {
-        this.person = await lastValueFrom(this.peopleService.getByUserId(user.id));
-        this.cdr.detectChanges();
-        console.log('Persona obtenida:', this.person);
-        this.getMoreParty(); // Llamar después de cargar la persona
-      }
-    } catch (error: any) {
-      console.error('Error al cargar el perfil:', error.message || error);
-    }
-  }
-
-  loadUserLikes() {
-    if (this.person && this.person.id) {
-      this.partySvc.getUserLikedParties(this.person.id).subscribe({
-        next: (likedPartyIds) => {
-          // Ahora likedPartyIds contiene los IDs de los likes
-          this.likedParties = new Set(likedPartyIds);
-          console.log('Likes del usuario:', this.likedParties);
-        },
-        error: (err) => {
-          console.error('Error al obtener los likes:', err);
-        }
-      });
-    } else {
-      console.error('No se pudo cargar el ID del usuario');
-    }
-  }
-
-  toggleLike(party: Party) {
-    const isCurrentlyLiked = this.likedParties.has(party.id);
-  
-    // Llama al servicio para alternar el like
-    this.partySvc.toggleLike(party.id).subscribe({
-      next: (isLiked) => {
-        // Actualiza el conjunto de likes local basado en la respuesta del backend
-        if (isLiked) {
-          this.likedParties.add(party.id);
-        } else {
-          this.likedParties.delete(party.id);
-        }
-        console.log(`Like actualizado para la fiesta ${party.id}. Ahora está ${isLiked ? 'gustando' : 'no gustando'}`);
-      },
-      error: (error) => {
-        // En caso de error, revierte el cambio local
-        console.error('Error al alternar like', error);
-        if (isCurrentlyLiked) {
-          this.likedParties.add(party.id);
-        } else {
-          this.likedParties.delete(party.id);
-        }
-      }
-    });
-  }
-  
-  isLiked(partyId: string): boolean {
-    return this.likedParties.has(partyId); // Verifica si la fiesta está en el conjunto de "me gusta"
-  }
+  ngOnInit(): void {}
 
   ionViewWillEnter() {
     // Forzamos la recarga de los datos al ingresar a la página
-    this.refresh();
-    this.loadUserLikes();
+    this.refresh(); // O this.getMoreParty();
   }
 
   @ViewChildren('avatar') avatars!: QueryList<ElementRef>;
@@ -133,34 +65,21 @@ export class HomePage implements OnInit {
   pageSize: number = 25;
 
   // Función para refrescar el listado de personas
-  async refresh() {
-    try {
-      if (!this.person) return;
-        // Obtener el usuario autenticado nuevamente
-        const user = await this.authService.getCurrentUser();
-        if (user) {
-          // Volver a cargar la persona desde el servicio
-          this.person = await lastValueFrom(this.peopleService.getByUserId(user.id));
-          console.log('Perfil actualizado:', this.person);
-          this.page = 1;
-          this.hasMoreParty = true;
-          this.partySvc.getAll(this.page, this.pageSize).subscribe({
-            next: (response: Paginated<Party>) => {
-              const party = response.data.map(party => ({
-                ...party
-              }));
-              this._party.next([...party]);
-              this.page++;
-              if (response.data.length < this.pageSize) {
-                this.hasMoreParty = false;
-              }
-            }
-          }
-        );
+  refresh() {
+    this.page = 1;
+    this.hasMoreParty = true;
+    this.partySvc.getAll(this.page, this.pageSize).subscribe({
+      next: (response: Paginated<Party>) => {
+        const party = response.data.map(party => ({
+          ...party
+        }));
+        this._party.next([...party]);
+        this.page++;
+        if (response.data.length < this.pageSize) {
+          this.hasMoreParty = false;
+        }
       }
-    } catch (error: any) {
-      console.error('Error al refrescar los datos del perfil:', error.message || error);
-    }
+    });
   }
 
   // Función para manejar el cambio de país

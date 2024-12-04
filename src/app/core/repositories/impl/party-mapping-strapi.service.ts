@@ -25,7 +25,6 @@ export interface PartyAttributes {
     price: number
     description?: string
     personId: string
-    likesCount: number
     createdAt?: string
     updatedAt?: string
     publishedAt?: string
@@ -47,8 +46,7 @@ export interface Meta {}
                 city:data.city,
                 price:data.price,
                 description:data.description,
-                personId:data.personId,
-                likesCount:data.likesCount
+                personId:data.personId
             }
         };
     }
@@ -73,8 +71,6 @@ export interface Meta {}
                 case 'description': toReturn.data['description']=data[key];
                 break;
                 case 'personId': toReturn.data['personId']=data[key];
-                break;
-                case 'likesCount': toReturn.data['likesCount']=data[key];
                 break;
                 default:
             }
@@ -101,8 +97,7 @@ export interface Meta {}
             city:attributes.city,
             price:attributes.price,
             description:attributes.description,
-            personId:attributes.personId,
-            likesCount:attributes.likesCount
+            personId:attributes.personId
         };
     }
     getAdded(data: PartyRaw):Party {

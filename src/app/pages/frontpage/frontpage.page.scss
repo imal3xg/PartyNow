@@ -32,7 +32,7 @@ ion-buttons {
 .topbuttons ion-button {
     font-size: 1rem; /* Aumentamos el tamaño de los botones */
     padding: 6px 15px; /* Aumentamos el padding para hacerlos más grandes */
-    color: white !important; /* Texto blanco */
+    color: rgb(251, 255, 0) !important; /* Texto blanco */
     border-radius: 15px; /* Bordes redondeados */
     border: none !important; /* Sin bordes */
     transition: background-color 0.3s, color 0.3s; /* Transiciones suaves para los cambios de color y sombra */
@@ -40,8 +40,8 @@ ion-buttons {
 
 /* Estilo cuando el usuario pasa el mouse por encima */
 .topbuttons ion-button:hover {
-    background-color: white !important; /* Fondo blanco al pasar el mouse */
-    color: #ffca28 !important; /* Texto dorado */
+    background-color: rgb(251, 255, 0) !important; /* Fondo blanco al pasar el mouse */
+    color: #000000 !important; /* Texto dorado */
 }
 
 /* Sección principal (imagen y texto) */
@@ -185,3 +185,109 @@ ion-buttons {
     --background: #d93025; /* Fondo rojo */
     color: white; /* Texto blanco */
 }
+
+/* Media query para pantallas pequeñas como móviles */
+@media (max-width: 576px) {
+    .hero-image {
+      width: 60%; /* Ajustar la imagen para móviles */
+    }
+  
+    .hero-description {
+      font-size: 1rem; /* Texto más pequeño para pantallas reducidas */
+      max-width: fit-content;
+    }
+  
+    .about-me-content {
+      flex-direction: column; /* Cambia a disposición vertical */
+      text-align: center; /* Centra el texto */
+    }
+  
+    .about-image {
+      width: 80%; /* Imagen más grande en dispositivos pequeños */
+      margin: 20px 0; /* Añade margen arriba y abajo */
+    }
+  
+    .about-description {
+      font-size: 1rem; /* Tamaño de fuente más pequeño */
+    }
+  
+    .contact-buttons {
+      flex-direction: column; /* Botones en una columna */
+      gap: 10px; /* Menor espacio entre botones */
+    }
+  }
+  
+  /* Media query para tablets y pantallas medianas */
+  @media (min-width: 577px) and (max-width: 992px) {
+    .hero-image {
+      width: 40%; /* Ajustar la imagen para tablets */
+    }
+  
+    .hero-description {
+      font-size: 1.3rem; /* Ajustar el tamaño del texto */
+    }
+  
+    .about-me-content {
+      gap: 15px; /* Reducir el espacio entre texto e imagen */
+    }
+  
+    .about-image {
+      width: 50%; /* Ajustar tamaño de la imagen */
+    }
+  
+    .about-description {
+      font-size: 1.2rem; /* Tamaño de fuente mediano */
+    }
+  
+    .contact-buttons {
+      justify-content: center; /* Centrar botones */
+      gap: 10px; /* Menor espacio entre botones */
+    }
+  }
+  
+  /* Media query para pantallas grandes como laptops */
+  @media (min-width: 993px) and (max-width: 1200px) {
+    .hero-image {
+      width: 30%; /* Imagen ligeramente más grande */
+    }
+  
+    .hero-description {
+      font-size: 1.5rem; /* Mantener texto proporcional */
+    }
+  
+    .about-me-content {
+      gap: 20px; /* Ajustar espacio */
+    }
+  
+    .about-image {
+      width: 40%; /* Tamaño equilibrado */
+    }
+  
+    .about-description {
+      font-size: 1.3rem; /* Texto un poco más grande */
+    }
+  }
+  
+  /* Media query para pantallas extra grandes */
+  @media (min-width: 1201px) {
+    .hero-image {
+      width: 25%; /* Tamaño original */
+    }
+  
+    .hero-description {
+      font-size: 1.7rem; /* Texto más grande */
+    }
+  
+    .about-me-content {
+      gap: 30px; /* Mayor espacio entre texto e imagen */
+    }
+  
+    .about-image {
+      width: 30%; /* Tamaño óptimo para pantallas grandes */
+    }
+  
+    .about-description {
+      font-size: 1.5rem; /* Fuente más grande */
+    }
+  }
+  
