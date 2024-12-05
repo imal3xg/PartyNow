@@ -1,2 +1,70 @@
-// For information on how to create your own theme, please see:
-// http://ionicframework.com/docs/theming/
+/* --- Colores generales --- */
+:root {
+    /* Colores Primarios */
+    --ion-color-primary: #ffca28;  /* Dorado */
+    --ion-color-primary-rgb: 255, 202, 40;
+    
+    /* Colores Secundarios */
+    --ion-color-secondary: #000;   /* Negro */
+    --ion-color-secondary-rgb: 0, 0, 0;
+    
+    /* Colores Terciarios */
+    --ion-color-tertiary: #e0e0e0; /* Gris claro */
+    --ion-color-tertiary-rgb: 224, 224, 224;
+    
+    /* Colores de fondo */
+    --ion-background-color: #101010; /* Fondo oscuro predeterminado */
+    
+    /* Colores de texto */
+    --ion-color-text: #fff;  /* Blanco para texto */
+    --ion-color-text-light: #000;  /* Negro para texto en modo claro */
+  }
+  
+  /* --- Modo Claro --- */
+  body.light {
+    --ion-background-color: #ffffff; /* Fondo blanco */
+    
+    --ion-color-primary: #ffca28;   /* Dorado */
+    --ion-color-secondary: #000;    /* Negro */
+    --ion-color-tertiary: #333;     /* Gris oscuro */
+    
+    --ion-color-text: #000;         /* Negro para texto */
+    --ion-color-text-light: #333;   /* Gris oscuro para texto secundario */
+    
+    /* Botones */
+    --ion-button-background: var(--ion-color-primary);
+    --ion-button-color: var(--ion-color-secondary);
+    
+    /* Fondos y bordes */
+    --ion-toolbar-background: var(--ion-color-secondary);
+    --ion-toolbar-color: var(--ion-color-primary);
+  }
+  
+  /* --- Modo Oscuro --- */
+  body.dark {
+    --ion-background-color: #101010; /* Fondo oscuro */
+    
+    --ion-color-primary: #ffca28;   /* Dorado */
+    --ion-color-secondary: #e0e0e0; /* Gris claro para elementos secundarios */
+    --ion-color-tertiary: #e0e0e0;  /* Gris claro */
+    
+    --ion-color-text: #fff;         /* Blanco para texto */
+    --ion-color-text-light: #b0b0b0; /* Gris para texto secundario */
+    
+    /* Botones */
+    --ion-button-background: var(--ion-color-primary);
+    --ion-button-color: var(--ion-color-secondary);
+    
+    /* Fondos y bordes */
+    --ion-toolbar-background: var(--ion-color-secondary);
+    --ion-toolbar-color: var(--ion-color-primary);
+  }
+  
+  /* --- Otros estilos y ajustes --- */
+  /* Para hacer que los botones cambien de color al pasar el mouse en ambos modos */
+  ion-button:hover {
+    --background: var(--ion-color-secondary);
+    --color: var(--ion-color-primary);
+    transition: all 0.3s ease-in-out;
+  }
+  

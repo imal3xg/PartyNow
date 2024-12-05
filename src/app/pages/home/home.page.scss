@@ -1,7 +1,16 @@
+.cards-list {
+  background-color: transparent;
+}
+
+ion-title {
+  --color: var(--ion-color-primary);
+}
+
+/* --- Estilo del Grid de las Tarjetas --- */
 .party-grid {
   display: grid;
   grid-template-columns: repeat(3, 1fr); /* Tres columnas */
-  gap: 16px; /* Espaciado entre tarjetas */
+  gap: 16px;
   padding: 16px;
 }
 
@@ -10,47 +19,50 @@
   flex-direction: column;
   justify-content: space-between;
   text-align: left;
-  border-radius: 15px; /* Bordes redondeados */
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Sombra suave */
-  overflow: hidden; /* Evita que el contenido sobresalga de los bordes redondeados */
-  margin: 16px; /* Separación entre las tarjetas */
-  transition: transform 0.2s ease, box-shadow 0.2s ease; /* Animación suave al pasar el mouse */
-  background-color: var(--ion-background-color, #fff); /* Fondo según el tema */
+  border-radius: 15px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3); /* Sombra sutil */
+  overflow: hidden;
+  margin: 16px;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
 }
 
 .party-item:hover {
-  transform: translateY(-5px); /* Eleva la tarjeta al pasar el mouse */
-  box-shadow: 0 8px 12px rgba(0, 0, 0, 0.15); /* Incrementa la sombra */
+  box-shadow: 0 8px 12px var(--ion-color-primary);
 }
 
 .party-item ion-card-header {
   padding: 16px;
-  border-bottom: 1px solid #e0e0e0; /* Línea sutil entre el encabezado y el contenido */
+  border-bottom: 1px solid var(--ion-color-tertiary); /* Línea sutil */
 }
 
 .party-item ion-card-title {
   font-size: 1.2rem;
   font-weight: bold;
-  color: var(--ion-text-color, #000); /* Color del texto según el tema */
+  margin-bottom: 8px;
+  color: var(--ion-color-primary); /* Color de texto según el tema */
 }
 
-.party-item .action-buttons {
-  display: flex;
-  margin-top: -35px;
-  justify-content: flex-end;
-  color: rgb(251, 255, 0);
-}
-
+/* --- Contenido de la Tarjeta --- */
 .party-item ion-card-content {
   padding: 16px;
 }
 
+/* --- Detalles dentro de la Tarjeta --- */
 .party-details p {
   margin: 4px 0;
   font-size: 0.9rem;
-  color: #555; /* Color del texto de los detalles */
+  color: var(--ion-color-tertiary); /* Color del texto de los detalles */
 }
 
+/* --- Botones de Acción en la Tarjeta --- */
+.party-item .action-buttons {
+  display: flex;
+  margin-top: -35px;
+  justify-content: flex-end;
+  color: var(--ion-color-primary, rgb(251, 255, 0)); /* Color de los botones de acción */
+}
+
+/* --- Medias Queries --- */
 @media (max-width: 768px) {
   .party-grid {
     grid-template-columns: repeat(2, 1fr); /* Dos columnas en pantallas medianas */
@@ -58,6 +70,9 @@
 }
 
 @media (max-width: 480px) {
+  ion-title {
+    display: none;
+  }
   .party-grid {
     grid-template-columns: 1fr; /* Una columna en pantallas pequeñas */
   }

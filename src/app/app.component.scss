@@ -1,58 +1,59 @@
-/* Estilo del menú */
-  ion-menu {
-    --width: 280px; /* Ancho del menú */
-    --background: #1a1a1a; /* Fondo oscuro */
-  }
+/* --- Estilo del Menú --- */
+ion-menu {
+  --width: 280px; /* Ancho del menú */
+  --background: var(--ion-color-background); /* Fondo del menú según el tema */
+}
 
-  .listt {
-    background: none;
-    width: 100%;
-    height: 100%;
-  }
-  
-  /* Estilo del header del menú */
-  .menu-header {
-    --background: #ffca28 !important;
-    border-bottom: 1px solid #000000; /* Línea dorada */
-    color: #000000; /* Texto blanco */
-    text-align: center; /* Centrado */
-  }
-  
-  /* Contenido del menú */
-  .menu-content {
-    background: #1a1a1a; /* Fondo oscuro */
-  }
-  
-  /* Estilo de los ítems del menú */
-  .menu-item {
-    --background: transparent;
-    font-size: 1rem;
-    color: #ffca28;
-    font-weight: 500;
-    border-radius: 10px;
-    margin: 5px 10px; /* Espaciado interno */
-    cursor: pointer;
+/* --- Lista del Menú --- */
+.listt {
+  background: none;
+  width: 100%;
+  height: 100%;
+}
 
-    /* Transiciones para color y fondo */
-    transition: color 0.3s ease, background-color 0.3s ease;
-  }
+/* --- Estilo del Header del Menú --- */
+.menu-header {
+  --background: var(--ion-color-primary); /* Fondo del header según el tema */
+  border-bottom: 1px solid var(--ion-color-tertiary); /* Línea sutil */
+  color: var(--ion-color-text); /* Color del texto según el tema */
+  text-align: center; /* Centrado */
+}
 
-  /* Íconos del menú */
-  .menu-icon {
-    font-size: 1.4rem;
-    color: #ffca28; /* Íconos dorados */
+/* --- Contenido del Menú --- */
+.menu-content {
+  background: var(--ion-color-background); /* Fondo del contenido según el tema */
+}
 
-    /* Transición de color para íconos */
-    transition: color 0.3s ease;
-  }
+/* --- Estilo de los Ítems del Menú --- */
+.menu-item {
+  --background: transparent;
+  font-size: 1rem;
+  color: var(--ion-color-primary); /* Color del texto de los ítems */
+  font-weight: 500;
+  border-radius: 10px;
+  margin: 5px 10px; /* Espaciado interno */
+  cursor: pointer;
 
-  /* Efectos hover para los ítems */
-  .menu-item:hover {
-    background-color: #ffca28; /* Fondo dorado al pasar el mouse */
-    color: #000; /* Texto negro al pasar el mouse */
-  }
+  /* Transiciones para color y fondo */
+  transition: color 0.3s ease, background-color 0.3s ease;
+}
 
-  /* Efectos hover para los íconos */
-  .menu-item:hover .menu-icon {
-    color: #000; /* Íconos negros al pasar el mouse */
-  }
+/* --- Íconos del Menú --- */
+.menu-icon {
+  font-size: 1.4rem;
+  color: var(--ion-color-primary); /* Color de los íconos según el tema */
+
+  /* Transición de color para íconos */
+  transition: color 0.3s ease;
+}
+
+/* --- Efectos Hover para los Ítems --- */
+.menu-item:hover {
+  background-color: var(--ion-color-primary); /* Fondo cuando pasa el mouse */
+  color: var(--ion-color-light); /* Texto blanco al pasar el mouse */
+}
+
+/* --- Efectos Hover para los Íconos --- */
+.menu-item:hover .menu-icon {
+  color: var(--ion-color-light); /* Íconos blancos al pasar el mouse */
+}

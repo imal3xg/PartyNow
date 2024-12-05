@@ -1,0 +1,10 @@
+<ion-item>
+  <ion-label position="stacked">Precio</ion-label>
+  <ion-input
+    type="number"
+    [value]="value"
+    (ionInput)="onInputChange($event)"
+    (ionBlur)="onTouched()"
+    clearInput>
+  </ion-input>
+</ion-item>

@@ -19,11 +19,13 @@ import { PersonModalComponent } from './components/person-modal/person-modal.com
 import { ReactiveFormsModule } from '@angular/forms';
 import { LoginPage } from './pages/login/login.page';
 import { PartyModalComponent } from './components/party-modal/party-modal.component';
+import { PriceInputComponent } from './components/price-input/price-input.component';
 @NgModule({
   declarations: [
     AppComponent,
     PersonModalComponent,
-    PartyModalComponent
+    PartyModalComponent,
+    PriceInputComponent
   ],
   imports: [
     BrowserModule, 

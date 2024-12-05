@@ -1,4 +1,4 @@
-<ion-header>
+<ion-header class="header-up">
   <ion-toolbar>
     <ion-buttons slot="start">
       <!-- Botón para abrir el menú lateral -->
@@ -9,7 +9,7 @@
 </ion-header>
 
 <ion-content class="content" *ngIf="person; else loading">
-  <ion-card>
+  <ion-card class="cardd">
     <ion-card-header>
       <div class="header-container">
         <!-- Nombre del usuario alineado a la izquierda -->
@@ -43,7 +43,7 @@
     </ion-card-header>
   
     <ion-card-content class="person-att">
-      <ion-list>
+      <ion-list class="list-atrib">
         <!-- Usar un contenedor para alinear los elementos -->
         <ion-item class="person-att">
           <ion-label class="attribute-label"><strong>Género:</strong> {{ person.gender }}</ion-label>

@@ -89,30 +89,23 @@
             label="Edad Mínima"
             label-placement="stacked"
             type="number"
-            value="0"
             formControlName="minAge"
             clearInput>
           </ion-input>
         </ion-item>
         <ion-text color="danger" *ngIf="minAge?.invalid && (minAge?.dirty || minAge?.touched)">
+          <p *ngIf="minAge?.errors?.['required']">La edad mínima no puede estar vacía. Debe ser un número mayor o igual a 0.</p>
           <p *ngIf="minAge?.errors?.['min']">Debe ser un número mayor o igual a 0.</p>
           <p *ngIf="minAge?.errors?.['notInteger']">Debe ser un número entero.</p>
         </ion-text>
 
         <!-- Precio -->
-        <ion-item>
-          <ion-input
-            label="Precio"
-            label-placement="stacked"
-            type="number"
-            value="0"
-            formControlName="price"
-            clearInput>
-          </ion-input>
-        </ion-item>
+        <app-price-input formControlName="price"></app-price-input>
         <ion-text color="danger" *ngIf="price?.invalid && (price?.dirty || price?.touched)">
+          <p *ngIf="price?.errors?.['required']">El precio no puede estar vacío. Debe ser un número mayor o igual a 0.</p>
           <p *ngIf="price?.errors?.['min']">Debe ser un número mayor o igual a 0.</p>
         </ion-text>
+
 
         <!-- Descripción -->
         <ion-item>

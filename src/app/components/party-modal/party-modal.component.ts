@@ -35,10 +35,10 @@ export class PartyModalComponent implements OnInit {
       country: ['', Validators.required],
       city: ['', Validators.required],
       date: ['', Validators.required],
-      minAge: [0, [Validators.min(0), this.integerValidator]],
-      price: [0, [Validators.min(0)]],
+      minAge: [0, [Validators.required, Validators.min(0), this.integerValidator]],  // Added 'required' validator
+      price: [0, [Validators.required, Validators.min(0)]],  // Added 'required' validator
       description: [''],
-    });  
+    });    
   }
 
   ngOnInit() {}
@@ -97,19 +97,27 @@ export class PartyModalComponent implements OnInit {
         console.error("El personId no está definido.");
         return;
       }
-      
+  
+      // Asegurar valores predeterminados
       const formValue = this.formGroup.value;
+      formValue.minAge = this.ensureNonEmpty(formValue.minAge);
+      formValue.price = this.ensureNonEmpty(formValue.price);
+  
       const partyToSave: Party = {
         ...formValue,
-        personId: this.personId,  // Asociamos el personId con la fiesta
+        personId: this.personId, // Asociar el personId con la fiesta
       };
-      
+  
       this.modalCtrl.dismiss(
         this.mode === 'new' ? partyToSave : this.getDirtyValues(this.formGroup),
         this.mode
-      );      
+      );
     } else {
       console.log('Formulario inválido');
     }
+  }
+  
+  ensureNonEmpty(value: any): number {
+    return value === null || value === undefined || value === '' ? 0 : value;
   }
 }

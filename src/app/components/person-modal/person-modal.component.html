@@ -88,27 +88,6 @@
           <p *ngIf="birthdate?.errors?.['required']">La fecha de nacimiento es obligatoria.</p>
           <p *ngIf="birthdate?.errors?.['pattern']">Introduce una fecha válida.</p>
         </ion-text>
-        
-        
-        <!--
-    <ion-item>
-      <ion-label position="stacked">Fecha de nacimiento</ion-label>
-      <ion-input 
-        type="date" 
-        formControlName="birthdate" 
-        (ionChange)="calculateAge()">
-      </ion-input>
-    </ion-item>
-    
-    <ion-text color="danger" *ngIf="birthdate?.invalid && birthdate?.touched">
-      <p *ngIf="birthdate?.errors?.['required']">La fecha de nacimiento es obligatoria.</p>
-      <p *ngIf="birthdate?.errors?.['pattern']">La fecha debe ser válida.</p>
-    </ion-text>
-    
-    <ion-text *ngIf="calculatedAge !== null">
-      <p>Edad: {{ calculatedAge }} años</p>
-    </ion-text>
-        -->
 
         <!-- Género -->
         <ion-item>
@@ -117,7 +96,7 @@
             label-placement="stacked"
             formControlName="gender"
             placeholder="Selecciona un género">
-            <ion-select-option *ngFor="let gen of genders" [value]="gen">{{ gen }}</ion-select-option>
+            <ion-select-option class="select-text" *ngFor="let gen of genders" [value]="gen">{{ gen }}</ion-select-option>
           </ion-select>
         </ion-item>
         <ion-text color="danger" *ngIf="gender?.invalid && (gender?.dirty || gender?.touched)">
