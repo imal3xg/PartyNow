@@ -1,3 +1,4 @@
 export const environment = {
-  production: true
+  production: true,
+  apiUrl:"https://people-service-h4cc.onrender.com"
 };
