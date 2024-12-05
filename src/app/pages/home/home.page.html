@@ -1,4 +1,4 @@
-<ion-header [translucent]="true">
+<ion-header class="header-up" [translucent]="true">
   <ion-toolbar>
     <ion-buttons slot="start">
       <!-- Botón para abrir el menú lateral -->
@@ -7,18 +7,18 @@
     <ion-title>Fiestas</ion-title>
     <ion-buttons slot="end">
       <!-- Recuento de fiestas mostradas -->
-      <ion-text>
+      <ion-text class="total">
         Total: {{ totalParty }}
       </ion-text>
-
+    
       <!-- Filtro por país -->
-      <ion-item>
+      <ion-item lines="none">
         <ion-select placeholder="Selecciona un país" (ionChange)="onCountryChange($event)">
           <ion-select-option value="all">Alrededor del mundo</ion-select-option>
           <ion-select-option *ngFor="let country of countries" [value]="country">{{ country }}</ion-select-option>
         </ion-select>
       </ion-item>
-    </ion-buttons>
+    </ion-buttons>    
   </ion-toolbar>
 </ion-header>
 
@@ -26,33 +26,36 @@
   <ion-list class="cards-list">
     <div class="party-grid">
       <ion-card *ngFor="let party of filteredParty$ | async; let i = index" class="party-item">
-        <!-- Imagen de la fiesta si la hay -->
-        <ion-card-header class="header-with-actions">
+        <!-- Encabezado -->
+        <ion-card-header>
           <ion-card-title class="party-title">
             {{ party.name }}
           </ion-card-title>
-          <!-- Botones de acción -->
-          <ion-buttons class="action-buttons">
-            <ion-button fill="clear" slot="end" (click)="onSaveParty(party)">
-              <ion-icon name="bookmark-outline" slot="icon-only"></ion-icon>
-            </ion-button>
-            <ion-button fill="clear" slot="end" (click)="onShareParty(party)">
-              <ion-icon name="share-social-outline" slot="icon-only"></ion-icon>
-            </ion-button>
-          </ion-buttons>
         </ion-card-header>
       
+        <!-- Contenido principal -->
         <ion-card-content>
-          <!-- Sección de detalles que se mostrará u ocultará -->
           <div class="party-details">
-            <p><strong>Fecha:</strong> {{ party.date }}</p>
-            <p><strong>Lugar del acontecimiento:</strong> {{ party.city }}, {{ party.country }}</p>
-            <p><strong>Precio:</strong> {{ party.price }}</p>
-            <p><strong>Edad mínima:</strong> {{ party.minAge }}</p>
-            <!-- Agrega más detalles según sea necesario -->
+            <p><strong>Fecha:</strong> {{ party?.date }}</p>
+            <p><strong>Lugar del acontecimiento:</strong> {{ party?.city }}, {{ party?.country }}</p>
+            <p><strong>Precio:</strong> {{ party?.price }}</p>
+            <p><strong>Edad mínima:</strong> {{ party?.minAge }}</p>
+            <app-map-frame *ngIf="party?.city && party?.country" [city]="party.city" [country]="party.country"></app-map-frame>
           </div>
-        </ion-card-content>
-      </ion-card>
+        </ion-card-content>        
+      
+        <!-- Footer con botones -->
+        <div class="party-footer">
+          <ion-button fill="clear" color="primary" (click)="onSaveParty(party)">
+            <ion-icon name="bookmark-outline" slot="start"></ion-icon>
+            Guardar
+          </ion-button>
+          <ion-button fill="clear" color="primary" (click)="onShareParty(party)">
+            <ion-icon name="share-social-outline" slot="start"></ion-icon>
+            Compartir
+          </ion-button>
+        </div>
+      </ion-card>      
       
     </div>
   </ion-list>  

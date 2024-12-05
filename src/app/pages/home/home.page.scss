@@ -1,3 +1,7 @@
+.header-up {
+  box-shadow: 0 8px 12px var(--ion-color-primary);
+}
+
 .cards-list {
   background-color: transparent;
 }
@@ -14,6 +18,68 @@ ion-title {
   padding: 16px;
 }
 
+.total {
+  font-size: 16px;
+  font-weight: bold;
+  color: var(--ion-color-tertiary);
+  margin-right: 16px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: var(--ion-color-light); /* Fondo suave */
+  padding: 10px 20px;
+  border-radius: 8px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2); /* Sombra sutil */
+}
+
+.total ion-text {
+  margin: 0;
+}
+
+/* --- Estilo del Ion Select para País --- */
+ion-select {
+  width: 180px; /* Ancho fijo */
+  --background: var(--ion-color-light);
+  --border-radius: 8px;
+  --padding-start: 10px;
+  --padding-end: 10px;
+  --color: var(--ion-color-dark);
+  --label-color: var(--ion-color-dark);
+  --placeholder-color: var(--ion-color-medium);
+}
+
+ion-select::part(placeholder) {
+  color: var(--ion-color-tertiary);
+  opacity: 1;
+}
+
+ion-select::part(icon) {
+  color: var(--ion-color-tertiary);
+}
+
+ion-select-option {
+  font-size: 14px;
+  padding: 10px;
+  color: var(--ion-color-dark);
+  background-color: var(--ion-color-light);
+}
+
+ion-select-option:hover {
+  background-color: var(--ion-color-tertiary);
+  color: white;
+}
+
+/* Estilo del item que contiene el ion-select */
+ion-item {
+  --background: var(--ion-color-light);
+  --border-radius: 8px;
+  --margin-top: 8px;
+  --padding-start: 0;
+  --padding-end: 0;
+  --lines: none;
+}
+
+/* --- Estilo para el Grid de las Tarjetas --- */
 .party-item {
   display: flex;
   flex-direction: column;
@@ -32,13 +98,13 @@ ion-title {
 
 .party-item ion-card-header {
   padding: 16px;
+  background-color: var(--ion-background-color, #fff);
   border-bottom: 1px solid var(--ion-color-tertiary); /* Línea sutil */
 }
 
 .party-item ion-card-title {
   font-size: 1.2rem;
   font-weight: bold;
-  margin-bottom: 8px;
   color: var(--ion-color-primary); /* Color de texto según el tema */
 }
 
@@ -62,10 +128,36 @@ ion-title {
   color: var(--ion-color-primary, rgb(251, 255, 0)); /* Color de los botones de acción */
 }
 
+.party-footer {
+  display: flex;
+  justify-content: space-around; /* Espaciado uniforme entre los botones */
+  align-items: center; /* Alinear verticalmente los botones */
+  border-top: 1px solid var(--ion-color-tertiary); /* Línea separadora opcional */
+  background-color: var(--ion-background-color, #fff); /* Fondo del footer */
+}
+
+.party-footer ion-button {
+  --border-radius: 8px; /* Bordes redondeados */
+  font-size: 1rem; /* Tamaño del texto */
+  text-transform: capitalize; /* Estilo del texto */
+  display: flex; /* Asegura que icono y texto estén alineados */
+  align-items: center; /* Centra el contenido del botón */
+}
+
 /* --- Medias Queries --- */
 @media (max-width: 768px) {
   .party-grid {
     grid-template-columns: repeat(2, 1fr); /* Dos columnas en pantallas medianas */
+  }
+  .total {
+    font-size: 14px;
+    margin-right: 8px;
+  }
+
+  ion-select {
+    width: 100%;
+    --padding-start: 12px;
+    --padding-end: 12px;
   }
 }
 
@@ -75,5 +167,14 @@ ion-title {
   }
   .party-grid {
     grid-template-columns: 1fr; /* Una columna en pantallas pequeñas */
+  }
+
+  ion-select {
+    font-size: 12px;
+  }
+
+  .total {
+    font-size: 12px;
+    margin-right: 8px;
   }
 }

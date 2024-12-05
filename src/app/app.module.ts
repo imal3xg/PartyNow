@@ -20,12 +20,14 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { LoginPage } from './pages/login/login.page';
 import { PartyModalComponent } from './components/party-modal/party-modal.component';
 import { PriceInputComponent } from './components/price-input/price-input.component';
+import { MapFrameComponent } from './components/map-frame/map-frame.component';
+import { SafeUrlPipe } from './components/pipes/safe-url.pipe';
 @NgModule({
   declarations: [
     AppComponent,
     PersonModalComponent,
     PartyModalComponent,
-    PriceInputComponent
+    PriceInputComponent,
   ],
   imports: [
     BrowserModule, 

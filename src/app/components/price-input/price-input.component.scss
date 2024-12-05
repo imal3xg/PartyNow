@@ -1,11 +1,18 @@
+/* --- Estilo de los Inputs, Selects, Datetime --- */
 ion-input {
     margin-bottom: 0.5rem;
-    --padding-start: 0;
-}
+    color: var(--ion-color-tertiary);
+  }
   
-ion-item {
-    --background: white;
+  /* --- Estilo de los Ítems en los Inputs --- */
+  ion-item {
+    --background: var(--ion-background-color, white); /* Fondo según el tema */
     border-radius: 8px;
     margin-bottom: 12px;
     padding: 8px 12px;
-}
+  }
+  
+  /* --- Ajustes de Padding en Inputs y Selects --- */
+  ion-input {
+    --padding-start: 0;
+  }

@@ -1,102 +1,117 @@
+/* --- Estilo del Header --- */
 ion-header {
-    background-color: var(--ion-color-primary);
-    color: white;
-  }
+  background-color: var(--ion-color-primary); /* Color principal según el tema */
+  color: var(--ion-text-color); /* Texto blanco o según el tema */
+}
   
-  ion-toolbar ion-title {
-    font-size: 1.5rem;
-    text-transform: capitalize;
-  }
+/* --- Estilo del Título del Toolbar --- */
+ion-toolbar ion-title {
+  font-size: 1.5rem;
+  text-transform: capitalize;
+  color: var(--ion-text-color, white); /* Ajusta el color del título según el tema */
+}
+
+/* --- Estilo de los Íconos en el Toolbar --- */
+ion-toolbar ion-icon {
+  margin-right: 8px;
+}
+
+/* --- Estilo de las Tarjetas (Cards) --- */
+ion-card {
+  margin-bottom: 1rem;
+  border-radius: 8px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Sombra suave */
+  background-color: var(--ion-background-color, #fff); /* Fondo según el tema */
+}
+
+/* --- Título de la Tarjeta --- */
+ion-card-title {
+  font-size: 1.2rem;
+  color: var(--ion-color-primary); /* Color del título según el tema */
+}
+
+/* --- Contenido de la Tarjeta --- */
+ion-card-content {
+  padding: var(--ion-padding-standard);
+}
   
-  ion-toolbar ion-icon {
-    margin-right: 8px;
-  }
+ion-input, ion-select, ion-datetime {
+  margin-bottom: 0.5rem;
+  color: var(--ion-color-tertiary);
+}
+
+/* --- Estilo de los Ítems en los Inputs --- */
+ion-item {
+  --background: var(--ion-background-color, white); /* Fondo según el tema */
+  border-radius: 8px;
+  margin-bottom: 12px;
+  padding: 8px 12px;
+}
+
+/* --- Ajustes de Padding en Inputs y Selects --- */
+ion-input, ion-select {
+  --padding-start: 0;
+}
   
-  /* Form cards */
+/* --- Estilo de Textos --- */
+.fechanac {
+  cursor: text;
+  color: var(--ion-color-tertiary);
+}
+
+ion-text {
+  font-size: 0.9rem;
+  margin-top: -8px;
+  margin-bottom: 8px;
+  padding-left: 4px;
+  color: var(--ion-color-tertiary);
+}
+
+/* --- Mensajes de Error --- */
+ion-text[color="danger"] p {
+  color: #e53935;
+  font-size: 0.85rem;
+}
+  
+/* --- Estilo de los Botones --- */
+ion-button {
+  --border-radius: 8px;
+  --padding-start: 1rem;
+  --padding-end: 1rem;
+  font-size: 1rem;
+  text-transform: uppercase;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+  --background: var(--ion-color-primary, #f6ff00); /* Fondo de botón según el tema */
+  --color: var(--ion-text-color, white); /* Color del texto según el tema */
+}
+
+ion-button:disabled {
+  opacity: 0.6;
+}
+  
+/* --- Estilo del Footer --- */
+ion-footer {
+  background-color: var(--ion-background-color, white); /* Fondo según el tema */
+  box-shadow: 0 -2px 6px rgba(0, 0, 0, 0.1);
+}
+
+/* --- Estilo del Toolbar en el Footer --- */
+ion-toolbar {
+  padding: var(--ion-padding-standard);
+  border-top: 1px solid var(--ion-color-medium, #e0e0e0); /* Línea superior sutil */
+}
+  
+/* --- Diseño Responsivo --- */
+@media (min-width: 768px) {
   ion-card {
-    margin-bottom: 1rem;
-    border-radius: 8px;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    margin-bottom: 1.5rem;
+    max-width: 700px;
+    margin-left: auto;
+    margin-right: auto;
   }
-  
-  ion-card-title {
-    font-size: 1.2rem;
-    color: var(--ion-color-primary);
-  }
-  
-  ion-card-content {
-    padding: var(--ion-padding-standard);
-  }
-  
-  /* Input styles */
-  ion-input, ion-select, ion-datetime {
-    margin-bottom: 0.5rem;
-  }
-  
-  ion-item {
-    --background: white;
-    border-radius: 8px;
-    margin-bottom: 12px;
-    padding: 8px 12px;
-  }
-  
-  ion-input, ion-select {
-    --padding-start: 0;
-  }
-  
-  .fechanac {
-    cursor: text;
-  }
-  
-  ion-text {
-    font-size: 0.9rem;
-    margin-top: -8px;
-    margin-bottom: 8px;
-    padding-left: 4px;
-  }
-  
-  ion-text[color="danger"] p {
-    color: #e53935;
-    font-size: 0.85rem;
-  }
-  
-  /* Button styles */
+
   ion-button {
-    --border-radius: 8px;
-    --padding-start: 1rem;
-    --padding-end: 1rem;
-    font-size: 1rem;
-    text-transform: uppercase;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+    max-width: 400px;
+    margin: 0 auto;
   }
-  
-  ion-button:disabled {
-    opacity: 0.6;
-  }
-  
-  /* Footer */
-  ion-footer {
-    background-color: white;
-    box-shadow: 0 -2px 6px rgba(0, 0, 0, 0.1);
-  }
-  
-  ion-toolbar {
-    padding: var(--ion-padding-standard);
-    border-top: 1px solid #e0e0e0;
-  }
-  
-  /* Responsive Design */
-  @media (min-width: 768px) {
-    ion-card {
-      margin-bottom: 1.5rem;
-      max-width: 700px;
-      margin-left: auto;
-      margin-right: auto;
-    }
-  
-    ion-button {
-      max-width: 400px;
-      margin: 0 auto;
-    }
-  }
-  
+}

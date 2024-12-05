@@ -32,7 +32,7 @@ ion-buttons {
 .topbuttons ion-button {
     font-size: 1rem; /* Aumentamos el tamaño de los botones */
     padding: 6px 15px; /* Aumentamos el padding para hacerlos más grandes */
-    color: rgb(251, 255, 0) !important; /* Texto blanco */
+    color: var(--ion-color-primary) !important; /* Texto blanco */
     border-radius: 15px; /* Bordes redondeados */
     border: none !important; /* Sin bordes */
     transition: background-color 0.3s, color 0.3s; /* Transiciones suaves para los cambios de color y sombra */
@@ -40,8 +40,8 @@ ion-buttons {
 
 /* Estilo cuando el usuario pasa el mouse por encima */
 .topbuttons ion-button:hover {
-    background-color: rgb(251, 255, 0) !important; /* Fondo blanco al pasar el mouse */
-    color: #000000 !important; /* Texto dorado */
+    background-color: var(--ion-color-primary) !important; /* Fondo blanco al pasar el mouse */
+    color: var(--ion-color-secondary) !important; /* Texto dorado */
 }
 
 /* Sección principal (imagen y texto) */
@@ -90,12 +90,13 @@ ion-buttons {
     }
 }
 
-.about ion-button {
-    font-size: 1rem;
-    padding: 6px 15px;
-    color: white;
-    border-radius: 15px;
-    scroll-behavior: smooth;
+.about-b ion-button {
+  font-size: 1rem;
+  padding: 6px 15px;
+  color: var(--ion-color-tertiary);
+  border-radius: 15px;
+  scroll-behavior: smooth;
+  --background: transparent !important;
 }
 
 /* Sección "Sobre mí" */
@@ -104,7 +105,7 @@ ion-buttons {
     padding: 20px;
     margin-top: 70px;
     border-radius: 10px;
-    color: white;
+    color: var(--ion-color-tertiary);
 }
 
 .about-me-section h2 {

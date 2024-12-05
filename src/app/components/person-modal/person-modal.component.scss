@@ -1,7 +1,7 @@
 /* --- Estilo del Header --- */
 ion-header {
   background-color: var(--ion-color-primary); /* Color principal según el tema */
-  color: var(--ion-text-color, white); /* Texto blanco o según el tema */
+  color: var(--ion-text-color); /* Texto blanco o según el tema */
 }
 
 /* --- Estilo del Título del Toolbar --- */
@@ -57,10 +57,6 @@ ion-input, ion-select {
 /* --- Estilo de Textos --- */
 .fechanac {
   cursor: text;
-  color: var(--ion-color-tertiary);
-}
-
-ion-overlay-wrapper {
   color: var(--ion-color-tertiary);
 }
 

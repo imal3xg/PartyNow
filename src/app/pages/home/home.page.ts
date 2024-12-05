@@ -8,6 +8,7 @@ import { Person } from 'src/app/core/models/person.model';
 import { PartyService } from 'src/app/core/services/impl/party-service.service';
 import { PeopleService } from 'src/app/core/services/impl/people-service.service';
 import { Countries } from 'src/app/core/models/countries.enum';
+import { MapFrameComponent } from 'src/app/components/map-frame/map-frame.component';
 
 @Component({
   selector: 'app-home',

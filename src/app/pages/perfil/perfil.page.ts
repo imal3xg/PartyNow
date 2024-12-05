@@ -61,6 +61,10 @@ export class PerfilPage implements OnInit {
 
   async ngOnInit() {
     this.refresh();
+  }
+
+  async ionViewWillEnter(){
+    this.refresh();
     try {
       const user = await this.authService.getCurrentUser();
       console.log('Usuario autenticado:', user);
@@ -74,7 +78,7 @@ export class PerfilPage implements OnInit {
     } catch (error: any) {
       console.error('Error al cargar el perfil:', error.message || error);
     }
-  }  
+  }
 
   getMoreParty(notify: HTMLIonInfiniteScrollElement | null = null) {
     if (!this.hasMoreParty || !this.person) {

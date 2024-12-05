@@ -38,6 +38,16 @@
     /* Fondos y bordes */
     --ion-toolbar-background: var(--ion-color-secondary);
     --ion-toolbar-color: var(--ion-color-primary);
+
+    /* Estilo para el cuadro desplegable del ion-select */
+    --ion-alert-background-color: #ffffff; /* Fondo blanco */
+    --ion-alert-color: #000000; /* Texto negro */
+
+    /* Opciones del selector */
+    --ion-alert-option-color: #000000; /* Texto negro para las opciones */
+    --ion-alert-option-background-color: #ffffff; /* Fondo blanco para las opciones */
+    --ion-alert-option-hover-background-color: #f0f0f0; /* Fondo gris al pasar el mouse */
+    --ion-alert-option-hover-color: #000000; /* Texto negro al pasar el mouse */
   }
   
   /* --- Modo Oscuro --- */

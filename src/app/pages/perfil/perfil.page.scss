@@ -87,13 +87,13 @@ ion-title {
 
 .party-item ion-card-header {
   padding: 16px;
+  background-color: var(--ion-background-color, #fff);
   border-bottom: 1px solid var(--ion-color-tertiary); /* Línea sutil */
 }
 
 .party-item ion-card-title {
   font-size: 1.2rem;
   font-weight: bold;
-  margin-bottom: 8px;
   color: var(--ion-color-primary); /* Color de texto según el tema */
 }
 
@@ -101,6 +101,22 @@ ion-title {
   display: flex;
   margin-top: -35px;
   justify-content: flex-end;
+}
+
+.party-footer {
+  display: flex;
+  justify-content: space-around; /* Espaciado uniforme entre los botones */
+  align-items: center; /* Alinear verticalmente los botones */
+  border-top: 1px solid var(--ion-color-tertiary); /* Línea separadora opcional */
+  background-color: var(--ion-background-color, #fff); /* Fondo del footer */
+}
+
+.party-footer ion-button {
+  --border-radius: 8px; /* Bordes redondeados */
+  font-size: 1rem; /* Tamaño del texto */
+  text-transform: capitalize; /* Estilo del texto */
+  display: flex; /* Asegura que icono y texto estén alineados */
+  align-items: center; /* Centra el contenido del botón */
 }
 
 .update-button {
@@ -119,12 +135,6 @@ ion-title {
   margin: 4px 0;
   font-size: 0.9rem;
   color: var(--ion-color-tertiary); /* Color del texto de los detalles */
-}
-
-/* --- Button Styles --- */
-.party-item ion-button {
-  --background: transparent;
-  --color: var(--ion-text-color); /* Color de los íconos según el tema */
 }
 
 /* --- Profile Stats --- */
@@ -172,12 +182,13 @@ ion-title {
 }
 
 .fab-button {
-  --border-radius: 8px;
+  text-align: end;
+  --border-radius: 8px; /* Bordes redondeados */
   --padding-start: 12px;
   --padding-end: 12px;
   --padding-top: 10px;
   --padding-bottom: 10px;
-  --background: var(--ion-color-primary); /* Color de fondo */
+  --background: var(--ion-color-primary); /* Color de fondo según el tema */
   --color: var(--ion-color-secondary); /* Color del texto */
 }
 
