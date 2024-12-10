@@ -3,110 +3,122 @@
     <ion-button fill="clear" (click)="goBack()" slot="start">
       <ion-icon name="arrow-back-outline"></ion-icon>
     </ion-button>
-    <ion-title>Crear cuenta</ion-title>
+    <ion-title>{{ 'CREATE_ACCOUNT' | translate }}</ion-title>
   </ion-toolbar>
 </ion-header>
 
-
 <ion-content [fullscreen]="true" scrollY="true">
   <div class="register-container">
-    <form [formGroup]="registerForm" (ngSubmit)="onSubmit()">
-      <!-- Sección principal -->
-      <ion-grid>
-        <ion-row>
-          <ion-col style="display:flex" class="ion-justify-content-center">
-            <ion-text><h1>Crear una cuenta</h1></ion-text>
-          </ion-col>
-        </ion-row>
-      </ion-grid>
+    <ion-grid>
+      <ion-row class="ion-align-items-center">
+        <!-- Imagen a la izquierda -->
+        <ion-col size="6" class="hero-image-col">
+          <img src="../../../assets/img/1.png" alt="{{ 'HERO_IMAGE_ALT' | translate }}" class="hero-image" />
+        </ion-col>
 
-      <!-- Pregunta sobre cuenta existente -->
-      <ion-grid>
-        <ion-row>
-          <ion-col style="display:flex" class="ion-justify-content-center ion-align-items-center">
-            ¿Tienes una cuenta?
-            <ion-button style="text-transform:none" (click)="onLogin()" fill="clear">
-              Inicia sesión
+        <!-- Formulario de registro a la derecha -->
+        <ion-col class="column-form">
+          <form [formGroup]="registerForm" (ngSubmit)="onSubmit()">
+            <!-- Sección principal -->
+            <ion-grid>
+              <ion-row>
+                <ion-col style="display:flex" class="ion-justify-content-center">
+                  <ion-text><h1>{{ 'CREATE_ACCOUNT' | translate }}</h1></ion-text>
+                </ion-col>
+              </ion-row>
+            </ion-grid>
+
+            <!-- Pregunta sobre cuenta existente -->
+            <ion-grid>
+              <ion-row>
+                <ion-col style="display:flex" class="ion-justify-content-center ion-align-items-center">
+                  <span class="al-ac">
+                    {{ 'ALREADY_HAVE_ACCOUNT' | translate }}
+                  </span>
+                  <ion-button fill="clear" class="button-login" (click)="onLogin()">
+                    {{ 'LOGIN' | translate }}
+                  </ion-button>
+                </ion-col>
+              </ion-row>
+            </ion-grid>
+            <!-- Campos del formulario -->
+            <ion-item>
+              <ion-input labelPlacement="floating" label="{{ 'FIRST_NAME' | translate }}" type="text" formControlName="name" required></ion-input>
+            </ion-item>
+            <ion-item>
+              <ion-input labelPlacement="floating" label="{{ 'LAST_NAME' | translate }}" type="text" formControlName="surname" required></ion-input>
+            </ion-item>
+
+            <!-- Fecha de nacimiento -->
+            <ion-item class="fechanac">
+              <ion-label position="stacked">{{ 'BIRTHDATE' | translate }}</ion-label>
+              <ion-input
+                type="date" 
+                formControlName="birthdate" 
+                (ionChange)="calculateAge()">
+              </ion-input>
+              <!-- Mostrar la edad -->
+              <ion-text *ngIf="calculatedAge !== null">
+                <p>{{ 'AGE' | translate }}: {{ calculatedAge }} {{ 'YEARS_OLD' | translate }}</p>
+              </ion-text>
+            </ion-item>
+            <ion-text color="danger" *ngIf="birthdate?.invalid && birthdate?.touched">
+              <p *ngIf="birthdate?.errors?.['required']">{{ 'BIRTHDATE_REQUIRED' | translate }}</p>
+              <p *ngIf="birthdate?.errors?.['pattern']">{{ 'INVALID_DATE' | translate }}</p>
+            </ion-text>
+
+            <!-- Género -->
+            <ion-item>
+              <ion-select
+                label="{{ 'GENDER' | translate }}"
+                labelPlacement="stacked"
+                formControlName="gender"
+                placeholder="{{ 'SELECT_GENDER' | translate }}">
+                <ion-select-option *ngFor="let gen of genders" [value]="gen">
+                  {{ gen }}
+                </ion-select-option>
+              </ion-select>
+            </ion-item>
+            <ion-text color="danger" *ngIf="gender?.invalid && (gender?.dirty || gender?.touched)">
+              <p>{{ 'GENDER_REQUIRED' | translate }}</p>
+            </ion-text>
+
+            <ion-item>
+              <ion-input labelPlacement="floating" label="{{ 'EMAIL' | translate }}" type="email" formControlName="email" required></ion-input>
+            </ion-item>
+            <ion-item>
+              <ion-input labelPlacement="floating" label="{{ 'PASSWORD' | translate }}" type="password" formControlName="password" required></ion-input>
+            </ion-item>
+            <ion-item>
+              <ion-input labelPlacement="floating" label="{{ 'CONFIRM_PASSWORD' | translate }}" type="password" formControlName="confirmPassword" required></ion-input>
+            </ion-item>
+
+            <!-- Mensajes de error -->
+            <ion-text color="danger" *ngIf="name?.invalid && (name?.dirty || name?.touched)">
+              <p>{{ 'NAME_REQUIRED' | translate }}</p>
+              <p *ngIf="name?.errors?.['minlength']">{{ 'NAME_MIN_LENGTH' | translate }}</p>
+            </ion-text>
+            <ion-text color="danger" *ngIf="surname?.invalid && (surname?.dirty || surname?.touched)">
+              <p>{{ 'SURNAME_REQUIRED' | translate }}</p>
+              <p *ngIf="surname?.errors?.['minlength']">{{ 'SURNAME_MIN_LENGTH' | translate }}</p>
+            </ion-text>
+            <ion-text color="danger" *ngIf="email?.invalid && (email?.dirty || email?.touched)">
+              <p>{{ 'VALID_EMAIL_REQUIRED' | translate }}</p>
+            </ion-text>
+            <ion-text color="danger" *ngIf="password?.invalid && (password?.dirty || password?.touched)">
+              <p>{{ 'PASSWORD_REQUIRED' | translate }}</p>
+            </ion-text>
+            <ion-text color="danger" *ngIf="registerForm.errors?.['passwordsMismatch']">
+              <p>{{ 'PASSWORDS_MISMATCH' | translate }}</p>
+            </ion-text>
+
+            <!-- Botón de envío -->
+            <ion-button style="text-transform:none" expand="block" type="submit" [disabled]="registerForm.invalid">
+              {{ 'CREATE_ACCOUNT' | translate }}
             </ion-button>
-          </ion-col>
-        </ion-row>
-      </ion-grid>
-
-      <!-- Campos del formulario -->
-      <ion-item>
-        <ion-input labelPlacement="floating" label="Nombre" type="text" formControlName="name" required></ion-input>
-      </ion-item>
-      <ion-item>
-        <ion-input labelPlacement="floating" label="Apellidos" type="text" formControlName="surname" required></ion-input>
-      </ion-item>
-
-      <!-- Fecha de nacimiento -->
-      <ion-item class="fechanac">
-        <ion-label position="stacked">Fecha de nacimiento</ion-label>
-        <ion-input
-          type="date" 
-          formControlName="birthdate" 
-          (ionChange)="calculateAge()">
-        </ion-input>
-        <!-- Mostrar la edad -->
-        <ion-text *ngIf="calculatedAge !== null">
-          <p>Edad: {{ calculatedAge }} años</p>
-        </ion-text>
-      </ion-item>
-      <ion-text color="danger" *ngIf="birthdate?.invalid && birthdate?.touched">
-        <p *ngIf="birthdate?.errors?.['required']">La fecha de nacimiento es obligatoria.</p>
-        <p *ngIf="birthdate?.errors?.['pattern']">Introduce una fecha válida.</p>
-      </ion-text>
-
-      <!-- Género -->
-      <ion-item>
-        <ion-select
-          label="Género"
-          labelPlacement="stacked"
-          formControlName="gender"
-          placeholder="Selecciona un género">
-          <ion-select-option *ngFor="let gen of genders" [value]="gen">
-            {{ gen }}
-          </ion-select-option>
-        </ion-select>
-      </ion-item>
-      <ion-text color="danger" *ngIf="gender?.invalid && (gender?.dirty || gender?.touched)">
-        <p>*El género es obligatorio</p>
-      </ion-text>
-
-      <ion-item>
-        <ion-input labelPlacement="floating" label="Email" type="email" formControlName="email" required></ion-input>
-      </ion-item>
-      <ion-item>
-        <ion-input labelPlacement="floating" label="Contraseña" type="password" formControlName="password" required></ion-input>
-      </ion-item>
-      <ion-item>
-        <ion-input labelPlacement="floating" label="Repita contraseña" type="password" formControlName="confirmPassword" required></ion-input>
-      </ion-item>
-
-      <!-- Mensajes de error -->
-      <ion-text color="danger" *ngIf="name?.invalid && (name?.dirty || name?.touched)">
-        <p>*Debe introducir su nombre</p>
-        <p *ngIf="name?.errors?.['minlength']">*El nombre debe tener al menos dos caracteres</p>
-      </ion-text>
-      <ion-text color="danger" *ngIf="surname?.invalid && (surname?.dirty || surname?.touched)">
-        <p>*Debe introducir su apellido</p>
-        <p *ngIf="surname?.errors?.['minlength']">*El apellido debe tener al menos dos caracteres</p>
-      </ion-text>
-      <ion-text color="danger" *ngIf="email?.invalid && (email?.dirty || email?.touched)">
-        <p>*Debe introducir un email válido</p>
-      </ion-text>
-      <ion-text color="danger" *ngIf="password?.invalid && (password?.dirty || password?.touched)">
-        <p>*Debe introducir una contraseña válida</p>
-      </ion-text>
-      <ion-text color="danger" *ngIf="registerForm.errors?.['passwordsMismatch']">
-        <p>*Las contraseñas no coinciden</p>
-      </ion-text>
-
-      <!-- Botón de envío -->
-      <ion-button style="text-transform:none" expand="block" type="submit" [disabled]="registerForm.invalid">
-        Crear cuenta
-      </ion-button>
-    </form>
+          </form>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
   </div>
 </ion-content>

@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { BaseAuthenticationService } from './core/services/impl/base-authentication.service';
 import { Router } from '@angular/router';
 import { MenuController } from '@ionic/angular';
+import { TranslationService } from './core/services/impl/translate.service';
 
 @Component({
   selector: 'app-root',
@@ -13,8 +14,13 @@ export class AppComponent {
   constructor(
     public authSvc: BaseAuthenticationService,
     private router: Router,
-    private menuCtrl: MenuController
+    private menuCtrl: MenuController,
+    private translate: TranslationService
   ) {}
+
+  changeLanguage(lang: string) {
+    this.translate.setLanguage(lang);
+  }
 
   closeMenu(){
     this.menuCtrl.close();

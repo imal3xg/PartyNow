@@ -1,8 +1,9 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { AbstractControl, FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { ModalController } from '@ionic/angular';
+import { AlertController, ModalController } from '@ionic/angular';
 import { Countries } from 'src/app/core/models/countries.enum';
 import { Party } from 'src/app/core/models/party.model';
+import { TranslationService } from 'src/app/core/services/impl/translate.service';
 
 @Component({
   selector: 'app-party-modal',
@@ -29,7 +30,7 @@ export class PartyModalComponent implements OnInit {
     this.formGroup.controls['description'].setValue(_party.description);
   }
 
-  constructor(private fb: FormBuilder, private modalCtrl: ModalController) {
+  constructor(private fb: FormBuilder, private alertController: AlertController, private modalCtrl: ModalController) {
     this.formGroup = this.fb.group({
       name: ['', [Validators.required, Validators.minLength(2)]],
       country: ['', Validators.required],
@@ -42,7 +43,6 @@ export class PartyModalComponent implements OnInit {
   }
 
   ngOnInit() {}
-
   // Getters for form controls
   get name() {
     return this.formGroup.controls['name'];
@@ -89,6 +89,35 @@ export class PartyModalComponent implements OnInit {
       return { notInteger: true };
     }
     return null;
+  }
+
+  async goBack() {
+    const alert = await this.alertController.create({
+      header: 'Cancel Submission',
+      message: 'Are you sure you want to cancel the form submission?',
+      buttons: [
+        {
+          text: 'No',
+          role: 'cancel',
+          handler: () => {
+            console.log('User decided to stay on the page.');
+          }
+        },
+        {
+          text: 'Yes',
+          handler: () => {
+            console.log('User confirmed cancellation.');
+            this.closeModal();
+          }
+        }
+      ]
+    });
+
+    await alert.present();
+  }
+
+  closeModal() {
+    this.modalCtrl.dismiss(); // Cierra el modal actual.
   }
 
   onSubmit() {

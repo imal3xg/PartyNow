@@ -1,38 +1,51 @@
 <ion-app>
   <!-- Menu lateral -->
   <ion-menu contentId="main-content" swipeGesture="false">
-    <ion-header>
+    <ion-header class="header-up">
       <ion-toolbar class="menu-header">
-        <ion-title>Menú</ion-title>
+        <ion-title>{{ 'MENU' | translate }}</ion-title>
       </ion-toolbar>
     </ion-header>
   
     <ion-content class="ion-padding menu-content">
       <ion-list class="listt">
-        <!-- Enlace "Fiestas" -->
+        <!-- Enlace "Página de inicio" -->
         <ion-item class="menu-item" (click)="closeMenu()" *ngIf="(authSvc.authenticated$ | async)" routerLink="/frontpage">
           <ion-icon slot="start" name="home-outline" class="menu-icon"></ion-icon>
-          <ion-label>Página de inicio</ion-label>
+          <ion-label>{{ 'HOME_PAGE' | translate }}</ion-label>
         </ion-item>
+        
         <!-- Enlace "Fiestas" -->
         <ion-item class="menu-item" (click)="closeMenu()" *ngIf="(authSvc.authenticated$ | async)" routerLink="/home">
           <ion-icon slot="start" name="balloon-outline" class="menu-icon"></ion-icon>
-          <ion-label>Fiestas</ion-label>
+          <ion-label>{{ 'PARTIES' | translate }}</ion-label>
         </ion-item>
   
         <!-- Enlace "Perfil" -->
         <ion-item class="menu-item" (click)="closeMenu()" *ngIf="(authSvc.authenticated$ | async)" routerLink="/perfil">
           <ion-icon slot="start" name="person-circle-outline" class="menu-icon"></ion-icon>
-          <ion-label>Perfil</ion-label>
-        </ion-item>
-  
-        <!-- Enlace "Cerrar Sesión" -->
-        <ion-item class="menu-item" (click)="closeMenu()" *ngIf="(authSvc.authenticated$ | async)" (click)="logout()">
-          <ion-icon slot="start" name="log-out-outline" class="menu-icon"></ion-icon>
-          <ion-label>Cerrar Sesión</ion-label>
+          <ion-label>{{ 'PROFILE' | translate }}</ion-label>
         </ion-item>
       </ion-list>
     </ion-content>
+    <ion-footer>
+      <ion-list>
+        <!-- Selector de idioma -->
+        <ion-item class="menu-item">
+          <ion-select placeholder="{{ 'LANGUAGE' | translate }}" (ionChange)="changeLanguage($event.detail.value)">
+            <ion-icon slot="start" name="language-outline" class="menu-icon"></ion-icon>
+            <ion-select-option value="es">{{ 'SPANISH' | translate }}</ion-select-option>
+            <ion-select-option value="en">{{ 'ENGLISH' | translate }}</ion-select-option>
+          </ion-select>
+        </ion-item>
+
+        <!-- Enlace "Cerrar Sesión" -->
+        <ion-item class="menu-item" (click)="closeMenu()" *ngIf="(authSvc.authenticated$ | async)" (click)="logout()">
+          <ion-icon slot="start" name="log-out-outline" class="menu-icon"></ion-icon>
+          <ion-label>{{ 'LOG_OUT' | translate }}</ion-label>
+        </ion-item>
+      </ion-list>
+    </ion-footer>
   </ion-menu>  
 
   <!-- Contenido principal (sin encabezado) -->

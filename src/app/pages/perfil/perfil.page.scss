@@ -36,6 +36,7 @@ ion-title {
 
 /* --- Spinner Container --- */
 .spinner-container {
+  color: var(--ion-color-primary);
   display: flex;
   flex-direction: column;
   justify-content: center;

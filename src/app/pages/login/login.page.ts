@@ -3,6 +3,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { IonicModule } from '@ionic/angular';
 import { ActivatedRoute, Router } from '@angular/router';
 import { BaseAuthenticationService } from 'src/app/core/services/impl/base-authentication.service';
+import { TranslationService } from 'src/app/core/services/impl/translate.service';
 
 @Component({
   selector: 'app-login',
@@ -16,12 +17,17 @@ export class LoginPage {
     private fb: FormBuilder,
     private router: Router,
     private route:ActivatedRoute,
-    private authSvc:BaseAuthenticationService
+    private authSvc:BaseAuthenticationService,
+    private translationService: TranslationService
   ) {
     this.loginForm = this.fb.group({
       email: ['', [Validators.required, Validators.email]],
       password: ['', [Validators.required]],
     });
+  }
+
+  changeLanguage(lang: string) {
+    this.translationService.setLanguage(lang);
   }
 
   goBack() {

@@ -7,13 +7,15 @@ import { IonicModule } from '@ionic/angular';
 import { FrontpagePageRoutingModule } from './frontpage-routing.module';
 
 import { FrontpagePage } from './frontpage.page';
+import { TranslateModule } from '@ngx-translate/core';
 
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
     IonicModule,
-    FrontpagePageRoutingModule
+    FrontpagePageRoutingModule,
+    TranslateModule.forChild()
   ],
   declarations: [FrontpagePage]
 })

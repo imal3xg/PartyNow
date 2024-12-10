@@ -4,11 +4,9 @@ import { BehaviorSubject, Observable, combineLatest, lastValueFrom } from 'rxjs'
 import { map, startWith } from 'rxjs/operators';  // Importar map para el filtro
 import { Party } from 'src/app/core/models/party.model';
 import { Paginated } from 'src/app/core/models/paginated.model';
-import { Person } from 'src/app/core/models/person.model';
 import { PartyService } from 'src/app/core/services/impl/party-service.service';
-import { PeopleService } from 'src/app/core/services/impl/people-service.service';
 import { Countries } from 'src/app/core/models/countries.enum';
-import { MapFrameComponent } from 'src/app/components/map-frame/map-frame.component';
+import { TranslationService } from 'src/app/core/services/impl/translate.service';
 
 @Component({
   selector: 'app-home',
@@ -30,6 +28,7 @@ export class HomePage implements OnInit {
 
   constructor(
     private partySvc: PartyService,
+    private translationService: TranslationService
   ) {
     // Combinar filtros con la lista de fiestas
     this.filteredParty$ = combineLatest([
@@ -81,6 +80,10 @@ export class HomePage implements OnInit {
         }
       }
     });
+  }
+
+  changeLanguage(lang: string) {
+    this.translationService.setLanguage(lang);
   }
 
   // Función para manejar el cambio de país

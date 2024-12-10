@@ -5,8 +5,8 @@ import { FormsModule } from '@angular/forms';
 import { HomePage } from './home.page';
 
 import { HomePageRoutingModule } from './home-routing.module';
-import { MapFrameComponent } from 'src/app/components/map-frame/map-frame.component';
-import { SafeUrlPipe } from 'src/app/components/pipes/safe-url.pipe';
+import { TranslateModule } from '@ngx-translate/core';
+import { SharedModule } from 'src/app/shared/shared.module';
 
 
 @NgModule({
@@ -14,8 +14,10 @@ import { SafeUrlPipe } from 'src/app/components/pipes/safe-url.pipe';
     CommonModule,
     FormsModule,
     IonicModule,
-    HomePageRoutingModule,    
+    HomePageRoutingModule,
+    SharedModule,
+    TranslateModule.forChild(),
   ],
-  declarations: [HomePage, MapFrameComponent, SafeUrlPipe]
+  declarations: [HomePage]
 })
 export class HomePageModule {}

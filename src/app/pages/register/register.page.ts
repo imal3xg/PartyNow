@@ -1,9 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
+import { NavController } from '@ionic/angular';
 import { User } from 'src/app/core/models/auth.model';
 import { BaseAuthenticationService } from 'src/app/core/services/impl/base-authentication.service';
 import { PeopleService } from 'src/app/core/services/impl/people-service.service';
+import { TranslationService } from 'src/app/core/services/impl/translate.service';
 import { passwordValidator, passwordsMatchValidator } from 'src/app/core/utils/validators';
 
 @Component({
@@ -20,8 +22,10 @@ export class RegisterPage {
     private fb: FormBuilder,
     private router: Router,
     private route:ActivatedRoute,
+    private navCtrl: NavController,
     private authSvc:BaseAuthenticationService,
-    private peopleSvc:PeopleService
+    private peopleSvc:PeopleService,
+    private translationService: TranslationService
   ) {
     this.registerForm = this.fb.group({
       name: ['', [Validators.required, Validators.minLength(2)]],
@@ -33,6 +37,10 @@ export class RegisterPage {
       confirmPassword: ['', [Validators.required]]
     },
     { validators: passwordsMatchValidator });
+  }
+
+  changeLanguage(lang: string) {
+    this.translationService.setLanguage(lang);
   }
 
   goBack() {
@@ -67,8 +75,15 @@ export class RegisterPage {
 
   onLogin(){
     this.registerForm.reset();
-    const returnUrl = this.route.snapshot.queryParams['returnUrl'] || '/home';
-    this.router.navigate(['/login'], {queryParams:{ returnUrl:returnUrl}, replaceUrl:true});
+    const isAuthenticated = this.authSvc.isLoggedIn(); // Verifica si el usuario está logeado
+
+    if (isAuthenticated) {
+      // Redirigir a 'home' si está autenticado
+      this.navCtrl.navigateRoot('/home');
+    } else {
+      // Redirigir a 'login' si no está autenticado
+      this.navCtrl.navigateForward('/login');
+    }
   }
 
   // Function to calculate age based on birthdate

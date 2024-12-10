@@ -1,3 +1,7 @@
+.header-up {
+  box-shadow: 0 8px 12px var(--ion-color-primary);
+}
+
 /* --- Estilo del Menú --- */
 ion-menu {
   --width: 280px; /* Ancho del menú */
@@ -51,6 +55,7 @@ ion-menu {
 .menu-item:hover {
   background-color: var(--ion-color-primary); /* Fondo cuando pasa el mouse */
   color: var(--ion-color-light); /* Texto blanco al pasar el mouse */
+  box-shadow: 0 0 12px var(--ion-color-primary);
 }
 
 /* --- Efectos Hover para los Íconos --- */

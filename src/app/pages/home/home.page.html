@@ -4,17 +4,17 @@
       <!-- Botón para abrir el menú lateral -->
       <ion-menu-button></ion-menu-button>
     </ion-buttons>
-    <ion-title>Fiestas</ion-title>
+    <ion-title>{{ 'HEADER_TITLE' | translate }}</ion-title>
     <ion-buttons slot="end">
       <!-- Recuento de fiestas mostradas -->
       <ion-text class="total">
-        Total: {{ totalParty }}
+        {{ 'TOTAL' | translate }}: {{ totalParty }}
       </ion-text>
     
       <!-- Filtro por país -->
       <ion-item lines="none">
-        <ion-select placeholder="Selecciona un país" (ionChange)="onCountryChange($event)">
-          <ion-select-option value="all">Alrededor del mundo</ion-select-option>
+        <ion-select placeholder="{{ 'SELECT_COUNTRY' | translate }}" (ionChange)="onCountryChange($event)">
+          <ion-select-option value="all">{{ 'WORLD' | translate }}</ion-select-option>
           <ion-select-option *ngFor="let country of countries" [value]="country">{{ country }}</ion-select-option>
         </ion-select>
       </ion-item>
@@ -36,32 +36,38 @@
         <!-- Contenido principal -->
         <ion-card-content>
           <div class="party-details">
-            <p><strong>Fecha:</strong> {{ party?.date }}</p>
-            <p><strong>Lugar del acontecimiento:</strong> {{ party?.city }}, {{ party?.country }}</p>
-            <p><strong>Precio:</strong> {{ party?.price }}</p>
-            <p><strong>Edad mínima:</strong> {{ party?.minAge }}</p>
-            <app-map-frame *ngIf="party?.city && party?.country" [city]="party.city" [country]="party.country"></app-map-frame>
+            <p><strong>{{ 'DATE' | translate }}:</strong> {{ party.date | dateFormat }}</p>
+            <p>
+              <strong>{{ 'EVENT_PLACE' | translate }}:</strong>
+              {{ party?.city }}, {{ party?.country }}
+            </p>
+            <p><strong>{{ 'PRICE' | translate }}:</strong> {{ party?.price }}</p>
+            <p><strong>{{ 'MIN_AGE' | translate }}:</strong> {{ party?.minAge }}</p>
+            <app-map-frame
+              *ngIf="party?.city && party?.country"
+              [city]="party.city"
+              [country]="party.country">
+            </app-map-frame>
           </div>
-        </ion-card-content>        
+        </ion-card-content>
       
         <!-- Footer con botones -->
         <div class="party-footer">
           <ion-button fill="clear" color="primary" (click)="onSaveParty(party)">
             <ion-icon name="bookmark-outline" slot="start"></ion-icon>
-            Guardar
+            {{ 'SAVE' | translate }}
           </ion-button>
           <ion-button fill="clear" color="primary" (click)="onShareParty(party)">
             <ion-icon name="share-social-outline" slot="start"></ion-icon>
-            Compartir
+            {{ 'SHARE' | translate }}
           </ion-button>
         </div>
-      </ion-card>      
-      
+      </ion-card>
     </div>
   </ion-list>  
 
   <div #animatedAvatarContainer class="animated-avatar-container" [ngStyle]="{'display':isAnimating?'block':'none'}">
-    <img #animatedAvatar [src]="selectedParty?.picture?.large" alt="Foto de {{ selectedParty?.name }}">
+    <img #animatedAvatar [src]="selectedParty?.picture?.large" alt="{{ 'PHOTO_ALT' | translate:{name: selectedParty?.name} }}">
   </div>
 
   <ion-infinite-scroll (ionInfinite)="onIonInfinite($event)">

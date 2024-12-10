@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { NavController } from '@ionic/angular';
 import { BaseAuthenticationService } from 'src/app/core/services/impl/base-authentication.service';
+import { TranslationService } from 'src/app/core/services/impl/translate.service';
 
 @Component({
   selector: 'app-frontpage',
@@ -11,7 +12,8 @@ export class FrontpagePage implements OnInit {
 
   constructor(
     private navCtrl: NavController,
-    private authSvc: BaseAuthenticationService
+    private authSvc: BaseAuthenticationService,
+    private translationService: TranslationService
   ) { }
 
   // Navega a la página de login
@@ -25,6 +27,10 @@ export class FrontpagePage implements OnInit {
       // Redirigir a 'login' si no está autenticado
       this.navCtrl.navigateForward('/login');
     }
+  }
+
+  changeLanguage(lang: string) {
+    this.translationService.setLanguage(lang);
   }
 
   // Navega a la página de registro

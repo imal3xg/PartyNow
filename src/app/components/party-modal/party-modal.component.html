@@ -1,8 +1,11 @@
 <ion-header>
   <ion-toolbar color="primary">
+    <ion-button fill="clear" (click)="goBack()" slot="start">
+      <ion-icon name="arrow-back-outline"></ion-icon>
+    </ion-button>
     <ion-title class="ion-text-center">
       <ion-icon name="person-outline" slot="start"></ion-icon>
-      {{ mode === 'edit' ? 'Editar Fiesta' : 'Crear Fiesta' }}
+      {{ 'EDIT_EVENT' | translate }}
     </ion-title>
   </ion-toolbar>
 </ion-header>
@@ -12,66 +15,66 @@
     <!-- Información General -->
     <ion-card>
       <ion-card-header>
-        <ion-card-title>Información General</ion-card-title>
+        <ion-card-title>{{ 'GENERAL_INFO' | translate }}</ion-card-title>
       </ion-card-header>
       <ion-card-content>
 
         <!-- Nombre -->
         <ion-item>
           <ion-input
-            label="Nombre"
+            label="{{ 'NAME' | translate }}"
             label-placement="stacked"
             type="text"
-            placeholder="Ej: Big Festival"
+            placeholder="{{ 'NAME_PLACEHOLDER' | translate }}"
             formControlName="name"
             clearInput>
           </ion-input>
         </ion-item>
         <ion-text color="danger" *ngIf="name?.invalid && (name?.dirty || name?.touched)">
-          <p *ngIf="name?.errors?.['required']">El nombre es obligatorio.</p>
-          <p *ngIf="name?.errors?.['minlength']">Debe tener al menos 2 caracteres.</p>
+          <p *ngIf="name?.errors?.['required']">{{ 'NAME_REQUIRED' | translate }}</p>
+          <p *ngIf="name?.errors?.['minlength']">{{ 'NAME_MINLENGTH' | translate }}</p>
         </ion-text>
 
         <!-- País -->
         <ion-item>
           <ion-select
-            label="País"
+            label="{{ 'COUNTRY' | translate }}"
             label-placement="stacked"
             formControlName="country"
-            placeholder="Selecciona un país">
+            placeholder="{{ 'SELECT_COUNTRY' | translate }}">
             <ion-select-option *ngFor="let cnt of countries" [value]="cnt">{{ cnt }}</ion-select-option>
           </ion-select>
         </ion-item>
         <ion-text color="danger" *ngIf="country?.invalid && (country?.dirty || country?.touched)">
-          <p *ngIf="country?.errors?.['required']">El país es obligatorio.</p>
+          <p *ngIf="country?.errors?.['required']">{{ 'COUNTRY_REQUIRED' | translate }}</p>
         </ion-text>
 
         <!-- Ciudad -->
         <ion-item>
           <ion-input
-            label="Ciudad"
+            label="{{ 'CITY' | translate }}"
             label-placement="stacked"
             type="text"
-            placeholder="Ej: Barcelona"
+            placeholder="{{ 'CITY_PLACEHOLDER' | translate }}"
             formControlName="city"
             clearInput>
           </ion-input>
         </ion-item>
         <ion-text color="danger" *ngIf="city?.invalid && (city?.dirty || city?.touched)">
-          <p *ngIf="city?.errors?.['required']">La ciudad es obligatoria.</p>
+          <p *ngIf="city?.errors?.['required']">{{ 'CITY_REQUIRED' | translate }}</p>
         </ion-text>
 
-        <!-- Date -->
+        <!-- Fecha -->
         <ion-item class="fechanac">
-          <ion-label position="stacked">Fecha de celebración</ion-label>
+          <ion-label position="stacked">{{ 'EVENT_DATE' | translate }}</ion-label>
           <ion-input
             type="date" 
             formControlName="date">
           </ion-input>
         </ion-item>
         <ion-text color="danger" *ngIf="date?.invalid && date?.touched">
-          <p *ngIf="date?.errors?.['required']">La fecha es obligatoria.</p>
-          <p *ngIf="date?.errors?.['pattern']">Introduce una fecha válida.</p>
+          <p *ngIf="date?.errors?.['required']">{{ 'DATE_REQUIRED' | translate }}</p>
+          <p *ngIf="date?.errors?.['pattern']">{{ 'DATE_PATTERN' | translate }}</p>
         </ion-text>
       </ion-card-content>
     </ion-card>
@@ -79,14 +82,14 @@
     <!-- Datos Adicionales -->
     <ion-card>
       <ion-card-header>
-        <ion-card-title>Datos Adicionales</ion-card-title>
+        <ion-card-title>{{ 'ADDITIONAL_INFO' | translate }}</ion-card-title>
       </ion-card-header>
       <ion-card-content>
 
         <!-- Edad Mínima -->
         <ion-item>
           <ion-input
-            label="Edad Mínima"
+            label="{{ 'MIN_AGE' | translate }}"
             label-placement="stacked"
             type="number"
             formControlName="minAge"
@@ -94,32 +97,31 @@
           </ion-input>
         </ion-item>
         <ion-text color="danger" *ngIf="minAge?.invalid && (minAge?.dirty || minAge?.touched)">
-          <p *ngIf="minAge?.errors?.['required']">La edad mínima no puede estar vacía. Debe ser un número mayor o igual a 0.</p>
-          <p *ngIf="minAge?.errors?.['min']">Debe ser un número mayor o igual a 0.</p>
-          <p *ngIf="minAge?.errors?.['notInteger']">Debe ser un número entero.</p>
+          <p *ngIf="minAge?.errors?.['required']">{{ 'MIN_AGE_REQUIRED' | translate }}</p>
+          <p *ngIf="minAge?.errors?.['min']">{{ 'MIN_AGE_MIN' | translate }}</p>
+          <p *ngIf="minAge?.errors?.['notInteger']">{{ 'MIN_AGE_INTEGER' | translate }}</p>
         </ion-text>
 
         <!-- Precio -->
         <app-price-input formControlName="price"></app-price-input>
         <ion-text color="danger" *ngIf="price?.invalid && (price?.dirty || price?.touched)">
-          <p *ngIf="price?.errors?.['required']">El precio no puede estar vacío. Debe ser un número mayor o igual a 0.</p>
-          <p *ngIf="price?.errors?.['min']">Debe ser un número mayor o igual a 0.</p>
+          <p *ngIf="price?.errors?.['required']">{{ 'PRICE_REQUIRED' | translate }}</p>
+          <p *ngIf="price?.errors?.['min']">{{ 'PRICE_MIN' | translate }}</p>
         </ion-text>
-
 
         <!-- Descripción -->
         <ion-item>
           <ion-input
-            label="Descripción"
+            label="{{ 'DESCRIPTION' | translate }}"
             label-placement="stacked"
             type="text"
-            placeholder="Ej: Fiesta temática con música electrónica"
+            placeholder="{{ 'DESCRIPTION_PLACEHOLDER' | translate }}"
             formControlName="description"
             clearInput>
           </ion-input>
         </ion-item>
         <ion-text color="danger" *ngIf="description?.invalid && (description?.dirty || description?.touched)">
-          <p *ngIf="description?.errors?.['required']">La descripción es obligatoria.</p>
+          <p *ngIf="description?.errors?.['required']">{{ 'DESCRIPTION_REQUIRED' | translate }}</p>
         </ion-text>
       </ion-card-content>
     </ion-card>
@@ -132,7 +134,7 @@
           color="primary"
           [disabled]="!formGroup.valid || !formGroup.dirty"
           type="submit">
-          {{ mode === 'edit' ? 'Actualizar Fiesta' : 'Crear Fiesta' }}
+          {{ mode === 'edit' ? ('UPDATE_EVENT' | translate) : ('CREATE_EVENT' | translate) }}
         </ion-button>
       </ion-toolbar>
     </ion-footer>

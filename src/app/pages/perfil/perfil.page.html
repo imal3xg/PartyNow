@@ -4,7 +4,7 @@
       <!-- Botón para abrir el menú lateral -->
       <ion-menu-button></ion-menu-button>
     </ion-buttons>
-    <ion-title>Perfil</ion-title>
+    <ion-title>{{ 'PROFILE_TITLE' | translate }}</ion-title>
   </ion-toolbar>
 </ion-header>
 
@@ -19,7 +19,7 @@
         <ion-buttons slot="end" class="edit-button">
           <ion-button (click)="openPersonDetail(person)">
             <ion-icon name="create-outline" slot="start"></ion-icon>
-            Editar Perfil
+            {{ 'EDIT_PROFILE' | translate }}
           </ion-button>
         </ion-buttons>
       </div>
@@ -27,17 +27,17 @@
         <!-- Contador de publicaciones -->
         <div class="stat">
           <p class="stat-number">{{ totalParty }}</p>
-          <p class="stat-label">Publicaciones</p>
+          <p class="stat-label">{{ 'POSTS' | translate }}</p>
         </div>
         <!-- Contador de seguidores -->
         <div class="stat">
           <p class="stat-number">{{ 0 }}</p>
-          <p class="stat-label">Seguidores</p>
+          <p class="stat-label">{{ 'FOLLOWERS' | translate }}</p>
         </div>
         <!-- Contador de seguidos -->
         <div class="stat">
           <p class="stat-number">{{ 0 }}</p>
-          <p class="stat-label">Seguidos</p>
+          <p class="stat-label">{{ 'FOLLOWING' | translate }}</p>
         </div>
       </div>
     </ion-card-header>
@@ -46,10 +46,10 @@
       <ion-list class="list-atrib">
         <!-- Usar un contenedor para alinear los elementos -->
         <ion-item class="person-att">
-          <ion-label class="attribute-label"><strong>Género:</strong> {{ person.gender }}</ion-label>
+          <ion-label class="attribute-label"><strong>{{ 'GENDER' | translate }}:</strong> {{ person.gender }}</ion-label>
         </ion-item>
         <ion-item class="person-att">
-          <ion-label class="attribute-label"><strong>Fecha de Nacimiento:</strong> {{ person.birthdate | date }}</ion-label>
+          <ion-label class="attribute-label"><strong>{{ 'BIRTHDATE' | translate }}:</strong> {{ person.birthdate | dateFormat }}</ion-label>
         </ion-item>
       </ion-list>
     </ion-card-content>
@@ -58,7 +58,7 @@
   <!-- Separador estilizado -->
   <div class="separator">
     <ion-text>
-      <h2>Publicaciones</h2>
+      <h2>{{ 'POSTS' | translate }}</h2>
     </ion-text>
   </div>
 
@@ -75,11 +75,15 @@
         <ion-card-content>
           <!-- Sección de detalles que se mostrará u ocultará -->
           <div class="party-details">
-            <p><strong>Fecha:</strong> {{ party.date }}</p>
-            <p><strong>Lugar del acontecimiento:</strong> {{ party.city }}, {{ party.country }}</p>
-            <p><strong>Precio:</strong> {{ party.price }}</p>
-            <p><strong>Edad mínima:</strong> {{ party.minAge }}</p>
-            <!-- Agrega más detalles según sea necesario -->
+            <p><strong>{{ 'DATE' | translate }}:</strong> {{ party.date | dateFormat }}</p>
+            <p><strong>{{ 'EVENT_LOCATION' | translate }}:</strong> {{ party.city }}, {{ party.country }}</p>
+            <p><strong>{{ 'PRICE' | translate }}:</strong> {{ party.price }}</p>
+            <p><strong>{{ 'MIN_AGE' | translate }}:</strong> {{ party.minAge }}</p>
+            <app-map-frame
+              *ngIf="party?.city && party?.country"
+              [city]="party.city"
+              [country]="party.country">
+            </app-map-frame>
           </div>
         </ion-card-content>
 
@@ -87,11 +91,11 @@
         <div class="party-footer">
           <ion-button fill="clear" class="update-button" (click)="openUpdateParty(party, i)">
             <ion-icon name="create-outline" slot="start"></ion-icon>
-            Editar
+            {{ 'EDIT' | translate }}
           </ion-button>
           <ion-button fill="clear" class="delete-button" (click)="onDeleteParty(party)">
             <ion-icon name="trash-outline" slot="start"></ion-icon>
-            Eliminar
+            {{ 'DELETE' | translate }}
           </ion-button>
         </div>
       </ion-card>
@@ -101,7 +105,7 @@
   <div class="fab-button-container">
     <ion-button class="fab-button" (click)="onAddParty()">
       <ion-icon name="add-outline" slot="start"></ion-icon>
-      Crear publicación
+      {{ 'CREATE_POST' | translate }}
     </ion-button>
   </div>
 
@@ -119,7 +123,7 @@
   <ion-content>
     <div class="spinner-container">
       <ion-spinner></ion-spinner>
-      <p>Cargando perfil...</p>
+      <p>{{ 'LOADING_PROFILE' | translate }}</p>
     </div>
   </ion-content>
 </ng-template>

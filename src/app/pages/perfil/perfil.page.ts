@@ -9,6 +9,7 @@ import { PartyModalComponent } from 'src/app/components/party-modal/party-modal.
 import { Party } from 'src/app/core/models/party.model';
 import { PartyService } from 'src/app/core/services/impl/party-service.service';
 import { Paginated } from 'src/app/core/models/paginated.model';
+import { TranslationService } from 'src/app/core/services/impl/translate.service';
 
 @Component({
   selector: 'app-perfil',
@@ -33,7 +34,8 @@ export class PerfilPage implements OnInit {
     private modalCtrl: ModalController,
     private cdr:ChangeDetectorRef,
     private partySvc: PartyService,
-    private alertCtrl: AlertController
+    private alertCtrl: AlertController,
+    private translationService: TranslationService
   ) {
     // Combinar filtros con la lista de fiestas
     this.filteredParty$ = combineLatest([
@@ -78,6 +80,10 @@ export class PerfilPage implements OnInit {
     } catch (error: any) {
       console.error('Error al cargar el perfil:', error.message || error);
     }
+  }
+
+  changeLanguage(lang: string) {
+    this.translationService.setLanguage(lang);
   }
 
   getMoreParty(notify: HTMLIonInfiniteScrollElement | null = null) {

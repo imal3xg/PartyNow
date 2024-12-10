@@ -27,19 +27,24 @@
 
 /* Estilo específico para el alert del ion-select en modo claro */
 ion-alert.alert-md {
-    --background: #000000 !important; /* Fondo blanco */
-    --color: #ffffff !important; /* Texto negro */
-  }
+  --background: #000000 !important; /* Fondo blanco */
+  --color: #ffffff !important; /* Texto negro */
+}
 
-  ion-alert .alert-title {
-    color: #ffffff !important;
-  }
+ion-alert .alert-title {
+  color: #ffffff !important;
+}
+
+/* Opciones dentro del alert */
+ion-alert .alert-radio-label,
+ion-alert .alert-checkbox-label {
+  color: #ffffff !important; /* Texto negro en las opciones */
+}
+
+ion-menu-button {
+  color: var(--ion-color-primary) !important;
+}
   
-  /* Opciones dentro del alert */
-  ion-alert .alert-radio-label,
-  ion-alert .alert-checkbox-label {
-    color: #ffffff !important; /* Texto negro en las opciones */
-  }
   
 
 /**
