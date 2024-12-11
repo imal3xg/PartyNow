@@ -9,38 +9,58 @@
 
 <ion-content [fullscreen]="true" scrollY="true">
   <div class="login-container">
-    
-    <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
-      <ion-grid>
-        <ion-row>
-          <ion-col style="display:flex" class="ion-justify-content-center">
-            <ion-text><h1>{{ 'LOGIN' | translate }}</h1></ion-text>
-          </ion-col>
-        </ion-row>
-      </ion-grid>
-      <ion-grid>
-        <ion-row>
-          <ion-col style="display:flex" class="ion-justify-content-center ion-align-items-center">
-            {{ 'NO_ACCOUNT' | translate }}<ion-button style="text-transform:none" (click)="onRegister()" fill="clear">{{ 'REGISTER' | translate }}</ion-button>
-          </ion-col>
-        </ion-row>
-      </ion-grid>
-      <ion-item>
-        <ion-input labelPlacement="floating" [label]="'EMAIL' | translate" type="email" formControlName="email" required></ion-input>
-      </ion-item>
-      <ion-item>
-        <ion-input labelPlacement="floating" [label]="'PASSWORD' | translate" type="password" formControlName="password" required></ion-input>
-      </ion-item>
-      <ion-text class="input-error" color="danger" *ngIf="email?.invalid && (email?.dirty || email?.touched)">
-        <p *ngIf="email?.errors?.['required']">*{{ 'EMAIL_REQUIRED' | translate }}</p>
-        <p *ngIf="email?.errors?.['email']">*{{ 'EMAIL_INVALID' | translate }}</p>
-      </ion-text>
-      <ion-text class="input-error" color="danger" *ngIf="password?.invalid && (password?.dirty || password?.touched)">
-        <p *ngIf="password?.errors?.['required']">*{{ 'PASSWORD_REQUIRED' | translate }}</p>
-      </ion-text>
-      <ion-button style="text-transform:none" expand="block" type="submit" [disabled]="loginForm.invalid">
-        {{ 'LOGIN_BUTTON' | translate }}
-      </ion-button>
-    </form>
+    <ion-grid>
+      <ion-row class="ion-align-items-center">
+        <!-- Imagen a la izquierda -->
+        <ion-col size="6" class="hero-image-col">
+          <img src="../../../assets/img/1.png" alt="{{ 'HERO_IMAGE_ALT' | translate }}" class="hero-image" />
+        </ion-col>
+
+        <!-- Formulario de registro a la derecha -->
+        <ion-col class="column-form">
+          <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+            <!-- Sección principal -->
+            <ion-grid>
+              <ion-row>
+                <ion-col style="display:flex" class="ion-justify-content-center">
+                  <ion-text><h1>{{ 'LOGIN' | translate }}</h1></ion-text>
+                </ion-col>
+              </ion-row>
+            </ion-grid>
+            
+            <!-- Pregunta si no tiene cuenta -->
+            <ion-grid>
+              <ion-row>
+                <ion-col style="display:flex" class="ion-justify-content-center ion-align-items-center">
+                  <span class="al-ac">
+                    {{ 'NO_ACCOUNT' | translate }}
+                  </span>
+                  <ion-button fill="clear" class="button-register" (click)="onRegister()">
+                    {{ 'REGISTER' | translate }}
+                  </ion-button>
+                </ion-col>
+              </ion-row>
+            </ion-grid>
+            <!-- Campos del formulario -->
+            <ion-item>
+              <ion-input labelPlacement="floating" label="{{ 'EMAIL' | translate }}" type="email" formControlName="email" required></ion-input>
+            </ion-item>
+            <ion-item>
+              <ion-input labelPlacement="floating" label="{{ 'PASSWORD' | translate }}" type="password" formControlName="password" required></ion-input>
+            </ion-item>
+            <ion-text class="input-error" color="danger" *ngIf="email?.invalid && (email?.dirty || email?.touched)">
+              <p *ngIf="email?.errors?.['required']">*{{ 'EMAIL_REQUIRED' | translate }}</p>
+              <p *ngIf="email?.errors?.['email']">*{{ 'EMAIL_INVALID' | translate }}</p>
+            </ion-text>
+            <ion-text class="input-error" color="danger" *ngIf="password?.invalid && (password?.dirty || password?.touched)">
+              <p *ngIf="password?.errors?.['required']">*{{ 'PASSWORD_REQUIRED' | translate }}</p>
+            </ion-text>
+            <ion-button style="text-transform:none" expand="block" type="submit" [disabled]="loginForm.invalid">
+              {{ 'LOGIN_BUTTON' | translate }}
+            </ion-button>
+          </form>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
   </div>
 </ion-content>

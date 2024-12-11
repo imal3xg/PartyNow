@@ -10,6 +10,7 @@ import { TranslationService } from './core/services/impl/translate.service';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
+  selectedFlag: string = ''; // Bandera inicial, por defecto inglés
 
   constructor(
     public authSvc: BaseAuthenticationService,
@@ -19,15 +20,16 @@ export class AppComponent {
   ) {}
 
   changeLanguage(lang: string) {
-    this.translate.setLanguage(lang);
+    this.selectedFlag = lang; // Actualiza la bandera seleccionada
+    this.translate.setLanguage(lang); // Cambia el idioma en el servicio de traducción
   }
 
-  closeMenu(){
+  closeMenu() {
     this.menuCtrl.close();
   }
 
   logout() {
-    this.authSvc.signOut().subscribe(()=>{
+    this.authSvc.signOut().subscribe(() => {
       this.router.navigate(['/frontpage']);
     });
   }

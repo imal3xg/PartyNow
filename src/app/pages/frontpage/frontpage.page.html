@@ -50,4 +50,17 @@
       <img src="../../../assets/img/Foto Curriculum.jpg" alt="{{ 'ABOUT_IMAGE_ALT' | translate }}" class="about-image" />
     </div>
   </div>
+  <ion-fab vertical="bottom" horizontal="end" slot="fixed">
+    <ion-fab-button>
+      <ion-icon name="language-outline"></ion-icon>
+    </ion-fab-button>
+    <ion-fab-list side="top" class="custom-fab-list">
+      <ion-fab-button class="fab-option es" (click)="changeLanguage('es')">
+        <ion-img src="assets/icon/espana.png"></ion-img>
+      </ion-fab-button>
+      <ion-fab-button class="fab-option en" (click)="changeLanguage('en')">
+        <ion-img src="assets/icon/reino-unido.png"></ion-img>
+      </ion-fab-button>
+    </ion-fab-list>
+  </ion-fab>  
 </ion-content>

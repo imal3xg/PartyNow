@@ -94,6 +94,44 @@ ion-buttons {
     }
 }
 
+/* Estilos generales del ion-fab-list */
+.custom-fab-list {
+  --background: transparent; /* Sin fondo */
+  gap: 10px; /* Espaciado entre opciones */
+}
+
+/* Estilo general de las opciones del FAB */
+.fab-option {
+  display: flex;
+  flex-direction: column; /* Alinea icono y texto verticalmente */
+  justify-content: center;
+  align-items: center;
+  width: 56px; /* Tamaño del botón */
+  height: 56px;
+  border-radius: 50%; /* Botones redondos */
+  --background: var(--ion-color-primary); /* Fondo del botón */
+  color: white; /* Color del texto e icono */
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  font-size: 0.75rem; /* Tamaño del texto */
+  font-weight: bold;
+}
+
+/* Hover y focus para opciones del FAB */
+.fab-option:hover,
+.fab-option:focus {
+  transform: scale(1.1); /* Efecto de zoom */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3); /* Sombra adicional */
+}
+
+/* Estilos específicos para cada idioma */
+.fab-option.es {
+  --background: #f44336; /* Rojo para español */
+}
+
+.fab-option.en {
+  --background: #2196f3; /* Azul para inglés */
+}
+
 .about-b ion-button {
   font-size: 1rem;
   padding: 6px 15px;

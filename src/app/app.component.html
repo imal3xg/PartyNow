@@ -32,12 +32,27 @@
       <ion-list>
         <!-- Selector de idioma -->
         <ion-item class="menu-item">
-          <ion-select placeholder="{{ 'LANGUAGE' | translate }}" (ionChange)="changeLanguage($event.detail.value)">
-            <ion-icon slot="start" name="language-outline" class="menu-icon"></ion-icon>
+          <ion-select
+            placeholder="{{ 'LANGUAGE' | translate }}"
+            (ionChange)="changeLanguage($event.detail.value)"
+            interface="popover"
+          >
+            <div slot="start" class="menu-icon">
+              <ng-container *ngIf="selectedFlag === 'es'">
+                <ion-img src="assets/icon/espana.png"></ion-img>
+              </ng-container>
+              <ng-container *ngIf="selectedFlag === 'en'">
+                <ion-img src="assets/icon/reino-unido.png"></ion-img>
+              </ng-container>
+              <ng-container *ngIf="!selectedFlag">
+                <ion-icon name="language-outline"></ion-icon>
+              </ng-container>
+            </div>
+        
             <ion-select-option value="es">{{ 'SPANISH' | translate }}</ion-select-option>
             <ion-select-option value="en">{{ 'ENGLISH' | translate }}</ion-select-option>
           </ion-select>
-        </ion-item>
+        </ion-item>                    
 
         <!-- Enlace "Cerrar Sesión" -->
         <ion-item class="menu-item" (click)="closeMenu()" *ngIf="(authSvc.authenticated$ | async)" (click)="logout()">
