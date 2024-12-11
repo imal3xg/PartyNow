@@ -1,0 +1,42 @@
+<input type="file" #fileLoader accept="image/png, image/gif, image/jpeg" hidden>
+<div class="user-image" id="image">
+  <ng-container *ngIf="hasValue">
+    <ion-modal trigger="image" class="auto-height">
+      <ng-template>
+        <ion-header>
+          <ion-toolbar>
+            <ion-buttons slot="end">
+              <ion-button color="primary" (click)="close()" fill="clear"><ion-icon slot="icon-only" name="close-outline"></ion-icon></ion-button>
+            </ion-buttons>
+          </ion-toolbar>
+        </ion-header>
+        <div class="inner-content">
+            <img [src]="image$ | async"/>
+        </div>
+      </ng-template>
+    </ion-modal>
+    <ion-img id="image"  [src]="image$ | async"></ion-img>
+    <ion-button *ngIf="!isDisabled"
+      class="change-image-btn"
+      expand="full" 
+      (click)="onChangeImage($event, fileLoader)">
+        <ion-icon slot="icon-only" name="image"></ion-icon>
+    </ion-button>
+    <ion-button *ngIf="!isDisabled"
+      class="delete-image-btn"
+      expand="full" 
+      (click)="onDeleteImage($event)">
+        <ion-icon slot="icon-only" name="trash"></ion-icon>
+    </ion-button>
+  </ng-container>
+  
+  <ion-button 
+    color="medium" 
+    *ngIf="!isDisabled && !hasValue"
+    class="empty-image-btn"
+    expand="full" 
+    fill="clear" 
+    (click)="onChangeImage($event,fileLoader)">
+      <ion-icon name="image" class="empty-image-icon"></ion-icon>
+  </ion-button>
+</div>

@@ -69,7 +69,7 @@ export interface PersonRaw {
             birthdate:(data as any)["fecha de nacimiento"]??'',
             email:(data as any)["email"]??'',
             gender:this.fromGenderMapping[data.genero],
-            picture:(data as any)["picture"]?{
+            image:(data as any)["picture"]?{
                 url:(data as any)["picture"].url,
                 large:(data as any)["picture"].large, 
                 medium:(data as any)["picture"].medium,

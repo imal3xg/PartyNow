@@ -1,6 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { AlertController, ModalController } from '@ionic/angular';
+import { TranslateService } from '@ngx-translate/core';
 import { Person } from 'src/app/core/models/person.model';
 
 @Component({
@@ -24,7 +25,11 @@ export class PersonModalComponent implements OnInit {
     this.calculateAge(); // Recalculate age when editing a person
   }
 
-  constructor(private fb: FormBuilder, private alertController: AlertController, private modalCtrl: ModalController) {
+  constructor(private fb: FormBuilder,
+    private alertController: AlertController,
+    private modalCtrl: ModalController,
+    private translate: TranslateService // Inyectamos el servicio de traducción
+) {
     this.formGroup = this.fb.group({
       name: ['', [Validators.required, Validators.minLength(2)]],
       surname: ['', [Validators.required, Validators.minLength(2)]],
@@ -86,33 +91,51 @@ export class PersonModalComponent implements OnInit {
     return dirtyValues;
   }
 
-  async goBack() {
+  onCancel() {
+    // Verifica si el formulario tiene campos modificados (sucios)
+    if (this.formGroup.dirty) {
+      // Si hay cambios, muestra un mensaje de confirmación
+      this.showConfirmExitAlert();
+    } else {
+      // Si no hay cambios, cierra el modal sin preguntar
+      this.modalCtrl.dismiss();
+    }
+  }
+
+  // Función para mostrar el alert de confirmación
+  async showConfirmExitAlert() {
+    // Traducir los textos antes de mostrarlos
+    const headerText = await this.translate.get('CONFIRM_EXIT_HEADER').toPromise();
+    const messageText = await this.translate.get('CONFIRM_EXIT_MESSAGE').toPromise();
+    const cancelButtonText = await this.translate.get('CANCEL').toPromise();
+    const exitButtonText = await this.translate.get('EXIT').toPromise();
+
     const alert = await this.alertController.create({
-      header: 'Cancel Submission',
-      message: 'Are you sure you want to cancel the form submission?',
+      header: headerText, // Título traducido
+      message: messageText, // Mensaje traducido
       buttons: [
         {
-          text: 'No',
+          text: cancelButtonText, // Botón de cancelar traducido
           role: 'cancel',
           handler: () => {
-            console.log('User decided to stay on the page.');
-          }
+            console.log('Cancelado');
+          },
         },
         {
-          text: 'Yes',
+          text: exitButtonText, // Botón de salir traducido
           handler: () => {
-            console.log('User confirmed cancellation.');
-            this.closeModal();
-          }
-        }
-      ]
+            // Si el usuario confirma, cierra el modal
+            this.modalCtrl.dismiss();
+          },
+        },
+      ],
     });
 
     await alert.present();
   }
 
   closeModal() {
-    this.modalCtrl.dismiss(); // Cierra el modal actual.
+    this.modalCtrl.dismiss();
   }
 
   onSubmit() {

@@ -21,6 +21,8 @@ import { PartyMappingJsonServer } from './impl/party-mapping-json-server.service
 import { PartyMappingStrapiService } from './impl/party-mapping-strapi.service';
 import { StrapiAuthMappingService } from '../services/impl/strapi-auth-mapping.service';
 import { IStrapiAuthentication } from '../services/interfaces/strapi-authentication.interface';
+import { BaseMediaService } from '../services/impl/base-media.service';
+import { StrapiMediaService } from '../services/impl/strapi-media.service';
 // Importa otros modelos según sea necesario
 
 export function createBaseRepositoryFactory<T extends Model>(
@@ -137,8 +139,6 @@ export const PartyRepositoryFactory: FactoryProvider = createBaseRepositoryFacto
   [BACKEND_TOKEN, HttpClient, BaseAuthenticationService, PARTY_API_URL_TOKEN, PARTY_RESOURCE_NAME_TOKEN, PARTY_REPOSITORY_MAPPING_TOKEN]
 );
 
-/**
------------------------------------
 export const MediaServiceFactory:FactoryProvider = {
   provide: BaseMediaService,
   useFactory: (backend:string, upload:string, auth:IStrapiAuthentication, http:HttpClient) => {
@@ -158,5 +158,3 @@ export const MediaServiceFactory:FactoryProvider = {
   },
   deps: [BACKEND_TOKEN, UPLOAD_API_URL_TOKEN, BaseAuthenticationService, HttpClient]
 };
---------------------------------------
-*/

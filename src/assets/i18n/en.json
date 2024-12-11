@@ -12,6 +12,7 @@
     "PHOTO_ALT": "Photo of {{name}}",
     "LOGIN": "Log In",
     "REGISTER": "Register",
+    "HOME_TITLE": "Home",
     "HERO_IMAGE_ALT": "Cover image",
     "HERO_DESCRIPTION": "The night awaits you. Are you ready?",
     "ABOUT_ME_BUTTON": "About me",
@@ -98,5 +99,16 @@
     "EMAIL_VALID": "Enter a valid email.",
     "BIRTHDATE_VALID": "Enter a valid date.",
     "YEARS": "years",
-    "UPDATE": "Update"
+    "UPDATE": "Update Profile",
+    "CONFIRM_EXIT_HEADER": "Confirm Exit",
+    "CONFIRM_EXIT_MESSAGE": "Are you sure you want to exit without saving changes?",
+    "CANCEL": "Cancel",
+    "EXIT": "Exit",
+    "CONFIRM_DELETE_HEADER": "Confirm Deletion",
+    "CONFIRM_DELETE_MESSAGE": "Are you sure you want to delete the party named {{partyName}}?",
+    "PLACE": "Place",
+    "MORE_DETAILS": "More details",
+    "SHARE_ERROR": "Sharing feature is not available on this device.",
+    "NO_REQUIRED_AGE": "Not required",
+    "DONT_MISS_PARTY": "Don't miss this party!"
 }

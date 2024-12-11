@@ -3,13 +3,14 @@ import { AlertController, InfiniteScrollCustomEvent, ModalController } from '@io
 import { Person } from 'src/app/core/models/person.model';
 import { BaseAuthenticationService } from 'src/app/core/services/impl/base-authentication.service';
 import { PeopleService } from 'src/app/core/services/impl/people-service.service';
-import { PersonModalComponent } from 'src/app/components/person-modal/person-modal.component';
+import { PersonModalComponent } from 'src/app/components/modals/person-modal/person-modal.component';
 import { BehaviorSubject, combineLatest, lastValueFrom, map, Observable, startWith } from 'rxjs';
-import { PartyModalComponent } from 'src/app/components/party-modal/party-modal.component';
+import { PartyModalComponent } from 'src/app/components/modals/party-modal/party-modal.component';
 import { Party } from 'src/app/core/models/party.model';
 import { PartyService } from 'src/app/core/services/impl/party-service.service';
 import { Paginated } from 'src/app/core/models/paginated.model';
 import { TranslationService } from 'src/app/core/services/impl/translate.service';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-perfil',
@@ -35,7 +36,8 @@ export class PerfilPage implements OnInit {
     private cdr:ChangeDetectorRef,
     private partySvc: PartyService,
     private alertCtrl: AlertController,
-    private translationService: TranslationService
+    private translationService: TranslationService,
+    private translate: TranslateService
   ) {
     // Combinar filtros con la lista de fiestas
     this.filteredParty$ = combineLatest([
@@ -192,16 +194,22 @@ export class PerfilPage implements OnInit {
 
   // Función para eliminar a una persona
   async onDeleteParty(party: Party) {
+    // Traducir los textos
+    const header = await this.translate.get('CONFIRM_DELETE_HEADER').toPromise();
+    const message = await this.translate.get('CONFIRM_DELETE_MESSAGE', { partyName: party.name }).toPromise();
+    const cancelText = await this.translate.get('CANCEL').toPromise();
+    const deleteText = await this.translate.get('DELETE').toPromise();
+
     const alert = await this.alertCtrl.create({
-      header: 'Confirmar eliminación',
-      message: `¿Estás seguro de que quieres eliminar la fiesta con nombre ${party.name}?`,
+      header: header,
+      message: message,
       buttons: [
         {
-          text: 'Cancelar',
+          text: cancelText,
           role: 'cancel',
         },
         {
-          text: 'Eliminar',
+          text: deleteText,
           role: 'destructive',
           handler: () => {
             this.partySvc.delete(party.id).subscribe({
@@ -212,11 +220,11 @@ export class PerfilPage implements OnInit {
               },
               error: (err) => {
                 console.error('Error eliminando fiesta:', err);
-              }
+              },
             });
-          }
-        }
-      ]
+          },
+        },
+      ],
     });
     await alert.present();
   }

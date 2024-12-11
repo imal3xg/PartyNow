@@ -7,7 +7,7 @@ export interface Person extends Model{
     birthdate:string,
     email:string,
     gender:string,
-    picture?:{
+    image?:{
         url:string | undefined,
         large:string | undefined,
         medium:string | undefined,

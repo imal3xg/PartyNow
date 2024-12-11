@@ -11,6 +11,7 @@
     "SHARE": "Compartir",
     "PHOTO_ALT": "Foto de {{name}}",
     "LOGIN": "Iniciar sesión",
+    "HOME_TITLE": "Inicio",
     "HERO_IMAGE_ALT": "Imagen de portada",
     "HERO_DESCRIPTION": "La noche te espera. ¿Estás preparado?",
     "ABOUT_ME_BUTTON": "Sobre mí",
@@ -98,5 +99,15 @@
     "EMAIL_VALID": "Introduce un email válido.",
     "BIRTHDATE_VALID": "Introduce una fecha válida.",
     "YEARS": "años",
-    "UPDATE": "Actualizar"
+    "UPDATE": "Actualizar Perfil",
+    "CONFIRM_EXIT_HEADER": "Confirmar salir",
+    "CONFIRM_EXIT_MESSAGE": "¿Estás seguro de que quieres salir sin guardar los cambios?",
+    "CANCEL": "Cancelar",
+    "EXIT": "Salir",
+    "CONFIRM_DELETE_HEADER": "Confirmar eliminación",
+    "CONFIRM_DELETE_MESSAGE": "¿Estás seguro de que quieres eliminar la fiesta con nombre {{partyName}}?",
+    "MORE_DETAILS": "Más detalles",
+    "SHARE_ERROR": "La función de compartir no está disponible en este dispositivo.",
+    "NO_REQUIRED_AGE": "No requerida",
+    "DONT_MISS_PARTY": "¡No te pierdas esta fiesta!"
 }

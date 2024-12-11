@@ -14,14 +14,6 @@
       <div class="header-container">
         <!-- Nombre del usuario alineado a la izquierda -->
         <ion-card-title class="name-title">{{ person.name }} {{ person.surname }}</ion-card-title>
-        
-        <!-- Botón Editar Perfil alineado a la derecha -->
-        <ion-buttons slot="end" class="edit-button">
-          <ion-button (click)="openPersonDetail(person)">
-            <ion-icon name="create-outline" slot="start"></ion-icon>
-            {{ 'EDIT_PROFILE' | translate }}
-          </ion-button>
-        </ion-buttons>
       </div>
       <div class="profile-stats">
         <!-- Contador de publicaciones -->
@@ -52,6 +44,15 @@
           <ion-label class="attribute-label"><strong>{{ 'BIRTHDATE' | translate }}:</strong> {{ person.birthdate | dateFormat }}</ion-label>
         </ion-item>
       </ion-list>
+      <div class="stats-container">
+        <!-- Botón Editar Perfil alineado a la derecha -->
+        <ion-buttons class="edit-button">
+          <ion-button class="edit-button" (click)="openPersonDetail(person)">
+            <ion-icon name="create-outline" slot="start"></ion-icon>
+            {{ 'EDIT_PROFILE' | translate }}
+          </ion-button>
+        </ion-buttons>
+      </div>
     </ion-card-content>
   </ion-card>  
 

@@ -7,15 +7,15 @@ import { IonicModule, IonicRouteStrategy } from '@ionic/angular';
 
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
-import { AuthenticationServiceFactory, AuthMappingFactory, PartyMappingFactory, PartyRepositoryFactory, PeopleMappingFactory, PeopleRepositoryFactory } from './core/repositories/repository.factory';
+import { AuthenticationServiceFactory, AuthMappingFactory, MediaServiceFactory, PartyMappingFactory, PartyRepositoryFactory, PeopleMappingFactory, PeopleRepositoryFactory } from './core/repositories/repository.factory';
 import { PeopleService } from './core/services/impl/people-service.service';
 import { AUTH_ME_API_URL_TOKEN, AUTH_SIGN_IN_API_URL_TOKEN, AUTH_SIGN_UP_API_URL_TOKEN, BACKEND_TOKEN, PARTY_API_URL_TOKEN, PARTY_REPOSITORY_MAPPING_TOKEN, PARTY_RESOURCE_NAME_TOKEN, PEOPLE_API_URL_TOKEN, PEOPLE_REPOSITORY_MAPPING_TOKEN, PEOPLE_RESOURCE_NAME_TOKEN, UPLOAD_API_URL_TOKEN } from './core/repositories/repository.tokens';
 import { HttpClient, HttpClientModule, provideHttpClient } from '@angular/common/http';
 import { PartyService } from './core/services/impl/party-service.service';
-import { PersonModalComponent } from './components/person-modal/person-modal.component';
+import { PersonModalComponent } from './components/modals/person-modal/person-modal.component';
 import { ReactiveFormsModule } from '@angular/forms';
-import { PartyModalComponent } from './components/party-modal/party-modal.component';
-import { PriceInputComponent } from './components/price-input/price-input.component';
+import { PartyModalComponent } from './components/modals/party-modal/party-modal.component';
+import { PriceInputComponent } from './components/control-value-accesor/price-input/price-input.component';
 import { environment } from 'src/environments/environment';
 import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
@@ -75,6 +75,7 @@ export function createTranslateLoader(http: HttpClient) {
       useClass: PartyService
     },
     AuthenticationServiceFactory,
+    MediaServiceFactory
 
     // ... otros proveedores],
 

@@ -1,8 +1,5 @@
 <ion-header>
   <ion-toolbar color="primary">
-    <ion-button fill="none" (click)="goBack()" slot="start">
-      <ion-icon name="arrow-back-outline"></ion-icon>
-    </ion-button>
     <ion-title class="ion-text-center">
       <ion-icon name="person-outline" slot="start"></ion-icon>
       {{ mode === 'edit' ? ('EDIT_PERSON' | translate) : ('NEW_PERSON' | translate) }}
@@ -107,18 +104,28 @@
         </ion-text>
       </ion-card-content>
     </ion-card>
-
-    <!-- Botón de envío -->
-    <ion-footer>
-      <ion-toolbar>
-        <ion-button
-          expand="block"
-          color="primary"
-          [disabled]="!formGroup.valid || !formGroup.dirty"
-          type="submit">
-          {{ mode === 'edit' ? ('UPDATE' | translate) : ('REGISTER' | translate) }}
-        </ion-button>
-      </ion-toolbar>
-    </ion-footer>
   </form>
 </ion-content>
+<!-- Botón de envío -->
+<ion-footer>
+  <ion-toolbar>
+    <ion-buttons class="button-group">
+      <!-- Botón de cancelar -->
+      <ion-button
+        class="cancel-btn"
+        color="tertiary"
+        (click)="onCancel()">
+        {{ 'CANCEL' | translate }}
+      </ion-button>
+
+      <!-- Botón de acción (Actualizar o Registrar) -->
+      <ion-button
+        class="action-btn"
+        color="primary"
+        [disabled]="!formGroup.valid || !formGroup.dirty"
+        type="submit">
+        {{ mode === 'edit' ? ('UPDATE' | translate) : ('REGISTER' | translate) }}
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-footer>

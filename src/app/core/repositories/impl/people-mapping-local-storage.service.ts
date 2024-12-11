@@ -13,7 +13,7 @@ interface PersonRaw{
     birthdate:string,
     email:string,
     genero:string,
-    picture:{
+    image:{
         url:string,
         large:string,
         medium:string,
@@ -45,12 +45,12 @@ interface PersonRaw{
             birthdate:data.birthdate,
             email:data.email,
             gender:data.genero,
-            picture:{
-                url:data.picture.url,
-                large:data.picture.large, 
-                medium:data.picture.medium,
-                small:data.picture.small,
-                thumbnail:data.picture.thumbnail
+            image:{
+                url:data.image.url,
+                large:data.image.large, 
+                medium:data.image.medium,
+                small:data.image.small,
+                thumbnail:data.image.thumbnail
             }};
     }
     getAdded(data: PersonRaw):Person {

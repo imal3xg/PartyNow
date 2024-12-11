@@ -1,9 +1,14 @@
 <ion-header translucent="false" class="header-up">
   <ion-toolbar class="custom-toolbar">
-    <ion-buttons slot="end" class="topbuttons">
+    <ion-buttons *ngIf="(isAuthenticated$ | async)" slot="start">
+      <!-- Botón para abrir el menú lateral -->
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+    <ion-title *ngIf="(isAuthenticated$ | async)">{{ 'HOME_TITLE' | translate }}</ion-title>
+    <ion-buttons *ngIf="!(isAuthenticated$ | async)" slot="end" class="topbuttons">
       <ion-button fill="clear" (click)="navigateToLogin()">{{ 'LOGIN' | translate }}</ion-button>
       <ion-button fill="clear" (click)="navigateToRegister()">{{ 'REGISTER' | translate }}</ion-button>
-    </ion-buttons>
+    </ion-buttons>    
   </ion-toolbar>
 </ion-header>
 
@@ -50,8 +55,8 @@
       <img src="../../../assets/img/Foto Curriculum.jpg" alt="{{ 'ABOUT_IMAGE_ALT' | translate }}" class="about-image" />
     </div>
   </div>
-  <ion-fab vertical="bottom" horizontal="end" slot="fixed">
-    <ion-fab-button>
+  <ion-fab *ngIf="!(isAuthenticated$ | async)" vertical="bottom" horizontal="end" slot="fixed">
+    <ion-fab-button class="fab">
       <ion-icon name="language-outline"></ion-icon>
     </ion-fab-button>
     <ion-fab-list side="top" class="custom-fab-list">

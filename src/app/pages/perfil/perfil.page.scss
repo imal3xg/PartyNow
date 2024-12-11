@@ -23,7 +23,8 @@ ion-title {
   --color: var(--ion-color-primary);
 }
 
-.header-container ion-button {
+.edit-button {
+  width: 100%;
   text-align: end;
   --border-radius: 8px; /* Bordes redondeados */
   --padding-start: 12px;
@@ -166,6 +167,7 @@ ion-title {
 }
 
 .list-atrib {
+  margin-top: -40px;
   background-color: transparent;
 }
 
@@ -201,6 +203,17 @@ ion-title {
 @media (max-width: 768px) {
   .party-grid {
     grid-template-columns: repeat(2, 1fr); /* Dos columnas en pantallas medianas */
+  }
+
+  .button-group {
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-around;
+  }
+
+  ion-button {
+    width: 100%;  /* Los botones ocuparán todo el ancho en pantallas pequeñas */
+    margin-bottom: 10px;  /* Espacio entre los botones */
   }
 }
 

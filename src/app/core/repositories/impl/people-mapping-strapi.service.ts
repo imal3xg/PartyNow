@@ -3,6 +3,11 @@ import { IBaseMapping } from "../interfaces/base-mapping.interface";
 import { Paginated } from "../../models/paginated.model";
 import { Person } from "../../models/person.model";
 import { PartyRaw } from "./party-mapping-json-server.service";
+import { StrapiMedia } from "../../services/impl/strapi-media.service";
+
+interface MediaRaw{
+    data: StrapiMedia
+}
 
 interface UserRaw{
     data: UserData
@@ -43,7 +48,8 @@ export interface PersonAttributes {
     gender: string
     birthdate: string
     email: string
-    user:UserRaw | number | null,
+    user: UserRaw | number | null,
+    image: MediaRaw | number | null
     createdAt?: string
     updatedAt?: string
     publishedAt?: string
@@ -76,6 +82,7 @@ export interface Meta {}
                 birthdate:data.birthdate,
                 user:data.userId?Number(data.userId):null,
                 gender: this.toGenderMapping[data.gender],
+                image:data.image?Number(data.image):null
 
             }
         };
@@ -97,6 +104,8 @@ export interface Meta {}
                 case 'gender': toReturn.data['gender']=data[key]=='Masculino'?'male':data[key]=='Femenino'?'female':'other';
                 break;
                 case 'userId': toReturn.data['userId']=data[key];
+                break;
+                case 'image': toReturn.data['image']=data[key];
                 break;
                 default:
             }
@@ -128,6 +137,13 @@ export interface Meta {}
         birthdate: attributes.birthdate,
         gender: this.fromGenderMapping[attributes.gender],
         userId: typeof attributes.user === 'object' ? attributes.user?.data?.id.toString() : undefined,
+        image: typeof attributes.image === 'object' ? {
+            url: attributes.image?.data?.attributes?.url,
+            large: attributes.image?.data?.attributes?.formats?.large?.url || attributes.image?.data?.attributes?.url,
+            medium: attributes.image?.data?.attributes?.formats?.medium?.url || attributes.image?.data?.attributes?.url,
+            small: attributes.image?.data?.attributes?.formats?.small?.url || attributes.image?.data?.attributes?.url,
+            thumbnail: attributes.image?.data?.attributes?.formats?.thumbnail?.url || attributes.image?.data?.attributes?.url,
+        } : undefined
       };
     }
   

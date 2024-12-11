@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { NavController } from '@ionic/angular';
+import { Observable } from 'rxjs';
 import { BaseAuthenticationService } from 'src/app/core/services/impl/base-authentication.service';
 import { TranslationService } from 'src/app/core/services/impl/translate.service';
 
@@ -10,11 +11,17 @@ import { TranslationService } from 'src/app/core/services/impl/translate.service
 })
 export class FrontpagePage implements OnInit {
 
+  // Observable para verificar si el usuario está autenticado
+  isAuthenticated$: Observable<boolean>;
+
   constructor(
     private navCtrl: NavController,
     private authSvc: BaseAuthenticationService,
     private translationService: TranslationService
-  ) { }
+  ) {
+    // Se obtiene el observable de autenticación
+    this.isAuthenticated$ = this.authSvc.authenticated$;
+  }
 
   // Navega a la página de login
   navigateToLogin() {

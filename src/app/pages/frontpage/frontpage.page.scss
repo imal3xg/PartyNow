@@ -1,5 +1,6 @@
 .header-up {
   box-shadow: 0 8px 12px var(--ion-color-primary);
+  animation: fadeIn 3s forwards;
 }
 
 /* Estilo del ion-header */
@@ -92,6 +93,10 @@ ion-buttons {
     to {
         opacity: 1;
     }
+}
+
+.fab {
+  animation: fadeIn 3s forwards;
 }
 
 /* Estilos generales del ion-fab-list */

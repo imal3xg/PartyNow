@@ -7,6 +7,7 @@ import { Paginated } from 'src/app/core/models/paginated.model';
 import { PartyService } from 'src/app/core/services/impl/party-service.service';
 import { Countries } from 'src/app/core/models/countries.enum';
 import { TranslationService } from 'src/app/core/services/impl/translate.service';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-home',
@@ -28,7 +29,8 @@ export class HomePage implements OnInit {
 
   constructor(
     private partySvc: PartyService,
-    private translationService: TranslationService
+    private translationService: TranslationService,
+    private translate: TranslateService
   ) {
     // Combinar filtros con la lista de fiestas
     this.filteredParty$ = combineLatest([
@@ -142,36 +144,47 @@ export class HomePage implements OnInit {
     // Aquí puedes llamar a un servicio o agregar lógica para marcar la fiesta como guardada
   }
   
-  onShareParty(party: Party): void {
-    // Verificar si la edad mínima es 0 y tratarla como nula
-    const minAgeText = party.minAge === 0 ? 'No requerida' : party.minAge;
-  
+  async onShareParty(party: Party): Promise<void> {
+    // Obtener los textos traducidos
+    const dontMissPartyText = await this.translate.get('DONT_MISS_PARTY').toPromise();
+    const minAgeText = party.minAge === 0 
+      ? await this.translate.get('NO_REQUIRED_AGE').toPromise() 
+      : party.minAge;
+
+    const nameText = await this.translate.get('NAME').toPromise();
+    const dateText = await this.translate.get('DATE').toPromise();
+    const placeText = await this.translate.get('PLACE').toPromise();
+    const priceText = await this.translate.get('PRICE').toPromise();
+    const descriptionText = await this.translate.get('DESCRIPTION').toPromise();
+    const moreDetailsText = await this.translate.get('MORE_DETAILS').toPromise();
+    const shareErrorText = await this.translate.get('SHARE_ERROR').toPromise();
+
     // Crear un texto completo con todos los detalles de la fiesta
     const shareText = `
-      🎉 ¡No te pierdas esta fiesta! 🎉
-  
-      **Nombre**: ${party.name}
-      **Fecha**: ${party.date}
-      **Lugar**: ${party.city}, ${party.country}
-      **Edad Mínima**: ${minAgeText}
-      **Precio**: ${party.price} €
-      **Descripción**: ${party.description ?? 'Sin descripción'}
-  
-      Más detalles aquí: https://partynow.netlify.app
+      🎉 ${dontMissPartyText} 🎉
+
+      **${nameText}**: ${party.name}
+      **${dateText}**: ${party.date}
+      **${placeText}**: ${party.city}, ${party.country}
+      **${await this.translate.get('MIN_AGE').toPromise()}**: ${minAgeText}
+      **${priceText}**: ${party.price} €
+      **${descriptionText}**: ${party.description ?? 'Sin descripción'}
+
+      ${moreDetailsText}: https://partynow.netlify.app
     `;
-  
+
     // Verificar si Web Share API está disponible
     if (navigator.share) {
       navigator.share({
-        title: `Fiesta: ${party.name}`,
+        title: `${nameText}: ${party.name}`,
         text: shareText,
       })
       .then(() => console.log('Fiesta compartida exitosamente'))
       .catch((error) => console.error('Error al compartir:', error));
     } else {
-      alert('La función de compartir no está disponible en este dispositivo.');
+      alert(shareErrorText);
     }
-  }  
+  }
 
   // Función para manejar la carga infinita de fiestas
   onIonInfinite(ev: InfiniteScrollCustomEvent) {
