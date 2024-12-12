@@ -2,6 +2,8 @@
 
 ---
 
+## **Enlace a la página**: https://partynow.netlify.app
+
 ## **PartyNow**
 
 **PartyNow** es una aplicación moderna y responsiva desarrollada para descubrir, organizar y gestionar fiestas en todo el mundo. Ofrece una experiencia intuitiva y enriquecedora para usuarios que deseen explorar eventos globales, gestionar su perfil, y más. La aplicación está construida utilizando **Ionic Framework** y emplea prácticas de desarrollo avanzado como arquitectura en capas, componentes reutilizables, y formularios reactivos.
