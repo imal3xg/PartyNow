@@ -85,6 +85,7 @@
     "PRICE_REQUIRED": "Price cannot be empty. It must be a number greater than or equal to 0.",
     "PRICE_MIN": "It must be a number greater than or equal to 0.",
     "DESCRIPTION": "Description",
+    "NO_DESCRIPTION": "No description",
     "DESCRIPTION_PLACEHOLDER": "E.g. Themed party with electronic music",
     "DESCRIPTION_REQUIRED": "Description is required.",
     "UPDATE_EVENT": "Update Party",
@@ -98,7 +99,7 @@
     "EMAIL_PLACEHOLDER": "E.g. email@domain.com",
     "EMAIL_VALID": "Enter a valid email.",
     "BIRTHDATE_VALID": "Enter a valid date.",
-    "YEARS": "years",
+    "YEARS": "years old",
     "UPDATE": "Update Profile",
     "CONFIRM_EXIT_HEADER": "Confirm Exit",
     "CONFIRM_EXIT_MESSAGE": "Are you sure you want to exit without saving changes?",
@@ -110,5 +111,8 @@
     "MORE_DETAILS": "More details",
     "SHARE_ERROR": "Sharing feature is not available on this device.",
     "NO_REQUIRED_AGE": "Not required",
-    "DONT_MISS_PARTY": "Don't miss this party!"
+    "DONT_MISS_PARTY": "Don't miss this party!",
+    "MALE": "Male",
+    "FEMALE": "Female", 
+    "OTHERS": "Others"
 }

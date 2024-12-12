@@ -112,7 +112,6 @@
     <ion-buttons class="button-group">
       <!-- Botón de cancelar -->
       <ion-button
-        class="cancel-btn"
         color="tertiary"
         (click)="onCancel()">
         {{ 'CANCEL' | translate }}
@@ -120,10 +119,9 @@
 
       <!-- Botón de acción (Actualizar o Registrar) -->
       <ion-button
-        class="action-btn"
         color="primary"
-        [disabled]="!formGroup.valid || !formGroup.dirty"
-        type="submit">
+        (click)="onSubmit()"
+        [disabled]="!formGroup.valid || !formGroup.dirty">
         {{ mode === 'edit' ? ('UPDATE' | translate) : ('REGISTER' | translate) }}
       </ion-button>
     </ion-buttons>

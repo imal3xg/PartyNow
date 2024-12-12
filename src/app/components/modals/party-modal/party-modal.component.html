@@ -130,15 +130,14 @@
     <ion-buttons class="button-group">
       <!-- Botón de cancelar -->
       <ion-button
-        class="cancel-btn"
         color="tertiary"
         (click)="onCancel()">
         {{ 'CANCEL' | translate }}
       </ion-button>
 
       <ion-button
-        expand="block"
         color="primary"
+        (click)="onSubmit()"
         [disabled]="!formGroup.valid || !formGroup.dirty"
         type="submit">
         {{ mode === 'edit' ? ('UPDATE_EVENT' | translate) : ('CREATE_EVENT' | translate) }}

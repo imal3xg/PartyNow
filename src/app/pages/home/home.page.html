@@ -25,7 +25,8 @@
 <ion-content [fullscreen]="true">
   <ion-list class="cards-list">
     <div class="party-grid">
-      <ion-card *ngFor="let party of filteredParty$ | async; let i = index" class="party-item">
+      <ion-card *ngFor="let party of filteredParty$ | async; let i = index" 
+      class="party-item" [appHighlightCheapParty]="party.price">
         <!-- Encabezado -->
         <ion-card-header>
           <ion-card-title class="party-title">
@@ -41,8 +42,8 @@
               <strong>{{ 'EVENT_PLACE' | translate }}:</strong>
               {{ party?.city }}, {{ party?.country }}
             </p>
-            <p><strong>{{ 'PRICE' | translate }}:</strong> {{ party?.price }}</p>
-            <p><strong>{{ 'MIN_AGE' | translate }}:</strong> {{ party?.minAge }}</p>
+            <p><strong>{{ 'PRICE' | translate }}:</strong> {{ party?.price }} €</p>
+            <p><strong>{{ 'MIN_AGE' | translate }}:</strong> {{ party?.minAge }} {{ 'YEARS' | translate }}</p>
             <app-map-frame
               *ngIf="party?.city && party?.country"
               [city]="party.city"
@@ -53,10 +54,11 @@
       
         <!-- Footer con botones -->
         <div class="party-footer">
+          <!--
           <ion-button fill="clear" color="primary" (click)="onSaveParty(party)">
             <ion-icon name="bookmark-outline" slot="start"></ion-icon>
             {{ 'SAVE' | translate }}
-          </ion-button>
+          </ion-button>  -->
           <ion-button fill="clear" color="primary" (click)="onShareParty(party)">
             <ion-icon name="share-social-outline" slot="start"></ion-icon>
             {{ 'SHARE' | translate }}

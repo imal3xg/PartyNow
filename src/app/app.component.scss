@@ -72,3 +72,9 @@ ion-menu {
 .menu-icon ion-icon {
   font-size: 24px; /* Tamaño similar al de las imágenes */
 }
+
+ion-img {
+  width: 24px;
+  height: 24px;
+  border-radius: 50%; /* Hace que las banderas sean circulares */
+}

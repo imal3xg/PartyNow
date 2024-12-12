@@ -8,10 +8,11 @@ import { ImageSelectableComponent } from './components/image-selectable/image-se
 import { IonicModule } from '@ionic/angular';
 import { ReactiveFormsModule } from '@angular/forms';
 import { TranslateModule } from '@ngx-translate/core';
+import { HighlightCheapPartyDirective } from '../components/directives/highlight-cheap-party.directive';
 
 @NgModule({
-  declarations: [MapFrameComponent, SafeUrlPipe, DateFormatPipe, ImageSelectableComponent],
+  declarations: [MapFrameComponent, SafeUrlPipe, DateFormatPipe, ImageSelectableComponent, HighlightCheapPartyDirective],
   imports: [CommonModule, IonicModule, ReactiveFormsModule, TranslateModule.forChild()],
-  exports: [MapFrameComponent, SafeUrlPipe, DateFormatPipe, ImageSelectableComponent]  // Exporta MapFrameComponent para usarlo en otros módulos
+  exports: [MapFrameComponent, SafeUrlPipe, DateFormatPipe, ImageSelectableComponent, HighlightCheapPartyDirective]  // Exporta MapFrameComponent para usarlo en otros módulos
 })
 export class SharedModule {}

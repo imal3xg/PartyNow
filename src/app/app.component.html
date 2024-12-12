@@ -32,7 +32,7 @@
       <ion-list>
         <!-- Selector de idioma -->
         <ion-item class="menu-item">
-          <ion-select
+          <ion-select class="my-custom-select"
             placeholder="{{ 'LANGUAGE' | translate }}"
             (ionChange)="changeLanguage($event.detail.value)"
             interface="popover"
@@ -48,9 +48,8 @@
                 <ion-icon name="language-outline"></ion-icon>
               </ng-container>
             </div>
-        
-            <ion-select-option value="es">{{ 'SPANISH' | translate }}</ion-select-option>
-            <ion-select-option value="en">{{ 'ENGLISH' | translate }}</ion-select-option>
+            <ion-select-option class="my-custom-select" value="es">{{ 'SPANISH' | translate }}</ion-select-option>
+            <ion-select-option class="my-custom-select" value="en">{{ 'ENGLISH' | translate }}</ion-select-option>
           </ion-select>
         </ion-item>                    
 

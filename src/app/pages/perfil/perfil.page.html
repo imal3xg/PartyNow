@@ -65,7 +65,7 @@
 
   <ion-list class="cards-list">
     <div class="party-grid">
-      <ion-card *ngFor="let party of filteredParty$ | async; let i = index" class="party-item">
+      <ion-card *ngFor="let party of filteredParty$ | async; let i = index" class="party-item" [appHighlightCheapParty]="party.price">
         <!-- Imagen de la fiesta si la hay -->
         <ion-card-header>
           <ion-card-title>
@@ -78,8 +78,8 @@
           <div class="party-details">
             <p><strong>{{ 'DATE' | translate }}:</strong> {{ party.date | dateFormat }}</p>
             <p><strong>{{ 'EVENT_LOCATION' | translate }}:</strong> {{ party.city }}, {{ party.country }}</p>
-            <p><strong>{{ 'PRICE' | translate }}:</strong> {{ party.price }}</p>
-            <p><strong>{{ 'MIN_AGE' | translate }}:</strong> {{ party.minAge }}</p>
+            <p><strong>{{ 'PRICE' | translate }}:</strong> {{ party.price }} €</p>
+            <p><strong>{{ 'MIN_AGE' | translate }}:</strong> {{ party.minAge }} {{ 'YEARS' | translate }}</p>
             <app-map-frame
               *ngIf="party?.city && party?.country"
               [city]="party.city"

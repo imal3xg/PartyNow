@@ -30,7 +30,7 @@ export function createTranslateLoader(http: HttpClient) {
     AppComponent,
     PersonModalComponent,
     PartyModalComponent,
-    PriceInputComponent
+    PriceInputComponent,
   ],
   imports: [
     BrowserModule, 

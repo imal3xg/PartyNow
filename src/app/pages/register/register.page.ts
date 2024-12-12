@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { NavController } from '@ionic/angular';
+import { TranslateService } from '@ngx-translate/core';
 import { User } from 'src/app/core/models/auth.model';
 import { BaseAuthenticationService } from 'src/app/core/services/impl/base-authentication.service';
 import { PeopleService } from 'src/app/core/services/impl/people-service.service';
@@ -16,7 +17,7 @@ import { passwordValidator, passwordsMatchValidator } from 'src/app/core/utils/v
 export class RegisterPage {
 
   registerForm: FormGroup;
-  genders: string[] = ['Masculino', 'Femenino', 'Otros'];
+  genders: string[] = ['GENDERS.MALE', 'GENDERS.FEMALE', 'GENDERS.OTHERS'];
 
   constructor(
     private fb: FormBuilder,
@@ -25,7 +26,8 @@ export class RegisterPage {
     private navCtrl: NavController,
     private authSvc:BaseAuthenticationService,
     private peopleSvc:PeopleService,
-    private translationService: TranslationService
+    private translationService: TranslationService,
+    private translate: TranslateService
   ) {
     this.registerForm = this.fb.group({
       name: ['', [Validators.required, Validators.minLength(2)]],

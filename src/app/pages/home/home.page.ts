@@ -156,8 +156,12 @@ export class HomePage implements OnInit {
     const placeText = await this.translate.get('PLACE').toPromise();
     const priceText = await this.translate.get('PRICE').toPromise();
     const descriptionText = await this.translate.get('DESCRIPTION').toPromise();
+    const noDescriptionText = await this.translate.get('NO_DESCRIPTION').toPromise();
     const moreDetailsText = await this.translate.get('MORE_DETAILS').toPromise();
     const shareErrorText = await this.translate.get('SHARE_ERROR').toPromise();
+
+    // Calcula el texto de descripción antes de construir el texto de compartir
+    const descriptionContent = party.description ? party.description : noDescriptionText;
 
     // Crear un texto completo con todos los detalles de la fiesta
     const shareText = `
@@ -168,7 +172,7 @@ export class HomePage implements OnInit {
       **${placeText}**: ${party.city}, ${party.country}
       **${await this.translate.get('MIN_AGE').toPromise()}**: ${minAgeText}
       **${priceText}**: ${party.price} €
-      **${descriptionText}**: ${party.description ?? 'Sin descripción'}
+      **${descriptionText}**: ${descriptionContent}
 
       ${moreDetailsText}: https://partynow.netlify.app
     `;

@@ -85,6 +85,7 @@
     "PRICE_REQUIRED": "El precio no puede estar vacío. Debe ser un número mayor o igual a 0.",
     "PRICE_MIN": "Debe ser un número mayor o igual a 0.",
     "DESCRIPTION": "Descripción",
+    "NO_DESCRIPTION": "Sin descripción",
     "DESCRIPTION_PLACEHOLDER": "Ej: Fiesta temática con música electrónica",
     "DESCRIPTION_REQUIRED": "La descripción es obligatoria.",
     "UPDATE_EVENT": "Actualizar Fiesta",
@@ -109,5 +110,8 @@
     "MORE_DETAILS": "Más detalles",
     "SHARE_ERROR": "La función de compartir no está disponible en este dispositivo.",
     "NO_REQUIRED_AGE": "No requerida",
-    "DONT_MISS_PARTY": "¡No te pierdas esta fiesta!"
+    "DONT_MISS_PARTY": "¡No te pierdas esta fiesta!",
+    "MALE": "Masculino",
+    "FEMALE": "Femenino", 
+    "OTHERS": "Otros"
 }

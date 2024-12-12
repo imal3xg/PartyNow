@@ -3,6 +3,10 @@
   animation: fadeIn 3s forwards;
 }
 
+ion-title {
+  --color: var(--ion-color-primary);
+}
+
 /* Estilo del ion-header */
 .custom-toolbar {
     --min-height: 60px; /* Altura del toolbar */
