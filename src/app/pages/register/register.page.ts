@@ -17,7 +17,7 @@ import { passwordValidator, passwordsMatchValidator } from 'src/app/core/utils/v
 export class RegisterPage {
 
   registerForm: FormGroup;
-  genders: string[] = ['GENDERS.MALE', 'GENDERS.FEMALE', 'GENDERS.OTHERS'];
+  genders: string[] = ['Masculino', 'Femenino', 'Otros'];
 
   constructor(
     private fb: FormBuilder,
