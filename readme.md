@@ -139,6 +139,4 @@ Este proyecto está bajo la licencia MIT. Consulte el archivo `LICENSE` para má
 
 ---
 
-Con **PartyNow**, organizar y asistir a las mejores fiestas nunca fue tan fácil. 🎉
-
-🎉
+🎉  Con **PartyNow**, organizar y asistir a las mejores fiestas nunca fue tan fácil. 🎉
